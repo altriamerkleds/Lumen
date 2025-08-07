@@ -1,14 +1,15 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
-const getCardsPerSlide = () => {
-        const width = window.innerWidth;
-        if (width < 768) return 1;
-        if (width < 1024) return 2;
-        return 3;
-      };
-    
-const cardsPerSlide = getCardsPerSlide();
+  const getCardsPerSlide = () => {
+    const width = window.innerWidth;
+    if (width < 768) return 1;
+    if (width < 1024) return 2;
+    return 3;
+  };
+
+  const cardsPerSlide = getCardsPerSlide();
+
   const cards = Array.from(block.children).map((row) => {
     const cols = row.querySelectorAll('div');
     const card = document.createElement('div');
@@ -34,16 +35,15 @@ const cardsPerSlide = getCardsPerSlide();
   const slidesWrapper = document.createElement('div');
   slidesWrapper.className = 'carousel-slides';
 
-  // Group cards into slides of 3
+  // Group cards into slides
   for (let i = 0; i < cards.length; i += cardsPerSlide) {
     const slide = document.createElement('div');
     slide.className = 'carousel-slide';
 
-    // Ensure last slide always has 3 cards by showing last 3 cards together
+    // Show last N cards if remaining cards are less than the group size
     if (i + cardsPerSlide > cards.length && cards.length > cardsPerSlide) {
-      // Last 3 cards
-      const lastThree = cards.slice(-cardsPerSlide  );
-      lastThree.forEach((card) => slide.appendChild(card.cloneNode(true)));
+      const lastGroup = cards.slice(-cardsPerSlide);
+      lastGroup.forEach((card) => slide.appendChild(card.cloneNode(true)));
     } else {
       const group = cards.slice(i, i + cardsPerSlide);
       group.forEach((card) => slide.appendChild(card));
@@ -67,8 +67,8 @@ const cardsPerSlide = getCardsPerSlide();
     if (i === 0) bullet.classList.add('active');
 
     bullet.addEventListener('click', () => {
-      Array.from(slides).forEach((s, idx) => {
-        s.style.transform = `translateX(-${i * 100}%)`;
+      Array.from(slides).forEach((slide) => {
+        slide.style.transform = `translateX(-${i * 100}%)`;
       });
       bullets.forEach((b) => b.classList.remove('active'));
       bullet.classList.add('active');
