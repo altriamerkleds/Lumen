@@ -61,7 +61,7 @@ export default async function decorate(block) {
   const bullets = [];
   const slides = slidesWrapper.children;
 
-  for (let i = 0; i < slides.length; i++) {
+  for (let i = 0; i < slides.length; i += 1) {
     const bullet = document.createElement('button');
     bullet.className = 'carousel-bullet';
     if (i === 0) bullet.classList.add('active');
