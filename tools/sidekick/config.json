@@ -12,5 +12,28 @@
   	"passConfig": true, 
   	"paletteRect": "top: 50px; bottom: 10px; right: 10px; left: auto; width:400px; height: calc(100vh - 60px)" 
 	}
+    ],
+	"blocks": {
+    "video": [
+      {
+        "mimeType": "video/*",
+        "value": "Core Embed"
+      }
     ]
+  }
+	{ 
+	"filterSchema": [ 
+    	{ 
+        	"header": "Assets Tags", 
+        	"groupKey": "AssetTagsGroup", 
+        	"fields": [ 
+            	{ 
+                	"element": "taggroup", 
+                	"name": "property=metadata.application.xcm:keywords.id", 
+                	"columns": 3 
+            	} 
+        	] 
+    	} 
+	] 
+} 
 }
