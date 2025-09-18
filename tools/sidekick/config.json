@@ -9,9 +9,8 @@
   	"url": "https://experience.adobe.com/solutions/CQ-helix-assets-addon/static-assets/resources/asset-selector.html?extConfigUrl=https://<your-config-server>/config.json", 
   	"isPalette": true, 
   	"includePaths": ["**.docx**"], 
-  	"passConfig": true, 
-  	"paletteRect": "top: 50px; bottom: 10px; right: 10px; left: auto; width:400px; height: calc(100vh - 60px)" 
-	}
+  	"passConfig": true,
+		}
     ],
 	"blocks": {
     "video": [
