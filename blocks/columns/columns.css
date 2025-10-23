@@ -302,3 +302,29 @@
     text-align: center;
   }
 }
+
+.columns.footersocial .columns-img-col p {
+  display: flex;           
+  flex-wrap: wrap;         
+  align-items: center;    
+  gap: 8px;               
+  margin: 0;
+  padding: 0;
+}
+
+.columns.footersocial .columns-img-col p a {
+  display: inline-block;   
+  white-space: nowrap;   
+}
+
+.columns.footersocial .columns-img-col p picture {
+  display: inline-block; 
+  width: auto;
+  height: 24px;          
+}
+
+.columns.footersocial .columns-img-col p picture img {
+  display: block;     
+  width: auto;
+  height: 100%;
+}
