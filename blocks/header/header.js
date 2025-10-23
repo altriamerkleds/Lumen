@@ -52,13 +52,13 @@ function focusNavSection() {
 }
 
 function toggleAllNavSections(sections, expanded = false) {
-  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach(section => {
+  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
     section.setAttribute('aria-expanded', expanded);
   });
 }
 
 function toggleAllSubNavSections(sections, expanded = false) {
-  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li > ul > li').forEach(section => {
+  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li > ul > li').forEach((section) => {
     section.setAttribute('aria-expanded', expanded);
   });
 }
@@ -73,14 +73,14 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 
   const navDrops = navSections.querySelectorAll('.nav-drop');
   if (isDesktop.matches) {
-    navDrops.forEach(drop => {
+    navDrops.forEach((drop) => {
       if (!drop.hasAttribute('tabindex')) {
         drop.setAttribute('tabindex', 0);
         drop.addEventListener('focus', focusNavSection);
       }
     });
   } else {
-    navDrops.forEach(drop => {
+    navDrops.forEach((drop) => {
       drop.removeAttribute('tabindex');
       drop.removeEventListener('focus', focusNavSection);
     });
@@ -88,14 +88,14 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 
   const subNavDrops = navSections.querySelectorAll('.sub-nav-drop');
   if (isDesktop.matches) {
-    subNavDrops.forEach(drop => {
+    subNavDrops.forEach((drop) => {
       if (!drop.hasAttribute('tabindex')) {
         drop.setAttribute('tabindex', 0);
         drop.addEventListener('focus', focusNavSection);
       }
     });
   } else {
-    navDrops.forEach(drop => {
+    navDrops.forEach((drop) => {
       drop.removeAttribute('tabindex');
       drop.removeEventListener('focus', focusNavSection);
     });
@@ -150,12 +150,12 @@ export default async function decorate(block) {
   // --- wrap top-level nav text in <span class="nav-text"> ---
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach(navSection => {
+    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
 
       // wrap only the first text node in span
       const firstTextNode = Array.from(navSection.childNodes).find(
-        node => node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== ''
+        (node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== '',
       );
       if (firstTextNode) {
         const span = document.createElement('span');
@@ -174,9 +174,9 @@ export default async function decorate(block) {
     });
 
     // sub-nav
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li > ul > li').forEach(navSection => {
+    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) navSection.classList.add('sub-nav-drop');
-      navSection.addEventListener('click', e => {
+      navSection.addEventListener('click', (e) => {
         if (isDesktop.matches) {
           e.stopPropagation();
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
