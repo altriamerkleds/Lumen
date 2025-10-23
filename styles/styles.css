@@ -10,8 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-@import url('./fonts.css');
-
 :root {
   /* colors */
   --background-color: white;
@@ -231,7 +229,7 @@ main img {
 
 /* sections */
 main > .section {
-  margin: 0px 0;
+  margin: 40px 0;
 }
 
 main > .section > div {
@@ -256,71 +254,4 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
-}
-
-.hero-button .default-content-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem; /* space between text and button */
-}
-
-.hero-button .default-content-wrapper .button-container {
-  order: 2; 
-  margin: 0;
-}
-
-.hero-button .default-content-wrapper p:not(.button-container) {
-  order: 1; 
-  margin: 0;
-}
-
-
-main .section.widget-intro {
-  background-color: #fafafa;
-  padding: 10px;
-  p {
-    font-size: 14px;
-    font-family: 'Gotham-Book', sans-serif;
-    word-wrap: break-word;
-    word-break: break-word;
-    font-weight: 400;
-    padding: 8px;
-    line-height: 16px;
-    color: #0f3133;
-    box-sizing: border-box;
-  }
-}
-
-main .section.widget-talent {
-    background-color: #fafafa;
-    padding: 20px;
-    max-width: 1440px;
-    margin: 0 auto;
-    p{
-      font-size:18px;
-      font-weight: 700;
-      font-family: 'Gotham-Book', sans-serif;
-      color: #0f3133;
-      line-height: 28px;
-
-    }
-}
-
-main .section.hero-button{
-  padding: 20px;
-  background-color: #0f3133;
-  
-p {
-   font-size:18px;
-      font-weight: 700;
-      font-family: 'Gotham-Book', sans-serif;
-     color: white;
-      line-height: 28px;
-}
-.button-container a{
-  font-size:18px;
-      font-weight: 700;
-      font-family: 'Gotham-Book', sans-serif;
-}
 }

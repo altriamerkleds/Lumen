@@ -15,18 +15,4 @@ export default function decorate(block) {
   ul.querySelectorAll('picture > img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
   block.textContent = '';
   block.append(ul);
-
-  document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach((heading) => {
-    const strongTags = heading.querySelectorAll('strong');
-    if (!strongTags.length) return;
-    const lastStrong = strongTags[strongTags.length - 1];
-
-    if (!lastStrong.querySelector('.highlight')) {
-      const span = document.createElement('span');
-      span.className = 'highlight';
-      span.innerHTML = lastStrong.innerHTML;
-      lastStrong.innerHTML = '';
-      lastStrong.appendChild(span);
-    }
-  });
 }
