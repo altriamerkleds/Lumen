@@ -261,6 +261,7 @@ main .section.highlight {
 .hero-button .default-content-wrapper {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem; /* space between text and button */
 }
 
@@ -308,11 +309,13 @@ main .section.widget-talent {
 
 main .section.hero-button{
   padding: 20px;
+  background-color: #0f3133;
+  
 p {
    font-size:18px;
       font-weight: 700;
       font-family: 'Gotham-Book', sans-serif;
-      color: #0f3133;
+     color: white;
       line-height: 28px;
 }
 .button-container a{
