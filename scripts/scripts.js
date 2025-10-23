@@ -12,19 +12,45 @@ import {
   loadSections,
   loadCSS,
 } from './aem.js';
-
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
  */
+
+
 function buildHeroBlock(main) {
-  const h1 = main.querySelector('h1');
-  const picture = main.querySelector('picture');
-  // eslint-disable-next-line no-bitwise
-  if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
-    const section = document.createElement('div');
-    section.append(buildBlock('hero', { elems: [picture, h1] }));
-    main.prepend(section);
+  try {
+    if (main.querySelector('[data-block-name="hero"], .hero')) return;
+    const h1 = main.querySelector('h1');
+    const picture = main.querySelector('picture');
+    if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
+      const getTopSection = (el) => {
+        let cur = el;
+        while (cur && cur.parentElement !== main) cur = cur.parentElement;
+        return (cur && cur.parentElement === main) ? cur : null;
+      };
+      const picTop = getTopSection(picture);
+      const h1Top = getTopSection(h1);
+      const sections = Array.from(main.children);
+
+      let anchor = null;
+      if (picTop && h1Top) {
+        anchor = (sections.indexOf(picTop) <= sections.indexOf(h1Top)) ? picTop : h1Top;
+      } else {
+        anchor = picTop || h1Top || null;
+      }
+      const heroSection = document.createElement('div');
+      heroSection.append(buildBlock('hero', { elems: [picture, h1] }));
+
+      if (anchor) {
+        main.insertBefore(heroSection, anchor);
+      } else {
+        main.prepend(heroSection);
+      }
+
+    }
+  } catch (e) {
+    console.error('Auto Hero build failed', e);
   }
 }
 
@@ -39,7 +65,6 @@ async function loadFonts() {
     // do nothing
   }
 }
-
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -90,6 +115,7 @@ async function loadEager(doc) {
     // do nothing
   }
 }
+
 
 /**
  * Loads everything that doesn't need to be delayed.
