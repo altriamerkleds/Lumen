@@ -284,6 +284,7 @@ header nav .nav-sections .nav-drop[aria-expanded='true']::after{
     white-space: nowrap;
   }
 
+
   header nav .nav-sections ul {
     display: flex;
     margin: 0;
@@ -373,4 +374,5 @@ header nav .nav-sections > .default-content-wrapper > ul > li > a:hover::after {
 header nav .nav-sections > .default-content-wrapper > ul > li {
   font-size: 12px;
 
+}
 }
