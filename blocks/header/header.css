@@ -7,11 +7,7 @@ header .nav-wrapper {
   z-index: 2;
   position: relative; /* or static (default) */
 }
-.nav-wrapper nav {
-  padding: 0px 134px;
-  margin: 0% 8px;
-  font-family: 'GothamMedium', sans-serif;
-}
+
 
 header nav {
   display: grid;
@@ -24,6 +20,12 @@ header nav {
   height: var(--nav-height);
   padding: 0 24px;
   font-family: var(--body-font-family);
+}
+
+.nav-wrapper nav {
+  padding: 0 134px;
+  margin: 0% 8px;
+  font-family: GothamMedium, sans-serif;
 }
 
 header nav[aria-expanded='true'] {
@@ -104,6 +106,7 @@ header nav[aria-expanded='false'] .nav-hamburger-icon::before { top: -6px; }
 header nav[aria-expanded='false'] .nav-hamburger-icon::after { top: 6px; }
 
 header nav[aria-expanded='true'] .nav-hamburger-icon { height: 22px; }
+
 header nav[aria-expanded='true'] .nav-hamburger-icon::before,
 header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   top: 3px;
@@ -114,6 +117,7 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   height: 2px;
   border-radius: 2px;
 }
+
 header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   top: unset;
   bottom: 3px;
@@ -168,7 +172,6 @@ header nav .nav-sections ul {
 }
 
 header nav .nav-sections ul > li {
-
   position: relative;
 }
 
@@ -177,11 +180,6 @@ header nav .nav-sections .nav-drop > ul {
   display: none;
   position: relative;
   padding-left: 0;
-}
-
-header nav .nav-sections .nav-drop[aria-expanded="true"] > ul {
-  display: block;
-  left: 0px;
 }
 
 /* Sub-nav dropdowns */
@@ -197,16 +195,37 @@ header nav .nav-sections .sub-nav-drop > ul {
   z-index: 2000;
 }
 
+header nav .nav-sections .nav-drop[aria-expanded="true"] > ul {
+  display: block;
+  left: 0;
+}
 
 header nav .nav-sections .sub-nav-drop[aria-expanded="true"] > ul {
   display: block;
 }
 
-header nav .nav-sections .sub-nav-drop a {
+header nav .nav-sections .sub-nav-drop a{
   display: inline-block;
   text-decoration: underline;
   font-size: 12px;
   transition: all 0.2s ease;
+}
+
+/* Submenu items */
+header nav .nav-sections ul > li > ul > li {
+  padding: 4px 18px;
+  margin-bottom: 4px;
+}
+
+header nav .nav-sections .sub-nav-drop > ul > li {  
+  font-size: 12px;
+}
+
+header nav .nav-sections .sub-nav-drop {
+  font-size: 12px;
+  transition: all 0.2s ease;
+  border: 1px dotted transparent; /* reserve space */
+  font-weight: 100;
 }
 
 header nav .nav-sections .nav-drop a {
@@ -220,36 +239,23 @@ header nav .nav-sections .nav-drop a {
 header nav .nav-sections .nav-drop {
   align-items: center;
 }
+
 header nav .nav-sections .nav-drop .nav-text {
   color: #0f3133;
   font-size: 12px;
 }
 
-
 header nav .nav-sections a:hover {
   /* visually thicker without changing layout */
-  text-shadow: 0 0 0.6px currentColor, 0 0 0.6px currentColor;
+  text-shadow: 0 0 0.6px currentcolor, 0 0 0.6px currentcolor;
 }
-header nav .nav-sections .sub-nav-drop {
-  border: 1px dotted transparent; /* reserve space */
-}
+
 
 header nav .nav-sections .sub-nav-drop[aria-expanded="true"] {
   border-color: black;
 }
 
-/* Submenu items */
-header nav .nav-sections ul > li > ul > li {
-  padding: 4px 18px;
-  margin-bottom: 4px;
-}
-
 /* Arrows for dropdowns */
-
-
-
-
-
 header nav .nav-sections .sub-nav-drop::after {
   content: '';
   display: inline-block;
@@ -258,9 +264,9 @@ header nav .nav-sections .sub-nav-drop::after {
   right: 2px;
   width: 8px;
   height: 8px;
-  border: 2px solid #0f3133;
+  border: 1px solid #0f3133;
   border-radius: 0 1px 0 0;
-  border-width: 2px 2px 0 0;
+  border-width: 1px 1px 0 0;
 }
 
 
@@ -269,11 +275,6 @@ header nav .nav-sections .nav-drop[aria-expanded='true']::after{
   bottom: 0.5em;
   transform: rotate(315deg);
   
-}
-
-
-header nav .nav-sections .sub-nav-drop[aria-expanded='true']::after {
- 
 }
 
 @media (width >= 900px) {
@@ -285,7 +286,6 @@ header nav .nav-sections .sub-nav-drop[aria-expanded='true']::after {
 
   header nav .nav-sections ul {
     display: flex;
-   
     margin: 0;
   }
 
@@ -300,23 +300,9 @@ header nav .nav-sections .sub-nav-drop[aria-expanded='true']::after {
     left: -24px;
     width: auto;
     top: 120%;
-    
     background-color: var(--background-color);
      white-space: nowrap; /* <-- prevents line breaks */
   }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: 16px;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--background-color);
-  }
-}
 /* Sub-nav opens to the right of parent li */
 
 
@@ -336,7 +322,7 @@ header nav .nav-sections .default-content-wrapper > ul > li {
 }
 
 /* Arrow as pseudo-element inline with text */
-header nav .nav-sections .nav-drop::after {
+header nav .nav-sections .nav-drop .nav-text::after {
   content: '';
   display: inline-block;
   width: 8px;
@@ -344,7 +330,13 @@ header nav .nav-sections .nav-drop::after {
   border: 1px solid  #0f3133;
   border-width: 1px 1px 0 0;
   transform: rotate(135deg);
-  flex-shrink: 0;             /* prevents shrinking if text is long */
+  flex-shrink: 0; 
+  margin-left: 8px;  
+  margin-right: 8px;          /* prevents shrinking if text is long */
+}
+
+header nav .nav-sections .nav-drop[aria-expanded="true"] .nav-text::after {
+  transform: rotate(315deg); /* points downwards */
 }
 
 /* Top-level nav hover effect: text + arrow */
@@ -356,14 +348,19 @@ header nav .nav-sections > .default-content-wrapper > ul > li.nav-drop {
   transition: color 0.2s ease, font-weight 0.2s ease, text-decoration 0.2s ease;
 }
 
-header nav .nav-sections > .default-content-wrapper > ul > li.nav-drop[aria-expanded="true"] {
-  border: 1px dotted orangered;
+header nav .nav-sections > .default-content-wrapper > ul > li.nav-drop[aria-expanded="true"] >span.nav-text {
+  border: 1px dotted black;
 }
 
 /* Apply hover to both text and arrow */
-header nav .nav-sections > .default-content-wrapper > ul > li.nav-drop:hover .nav-text,
-header nav .nav-sections > .default-content-wrapper > ul > li.nav-drop:hover::after {
-  color: #f95e4a;        /* text and arrow color */     /* make text bold */
+
+/* Hover state — applies to text and arrow */
+header nav .nav-sections > .default-content-wrapper > ul > li.nav-drop:hover .nav-text {
+  color: #f95e4a;
+}
+
+header nav .nav-sections > .default-content-wrapper > ul > li.nav-drop:hover .nav-text::after {
+  border-color: #f95e4a; /* <-- key change */
 }
 
 header nav .nav-sections > .default-content-wrapper > ul > li > a:hover ,
@@ -375,14 +372,5 @@ header nav .nav-sections > .default-content-wrapper > ul > li > a:hover::after {
 
 header nav .nav-sections > .default-content-wrapper > ul > li {
   font-size: 12px;
-}
 
-
-/* Ensure arrow is inline with text */
-header nav,
-header nav a,
-header nav .nav-sections,
-header nav .nav-sections li,
-header nav .nav-sections a {
-  font-weight: normal;
 }

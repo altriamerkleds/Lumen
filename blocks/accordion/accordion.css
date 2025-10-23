@@ -2,11 +2,8 @@
     max-width: 65% !important;
     margin-left: 348.906px !important;
     margin-right: 348.906px !important;
-    padding-left: 8px !important;
-    padding-right: 8px !important;
-    padding-top: 100px !important;
-    padding-bottom: 100px !important;
-    font-family: 'Gotham', sans-serif;
+    padding: 100px 8px !important;
+    font-family: Gotham, sans-serif;
 }
 
 .accordion details {
@@ -32,13 +29,20 @@
   overflow: auto;
   transition: background-color 0.2s;
 }
+
 .accordion details summary p{
-  margin: 0px !important;
+  margin: 0 !important;
 }
 
 .accordion details[open] summary {
   background-color: #0f3133;
   color:white;
+}
+
+.accordion details summary:hover {
+  background-color: #0f3133 !important;
+   color: white !important;
+
 }
 
 .accordion details:not([open]) summary:hover,
@@ -48,14 +52,9 @@
 
 }
 
-.accordion details summary:hover {
-  background-color: #0f3133 !important;
-   color: white !important;
 
-}
 
 .accordion details summary p :hover {
-  
    font-weight: bold;
 } 
 
