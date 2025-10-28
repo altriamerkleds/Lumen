@@ -3,6 +3,20 @@ export default function decorate(block) {
   const cardsPerLoad = 3;
   let visibleCount = cardsPerLoad;
 
+  cards.forEach((card) => {
+    const paragraphs = card.querySelectorAll('p');
+
+    if (paragraphs[1]) {
+      paragraphs[1].classList.add('job-location');
+    }
+    if (paragraphs[2]) {
+      paragraphs[2].classList.add('job-category');
+    }
+    if (paragraphs[3]) {
+      paragraphs[3].classList.add('job-description');
+    }
+  });
+
   // Function to show cards
   function renderCards() {
     cards.forEach((card, index) => {
