@@ -37,7 +37,7 @@ header nav[aria-expanded='true'] {
   min-height: 100dvh;
 }
 
-@media (width >= 900px) {
+@media (width >= 1024px) {
   header nav {
     display: flex;
     justify-content: space-between; 
@@ -124,7 +124,7 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   transform: rotate(-45deg);
 }
 
-@media (width >= 900px) {
+@media (width >= 1024px) {
   header nav .nav-hamburger {
     display: none;
     visibility: hidden;
@@ -277,7 +277,7 @@ header nav .nav-sections .nav-drop[aria-expanded='true']::after{
   
 }
 
-@media (width >= 900px) {
+@media (width >= 1024px) {
   header nav .nav-sections {
     display: block;
     visibility: visible;
@@ -368,4 +368,88 @@ header nav .nav-sections > .default-content-wrapper > ul > li {
   font-size: 12px;
 
 }
+}
+
+
+
+/********** Tablet (768px - 1023.98px) **********/
+@media (max-width: 1023.98px) and (min-width: 768px) {
+
+.nav-wrapper nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+     padding-left: 17px;
+    padding-right: 17px;
+  overflow-x: hidden;   /* prevent horizontal scroll */
+}
+
+  .nav-hamburger {
+    order: 1;
+    display: flex;
+  }
+
+  /* Logo centered */
+  .nav-brand {
+    order: 2;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .nav-tools {
+    order: 3;
+  }
+}
+
+/********** Mobile (<768px) **********/
+@media (max-width: 767.98px) {
+  .nav-wrapper nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+     padding-left: 17px;
+    padding-right: 17px;
+  overflow-x: hidden;   /* prevent horizontal scroll */
+}
+
+
+  /* Hamburger + Logo together on left */
+  .nav-hamburger {
+    order: 1;
+    display: flex;
+    margin-right: 8px;
+  }
+
+  .nav-brand {
+    order: 2;
+    display: flex;
+    align-items: center;
+    flex: 0 auto;
+  }
+
+  .nav-tools {
+    order: 3;
+  }
+}
+
+/* Desktop first */
+.nav-hamburger {
+  display: none;
+}
+
+/* Show below 1024px */
+@media (max-width: 1023.98px) {
+  .nav-hamburger {
+    display: flex;
+  }
+}
+
+#nav[aria-expanded="false"] .nav-sections {
+  display: none;
+  visibility: hidden;
+}
+
+#nav[aria-expanded="true"] .nav-sections {
+  display: block;
+  visibility: visible;
 }
