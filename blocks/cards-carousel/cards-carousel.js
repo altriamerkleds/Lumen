@@ -81,6 +81,4 @@ export default async function decorate(block) {
   carousel.appendChild(nav);
   block.innerHTML = '';
   block.appendChild(carousel);
-
-  
 }

@@ -22,7 +22,7 @@ function buildHeroBlock(main) {
     if (main.querySelector('[data-block-name="hero"], .hero')) return;
     const h1 = main.querySelector('h1');
     const picture = main.querySelector('picture');
-    if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
+    if (h1 && picture && (h1.compareDocumentPosition(picture) && Node.DOCUMENT_POSITION_PRECEDING)) {
       const getTopSection = (el) => {
         let cur = el;
         while (cur && cur.parentElement !== main) cur = cur.parentElement;
