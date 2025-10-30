@@ -17,7 +17,6 @@ import {
  * @param {Element} main The container element
  */
 
-
 function buildHeroBlock(main) {
   try {
     if (main.querySelector('[data-block-name="hero"], .hero')) return;
@@ -47,7 +46,6 @@ function buildHeroBlock(main) {
       } else {
         main.prepend(heroSection);
       }
-
     }
   } catch (e) {
     console.error('Auto Hero build failed', e);
@@ -115,7 +113,6 @@ async function loadEager(doc) {
     // do nothing
   }
 }
-
 
 /**
  * Loads everything that doesn't need to be delayed.
