@@ -32,18 +32,17 @@
 
 .section.people-intro h2 {
   font-family: 'GothamBlack', sans-serif;
-  font-size: 32px;
+  font-size: 16px;
   font-weight: 400;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 52px;
   line-height: 32px;
   color: #000; /* default black */
 }
 
 .section.people-intro h2 span.highlight {
-  color: #d62828; /* red for 'Our People' */
+  color: #d62828;
   font-family: 'GothamBlack', sans-serif;
-
 }
 
 /* Card text body styling */

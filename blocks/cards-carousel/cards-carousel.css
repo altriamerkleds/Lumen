@@ -105,7 +105,7 @@
 
 .section.people-career h2 {
     font-family: "GothamBlack", sans-serif;
-    font-size: 32px;
+    font-size: 16px;
     font-weight: 400;
     text-align: center;
     margin-bottom: 40px;
@@ -130,6 +130,7 @@
 .section.people-career.cards-carousel-container .carousel-card img {
     max-width: 100%;
     width: auto;
+    aspect-ratio: 4 / 3;
     height: auto;
     object-fit: cover;
     display: block;
@@ -254,3 +255,30 @@
 .carousel-slide {
     overflow-x: hidden;
 }
+
+/*Tablet */
+
+@media (max-width: 1024px) and (min-width: 768px) {
+    .section.people-intro h2 {
+        font-size: 19px;
+    }
+
+    .section.people-career h2 {
+        font-size: 19px;
+    }
+}
+
+/* Desktop */
+
+@media (min-width: 1024px) {
+    .section.people-intro h2 {
+        font-size: 32px;
+        line-height: 32px;
+    }
+
+    .section.people-career h2 {
+        font-size: 32px;
+        line-height: 32px;
+    }
+}
+

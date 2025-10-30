@@ -1,107 +1,152 @@
 .hero-container .hero-wrapper {
-  max-width: unset;
-  padding: 0;
+    max-width: unset;
+    padding: 0;
 }
 
 .hero {
-  position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+    position: relative;
+    padding: 0;
 }
 
 .hero h1 {
-  width: auto;
-  position: absolute;
-  top: 50%;
-  left: 40%;
-  right: 0;
-  margin: 0 auto;
-  font-size: 48px;
-  line-height: 3rem;
-  transform: translateY(-50%);
-  display: inline-block;
-  padding: 16px;
-  text-align: left;
-  color: var(--background-color);
-  font-family: 'GothamBlack', sans-serif;
-  text-shadow: transparent 0px 0px 0px;
+    width: auto;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    right: 0;
+    margin: 0 auto;
+    font-size: 48px;
+    line-height: 3rem;
+    transform: translateY(-50%);
+    display: inline-block;
+    padding: 16px;
+    text-align: left;
+    color: var(--background-color);
+    font-family: "GothamBlack", sans-serif;
+    text-shadow: transparent 0px 0px 0px;
 }
 
 .hero picture {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+    z-index: -1;
+    inset: 0;
+    object-fit: cover;
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    text-align: center;
 }
 
 .hero img {
-  object-fit: cover;
-  width: 100%;
-  height: auto;
-}
-
-@media (width >=900px) {
-  .hero {
-    padding: 40px 32px;
-  }
+    object-fit: cover;
+    max-width: 100%;
+    height: auto;
 }
 
 .hero-button .button-container a.button.primary {
-  text-align: center;
-  border: 1px solid #0f3133;
-  background-color: #b2fff6;
-  border-radius: 5px;
-  padding: 11px 38px;
-  font-family: 'Gotham', sans-serif;
-  display: inline-block;
-  text-decoration: none;
-  color: #000;
-  font-weight: 400;
+    text-align: center;
+    border: 1px solid #0f3133;
+    background-color: #b2fff6;
+    border-radius: 5px;
+    padding: 11px 38px;
+    font-family: "Gotham", sans-serif;
+
+    text-decoration: none;
+    color: #000;
+    font-weight: 400;
+    display: block;
+    width: 100%;
 }
 
 .hero-button .button-container a.button.primary:hover {
-  background-color: red;
-  color: white;
+    background-color: red;
+    color: white;
 }
 
 .hero.image-right h1 {
-  left: 0;
-  color: #000;
+    left: 0;
+    color: #000;
 }
 
 .hero.block.background-cta h1 {
-  color: #000;
+    color: #000;
 }
 
 .hero.block a,
 .hero.block em strong a {
-  display: inline-block;
-  padding: 11px 38px;
-  width: auto;
-  font-family: 'Gotham', sans-serif;
-  font-weight: 500;
-  font-size: 14px;
-  color: #0f3133;
-  text-align: center;
-  border: 1px solid #0f3133;
-  background-color: #b2fff6;
-  border-radius: 4px;
-  text-transform: uppercase;
-  text-decoration: none;
-  line-height: 28px;
-  letter-spacing: normal;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-  box-shadow: none;
-  cursor: pointer;
-  margin-top: 16px;
+    display: inline-block;
+    padding: 11px 38px;
+    width: auto;
+    font-family: "Gotham", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #0f3133;
+    text-align: center;
+    border: 1px solid #0f3133;
+    background-color: #b2fff6;
+    border-radius: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 28px;
+    letter-spacing: normal;
+    transition: background-color 0.3s ease, color 0.3s ease,
+        border-color 0.3s ease;
+    box-shadow: none;
+    cursor: pointer;
+    margin-top: 16px;
 }
 
 .hero.block a:hover,
 .hero.block em strong a:hover {
-  color: #ffffff;
-  background-color: #f95e4a;
-  border-color: #f95e4a;
-  text-decoration: none;
-  box-shadow: none;
+    color: #ffffff;
+    background-color: #f95e4a;
+    border-color: #f95e4a;
+    text-decoration: none;
+    box-shadow: none;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 0;
+        min-height: auto;
+    }
+
+    .hero picture,
+    .hero img {
+        position: static !important;
+        inset: unset;
+        width: 100%;
+        height: auto;
+        z-index: unset;
+        display: block;
+    }
+
+    .hero h1 {
+        position: static !important;
+        transform: unset;
+        top: unset;
+        left: unset;
+        right: unset;
+        width: 100%;
+        order: 2;
+        margin: 16px auto 0;
+        text-align: center;
+        font-size: 16px;
+        line-height: 2rem;
+        color: #000;
+        padding: 0 0 20px 0;
+    }
+
+    .hero-container .hero-wrapper .hero > div > div {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+    .hero {
+        padding: 0;
+    }
+    .hero h1 {
+        font-size: 29px;
+    }
 }

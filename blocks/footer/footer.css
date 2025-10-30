@@ -5,7 +5,7 @@ footer {
 
 footer .footer > div {
     max-width: 1440px;
-    width: 100%; /* ✅ responsive width */
+    width: 100%;
     padding: 40px 16px;
     box-sizing: border-box;
     overflow-x: hidden;
@@ -15,11 +15,6 @@ footer .footer > div {
     display: flex;
     margin: auto;
 }
-
-/* .footer-wrapper .footer > div .section .default-content-wrapper img {
-  max-width: 100%;
-  height: auto;
-} */
 
 .footer-wrapper .footer > div .section .default-content-wrapper a {
     text-decoration: underline;
@@ -55,7 +50,7 @@ footer .footer p {
 
 .columns.footersocial p {
     display: flex;
-    flex-wrap: wrap; /* ✅ wrap links */
+    flex-wrap: wrap;
     gap: 16px;
     width: 100%;
     max-width: 100%;
@@ -88,7 +83,7 @@ footer .footer p {
     }
 }
 
-/* Mobile / below 768px (optional, if you want stacking + centered) */
+/* Mobile */
 @media (max-width: 767px) {
     footer .footer > div {
         margin-left: 15px;
@@ -122,8 +117,8 @@ footer .footer p {
     .columns.footersocial .columns-img-col > p {
         display: flex;
         justify-content: center;
-        gap: 12px; /* space between icons */
-        flex-wrap: nowrap; /* prevent wrapping */
+        gap: 12px; 
+        flex-wrap: nowrap;
         flex-direction: row;
         align-items: center;
     }
