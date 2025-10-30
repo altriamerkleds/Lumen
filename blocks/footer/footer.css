@@ -1,130 +1,130 @@
 footer {
-    background-color: #f2f0f1;
-    font-size: var(--body-font-size-xs);
+  background-color: #f2f0f1;
+  font-size: var(--body-font-size-xs);
 }
 
 footer .footer > div {
-    max-width: 1440px;
-    width: 100%; /* ✅ responsive width */
-    padding: 40px 16px;
-    box-sizing: border-box;
-    overflow-x: hidden;
+  max-width: 1440px;
+  width: 100%;
+  padding: 40px 16px;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .footer-wrapper .footer > div {
-    display: flex;
-    margin: auto;
+  display: flex;
+  margin: auto;
 }
-
-/* .footer-wrapper .footer > div .section .default-content-wrapper img {
-  max-width: 100%;
-  height: auto;
-} */
 
 .footer-wrapper .footer > div .section .default-content-wrapper a {
-    text-decoration: underline;
+  text-decoration: underline;
 }
+
+footer .footer p {
+  margin: 0;
+}
+
 footer .footer .social p:first-of-type {
-    display: flex;
-    gap: 25px;
+  display: flex;
+  gap: 25px;
 }
 
 .footer-wrapper .footer > div .section.social .default-content-wrapper img {
-    max-width: 2%;
-    height: auto;
-    display: flex;
-    gap: 20px;
-}
-footer .footer p {
-    margin: 0;
+  max-width: 2%;
+  height: auto;
+  display: flex;
+  gap: 20px;
 }
 
 .footer-wrapper .footer .section.footer-icon {
-    width: 16%;
+  width: 16%;
 }
 
 .footer-wrapper .footer .section.columns-container {
-    width: 84%;
+  width: 84%;
 }
 
 @media (width >= 900px) {
-    footer .footer > div {
-        padding: 40px 0 30px;
-    }
+  footer .footer > div {
+    padding: 40px 0 30px;
+  }
 }
 
 .columns.footersocial p {
-    display: flex;
-    flex-wrap: wrap; /* ✅ wrap links */
-    gap: 16px;
-    width: 100%;
-    max-width: 100%;
-    word-break: break-word;
-    overflow-wrap: break-word;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+  max-width: 100%;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .columns-wrapper {
-    max-width: 100%;
-    overflow-x: hidden;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 #footer .footer-block .container {
-    padding: 40px 0 30px;
+  padding: 40px 0 30px;
 }
 
 /* Desktop view (above 1024px) */
-@media (min-width: 1024px) {
-    .footer-wrapper .footer {
-        margin-left: 90px;
-        margin-right: 90px;
-    }
+@media (width >= 1024px) {
+  .footer-wrapper .footer {
+    margin-left: 90px;
+    margin-right: 90px;
+  }
 }
 
 /* Tablet / below 1024px */
-@media (max-width: 1023px) {
-    .footer-wrapper .footer {
-        margin-left: 17px;
-        margin-right: 17px;
-    }
+@media (width <= 1023px) {
+  .footer-wrapper .footer {
+    margin-left: 17px;
+    margin-right: 17px;
+  }
 }
 
-/* Mobile / below 768px (optional, if you want stacking + centered) */
-@media (max-width: 767px) {
-    footer .footer > div {
-        margin-left: 15px;
-        margin-right: 15px;
-        width: auto;
-    }
-    .footer-wrapper .footer .section.footer-icon {
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-        display: flex;
-    }
-    .footer-wrapper .footer .section.columns-container {
-        width: 100%;
-    }
-    .footer-wrapper .footer > div {
-        display: flex;
-        flex-direction: column;
-    }
-    .footer-wrapper
-        .footer
-        .section.columns-container
-        .columns-wrapper
-        .columns-img-col
-        p
-        a {
-        display: flex;
-        justify-content: center;
-    }
+/* Mobile */
+@media (width <= 767px) {
+  footer .footer > div {
+    margin-left: 15px;
+    margin-right: 15px;
+    width: auto;
+  }
 
-    .columns.footersocial .columns-img-col > p {
-        display: flex;
-        justify-content: center;
-        gap: 12px; /* space between icons */
-        flex-wrap: nowrap; /* prevent wrapping */
-        flex-direction: row;
-        align-items: center;
-    }
+  .footer-wrapper .footer .section.footer-icon {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+
+  .footer-wrapper .footer .section.columns-container {
+    width: 100%;
+  }
+
+  .footer-wrapper .footer > div {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  .footer-wrapper
+    .footer
+    .section.columns-container
+    .columns-wrapper
+    .columns-img-col
+    p
+    a {
+    display: flex;
+    justify-content: center;
+  }
+
+  .columns.footersocial .columns-img-col > p {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-flow: row nowrap; 
+    align-items: center;
+  }
 }

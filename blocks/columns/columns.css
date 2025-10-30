@@ -267,6 +267,8 @@
     word-break: break-word;
 }
 
+/* footer Social Section */
+
 .columns.footersocial .columns-img-col p {
     display: flex;
     flex-wrap: wrap;

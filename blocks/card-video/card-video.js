@@ -2,7 +2,7 @@ import { loadVideoEmbed } from '../video/video.js';
 
 export default function decorate(block) {
   const ul = document.createElement('ul');
-  ul.className = 'card-video-list'; 
+  ul.className = 'card-video-list';
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
     li.className = 'card-video-item';
@@ -20,7 +20,7 @@ export default function decorate(block) {
         videoCol.textContent = '';
         videoCol.dataset.embedLoaded = false;
 
-        // Create wrapper 
+        // Create wrapper
         const wrapper = document.createElement('div');
         wrapper.className = 'video-placeholder';
 
@@ -42,7 +42,7 @@ export default function decorate(block) {
           loadVideoEmbed(videoCol, link, true, false);
         });
         wrapper.addEventListener('click', (e) => {
-          if (e.target.closest('button')) return; 
+          if (e.target.closest('button')) return;
           window.open(link, '_blank', 'noopener,noreferrer');
         });
 

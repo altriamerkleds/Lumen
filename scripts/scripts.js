@@ -12,18 +12,18 @@ import {
   loadSections,
   loadCSS,
 } from './aem.js';
+
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
  */
-
-
 function buildHeroBlock(main) {
   try {
     if (main.querySelector('[data-block-name="hero"], .hero')) return;
     const h1 = main.querySelector('h1');
     const picture = main.querySelector('picture');
-    if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
+    if (h1 && picture && (h1.compareDocumentPosition(picture)
+      && Node.DOCUMENT_POSITION_PRECEDING)) {
       const getTopSection = (el) => {
         let cur = el;
         while (cur && cur.parentElement !== main) cur = cur.parentElement;
@@ -47,9 +47,9 @@ function buildHeroBlock(main) {
       } else {
         main.prepend(heroSection);
       }
-
     }
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.error('Auto Hero build failed', e);
   }
 }
@@ -65,6 +65,7 @@ async function loadFonts() {
     // do nothing
   }
 }
+
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -84,7 +85,6 @@ function buildAutoBlocks(main) {
  */
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
-  // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
   buildAutoBlocks(main);
@@ -107,7 +107,6 @@ async function loadEager(doc) {
   }
 
   try {
-    /* if desktop (proxy for fast connection) or fonts already loaded, load fonts.css */
     if (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded')) {
       loadFonts();
     }
@@ -115,7 +114,6 @@ async function loadEager(doc) {
     // do nothing
   }
 }
-
 
 /**
  * Loads everything that doesn't need to be delayed.
@@ -143,7 +141,6 @@ async function loadLazy(doc) {
 function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
   window.setTimeout(() => import('./delayed.js'), 3000);
-  // load anything that can be postponed to the latest here
 }
 
 async function loadPage() {
