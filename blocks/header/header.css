@@ -185,14 +185,15 @@ header nav .nav-sections .nav-drop > ul {
 /* Sub-nav dropdowns */
 header nav .nav-sections .sub-nav-drop > ul {
   display: none;
-  position: absolute;
+  position: relative;
   top: 0;
-  margin-left: 10px;
-  left: 100%; /* opens to the right */
-  min-width: 200px;
+  left: 100%;
+  min-width: 160px;
   background-color:var(--background-color);
-  padding: 3px;
+  margin-left: 2px;
   z-index: 2000;
+  word-break: break-word;
+  white-space: normal;
 }
 
 header nav .nav-sections .nav-drop[aria-expanded="true"] > ul {
@@ -205,7 +206,6 @@ header nav .nav-sections .sub-nav-drop[aria-expanded="true"] > ul {
 }
 
 header nav .nav-sections .sub-nav-drop a{
-  display: inline-block;
   text-decoration: underline;
   font-size: 12px;
   transition: all 0.2s ease;
@@ -213,12 +213,39 @@ header nav .nav-sections .sub-nav-drop a{
 
 /* Submenu items */
 header nav .nav-sections ul > li > ul > li {
-  padding: 4px 18px;
-  margin-bottom: 4px;
+  padding: 0;
+  margin-bottom: 6px;
+  width: 100%;         /* your wanted width */
+  min-height: 20px;
+}
+
+header nav .nav-sections ul > li > ul > li > a {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  width: fit-content;
+  border: 1px dotted transparent;
+  word-break: break-word;
+  white-space: normal;
+  box-sizing: border-box;
 }
 
 header nav .nav-sections .sub-nav-drop > ul > li {  
   font-size: 12px;
+  width: auto !important;
+  max-width: 200px; /* if you want same width, else remove */
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+header nav .nav-sections .sub-nav-drop > ul > li > a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  white-space: normal;
+  width: 100%;
 }
 
 header nav .nav-sections .sub-nav-drop {
@@ -233,6 +260,8 @@ header nav .nav-sections .nav-drop a {
   text-decoration: underline;
   font-size: 12px;
   transition: all 0.2s ease;
+  white-space: normal;
+  word-break: break-word;
 }
 
 
@@ -243,6 +272,7 @@ header nav .nav-sections .nav-drop {
 header nav .nav-sections .nav-drop .nav-text {
   color: #0f3133;
   font-size: 12px;
+  border: 1px dotted transparent;
 }
 
 header nav .nav-sections a:hover {
@@ -267,6 +297,7 @@ header nav .nav-sections .sub-nav-drop::after {
   border: 1px solid #0f3133;
   border-radius: 0 1px 0 0;
   border-width: 1px 1px 0 0;
+  position: absolute;
 }
 
 
@@ -288,16 +319,18 @@ header nav .nav-sections .nav-drop[aria-expanded='true']::after{
   header nav .nav-sections ul {
     display: flex;
     margin: 0;
+    white-space: nowrap;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
     display: none;
     position: absolute;
-    left: -24px;
-    width: auto;
-    top: 120%;
+    left: 0;
+    top: 125%;
     background-color: var(--background-color);
-     white-space: nowrap; /* <-- prevents line breaks */
+    white-space: nowrap;
+    text-align: left;
+    padding: 10px;
   }
 
 /* =======================
@@ -366,8 +399,33 @@ header nav .nav-sections > .default-content-wrapper > ul > li > a:hover::after {
 
 header nav .nav-sections > .default-content-wrapper > ul > li {
   font-size: 12px;
-
+  width: auto;
 }
+
+/* Hover = orange */
+header nav .nav-sections .nav-drop:hover .nav-text {
+  color: #f95e4a;
+}
+
+/* Keep orange when dropdown open */
+header nav .nav-sections .nav-drop[aria-expanded="true"] .nav-text {
+  color: #0f3133;
+}
+
+/* Arrow color also stays orange when open */
+header nav .nav-sections .nav-drop[aria-expanded="true"] .nav-text::after {
+  border-color: #0f3133;
+}
+
+/* When hovering inside submenu, revert parent text color to default */
+header nav .nav-sections .nav-drop[aria-expanded="true"]:has(.sub-nav-drop:hover) .nav-text {
+  color: #0f3133;
+}
+
+header nav .nav-sections .nav-drop[aria-expanded="true"]:has(.sub-nav-drop:hover) .nav-text::after {
+  border-color: #0f3133;
+}
+
 }
 
 
@@ -414,21 +472,172 @@ header nav .nav-sections > .default-content-wrapper > ul > li {
 
 
   /* Hamburger + Logo together on left */
+  @media (max-width: 767.98px) {
+    header nav {
+      display: flex !important;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px !important;
+      height: var(--nav-height);
+    }
+
+    .nav-hamburger {
+      display: flex;
+      order: 1;
+      margin-right: 8px;
+    }
+
+    .nav-brand {
+      order: 2;
+      max-width: 110px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-tools {
+      order: 3;
+      display: flex;
+      gap: 12px;
+    }
+
+    /* Hide menu in header, show only when opened */
+    .nav-sections {
+      display: none;
+      visibility: hidden;
+    }
+    
+    header nav[aria-expanded="true"] {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 16px;
+    }
+
+    header nav[aria-expanded="true"] .nav-sections {
+      display: block;
+      visibility: visible;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    header nav .nav-sections .nav-drop > ul {
+      display: none;
+    }
+
+    .nav[aria-expanded="true"] .nav-hamburger {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 9999;
+    }
+
+    .nav[aria-expanded="true"] .nav-hamburger-icon {
+      background: none;
+    }
+    /* when expanded, show */
+    header nav .nav-sections .nav-drop[aria-expanded="true"] > ul {
+      display: block;
+    }
+
+     header .nav-wrapper {
+    width: 100%;
+    background: #fff; /* or your theme */
+    position: relative;
+    z-index: 1000;
+  }
+
+  /* Header top bar layout */
+  header nav {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    height: 60px;
+  }
+
   .nav-hamburger {
     order: 1;
     display: flex;
-    margin-right: 8px;
+    align-items: center;
   }
 
   .nav-brand {
     order: 2;
+    margin: 0 auto; /* centers logo */
     display: flex;
     align-items: center;
-    flex: 0 auto;
+  }
+
+  .nav-brand img {
+    max-height: 32px;
   }
 
   .nav-tools {
     order: 3;
+    align-items: center;
+    display: flex;
+    gap: 10px;
+  }
+
+  /* Main menu */
+  .nav-sections {
+    display: none;
+    width: 100%;
+    padding: 12px;
+    flex-direction: column;
+  }
+
+  nav[aria-expanded="true"] .nav-sections {
+    display: flex;
+  }
+
+  .nav-sections ul {
+    width: 100%;
+  }
+
+  .nav-sections > .default-content-wrapper > ul > li {
+    padding: 14px 8px;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Hidden submenus initially */
+  .nav-sections .nav-drop > ul {
+    display: none;
+    padding-left: 12px;
+  }
+
+  .nav-sections .nav-drop[aria-expanded="true"] > ul {
+    display: block;
+  }
+
+  /* Arrow icon */
+  .nav-sections .nav-drop .nav-text::after {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border: 2px solid #000;
+    border-width: 2px 2px 0 0;
+    margin-left: 10px;
+    transform: rotate(135deg); /* pointing down */
+  }
+
+  .nav-sections .nav-drop[aria-expanded="true"] .nav-text::after {
+    transform: rotate(315deg); /* pointing up */
+  }
+
+  /* Sub-nav */
+  .sub-nav-drop > ul {
+    display: none;
+    padding-left: 16px;
+    padding-top: 6px;
+  }
+
+  .sub-nav-drop[aria-expanded="true"] > ul {
+    display: block;
+  }
   }
 }
 
@@ -441,6 +650,16 @@ header nav .nav-sections > .default-content-wrapper > ul > li {
 @media (max-width: 1023.98px) {
   .nav-hamburger {
     display: flex;
+  }
+
+  .nav-drop > ul,
+  .sub-nav-drop > ul {
+    display: none;
+  }
+
+  .nav-drop[aria-expanded="true"] > ul,
+  .sub-nav-drop[aria-expanded="true"] > ul {
+    display: block;
   }
 }
 
