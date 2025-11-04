@@ -188,6 +188,7 @@ header nav .nav-sections .sub-nav-drop > ul {
     display: none;
     position: absolute;
     top: 0;
+    margin-left: 1px;
     left: 100%; /* opens to the right */
     min-width: 200px;
     background-color: var(--background-color);
