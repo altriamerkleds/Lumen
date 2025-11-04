@@ -101,6 +101,7 @@ header nav[aria-expanded="false"] .nav-hamburger-icon::after {
 header nav[aria-expanded="false"] .nav-hamburger-icon::before {
     top: -6px;
 }
+
 header nav[aria-expanded="false"] .nav-hamburger-icon::after {
     top: 6px;
 }
@@ -179,6 +180,7 @@ header nav .nav-sections .nav-drop > ul {
     display: none;
     position: relative;
     padding-left: 0;
+    color : #8E9399;
 }
 
 /* Sub-nav dropdowns */
@@ -186,7 +188,6 @@ header nav .nav-sections .sub-nav-drop > ul {
     display: none;
     position: absolute;
     top: 0;
-    margin-left: 10px;
     left: 100%; /* opens to the right */
     min-width: 200px;
     background-color: var(--background-color);
@@ -241,10 +242,13 @@ header nav .nav-sections .nav-drop {
 header nav .nav-sections .nav-drop .nav-text {
     color: #0f3133;
     font-size: 12px;
+      border: 1px dotted transparent;
+
+
 }
 
 header nav .nav-sections a:hover {
-    text-shadow: 0 0 0.6px currentcolor, 0 0 0.6px currentcolor;
+    color:black
 }
 
 header nav .nav-sections .sub-nav-drop[aria-expanded="true"] {
@@ -260,7 +264,7 @@ header nav .nav-sections .sub-nav-drop::after {
     right: 2px;
     width: 8px;
     height: 8px;
-    border: 1px solid #0f3133;
+    border: 1px solid #8E9399;
     border-radius: 0 1px 0 0;
     border-width: 1px 1px 0 0;
 }
@@ -347,27 +351,73 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
     }
 
     /* Hover state */
-    header
-        nav
-        .nav-sections
-        > .default-content-wrapper
-        > ul
-        > li.nav-drop:hover
-        .nav-text {
-        color: #f95e4a;
-    }
 
-    header
-        nav
-        .nav-sections
-        > .default-content-wrapper
-        > ul
-        > li.nav-drop:hover
-        .nav-text::after {
-        border-color: #f95e4a;
-    }
+    /* Hover state */
 
-    header nav .nav-sections > .default-content-wrapper > ul > li > a:hover,
+/* Always apply hover on main nav text */
+header
+    nav
+    .nav-sections
+    > .default-content-wrapper
+    > ul
+    > li.nav-drop
+    > .nav-text:hover {
+    color: #f95e4a;
+}
+
+header
+    nav
+    .nav-sections
+    > .default-content-wrapper
+    > ul
+    > li.nav-drop
+    > .nav-text:hover::after {
+    border-color: #f95e4a;
+}
+
+/* Prevent hover color when hovering on sub-nav items */
+header
+    nav
+    .nav-sections
+    > .default-content-wrapper
+    > ul
+    > li.nav-drop:hover
+    ul:hover
+    ~ .nav-text,
+header
+    nav
+    .nav-sections
+    > .default-content-wrapper
+    > ul
+    > li.nav-drop:hover
+    ul:hover
+    ~ .nav-text::after {
+    color: #0f3133;
+    border-color: #0f3133;
+}
+
+/* When expanded, keep hover working on main text */
+header
+    nav
+    .nav-sections
+    > .default-content-wrapper
+    > ul
+    > li.nav-drop[aria-expanded="true"]
+    > .nav-text:hover {
+    color: #f95e4a;
+}
+
+header
+    nav
+    .nav-sections
+    > .default-content-wrapper
+    > ul
+    > li.nav-drop[aria-expanded="true"]
+    > .nav-text:hover::after {
+    border-color: #f95e4a;
+}
+
+header nav .nav-sections > .default-content-wrapper > ul > li > a:hover,
     header
         nav
         .nav-sections
@@ -386,7 +436,7 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
 }
 
 /********** Tablet */
-@media (max-width: 1024px) and (min-width: 768px) {
+@media (width <= 1024px) and (width >= 768px) {
     .nav-wrapper nav {
         display: flex;
         align-items: center;
@@ -413,7 +463,7 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
 }
 
 /********** Mobile (<768px) **********/
-@media (max-width: 768px) {
+@media (width <= 768px) {
     .nav-wrapper nav {
         display: flex;
         align-items: center;
@@ -445,7 +495,7 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
     display: none;
 }
 
-@media (max-width: 1023.98px) {
+@media (width <= 1023.98px) {
     .nav-hamburger {
         display: flex;
     }
