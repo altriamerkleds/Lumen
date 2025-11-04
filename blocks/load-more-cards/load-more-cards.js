@@ -22,47 +22,50 @@ export default function decorate(block) {
   // Initial render
   renderCards();
 
-  // Create button structure
-  const buttonWrapper = document.createElement('div');
-  buttonWrapper.classList.add('load-more-button'); // main wrapper
+  // ✅ Only create the button if there are more than 3 cards
+  if (cards.length > cardsPerLoad) {
+    // Create wrapper and button structure
+    const buttonWrapper = document.createElement('div');
+    buttonWrapper.classList.add('load-more-button');
 
-  const buttonContainer = document.createElement('p');
-  buttonContainer.classList.add('button-container');
+    const buttonContainer = document.createElement('p');
+    buttonContainer.classList.add('button-container');
 
-  const strongEl = document.createElement('strong');
-  const linkEl = document.createElement('a');
+    const strongEl = document.createElement('strong');
+    const linkEl = document.createElement('a');
 
-  linkEl.href = '#';
-  linkEl.title = 'VIEW MORE';
-  linkEl.classList.add('button', 'primary');
-  linkEl.textContent = 'VIEW MORE';
+    linkEl.href = '#';
+    linkEl.title = 'VIEW MORE';
+    linkEl.classList.add('button', 'primary');
+    linkEl.textContent = 'VIEW MORE';
 
-  strongEl.appendChild(linkEl);
-  buttonContainer.appendChild(strongEl);
-  buttonWrapper.appendChild(buttonContainer);
+    strongEl.appendChild(linkEl);
+    buttonContainer.appendChild(strongEl);
+    buttonWrapper.appendChild(buttonContainer);
 
-  // Append AFTER the grid (outside card block)
-  block.parentElement.appendChild(buttonWrapper);
+    // Append AFTER the grid (outside cards)
+    block.parentElement.appendChild(buttonWrapper);
 
-  // Add click event
-  linkEl.addEventListener('click', (e) => {
-    e.preventDefault();
+    // Add click behavior
+    linkEl.addEventListener('click', (e) => {
+      e.preventDefault();
 
-    if (linkEl.textContent.trim().toUpperCase() === 'VIEW MORE') {
-      visibleCount += cardsPerLoad;
-      renderCards();
-
-      if (visibleCount >= cards.length) {
-        visibleCount = cards.length;
+      if (linkEl.textContent.trim().toUpperCase() === 'VIEW MORE') {
+        visibleCount += cardsPerLoad;
         renderCards();
-        linkEl.textContent = 'VIEW LESS';
-        linkEl.title = 'VIEW LESS';
+
+        if (visibleCount >= cards.length) {
+          visibleCount = cards.length;
+          renderCards();
+          linkEl.textContent = 'VIEW LESS';
+          linkEl.title = 'VIEW LESS';
+        }
+      } else {
+        visibleCount = cardsPerLoad;
+        renderCards();
+        linkEl.textContent = 'VIEW MORE';
+        linkEl.title = 'VIEW MORE';
       }
-    } else {
-      visibleCount = cardsPerLoad;
-      renderCards();
-      linkEl.textContent = 'VIEW MORE';
-      linkEl.title = 'VIEW MORE';
-    }
-  });
+    });
+  }
 }
