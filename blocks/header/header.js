@@ -183,13 +183,13 @@ export default async function decorate(block) {
     // sub-nav
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) {
-      navSection.classList.add('sub-nav-drop');
-      
-      //Ensure aria-expanded exists
-      if (!navSection.hasAttribute('aria-expanded')) {
-        navSection.setAttribute('aria-expanded', 'false');
+        navSection.classList.add('sub-nav-drop');
+
+        // Ensure aria-expanded exists
+        if (!navSection.hasAttribute('aria-expanded')) {
+          navSection.setAttribute('aria-expanded', 'false');
+        }
       }
-    }
       navSection.addEventListener('click', (e) => {
         e.stopPropagation();
         const expanded = navSection.getAttribute('aria-expanded') === 'true';
