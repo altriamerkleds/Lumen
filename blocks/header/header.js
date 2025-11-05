@@ -164,10 +164,17 @@ export default async function decorate(block) {
         navSection.replaceChild(span, firstTextNode);
       }
 
-      navSection.addEventListener('click', () => {
+      navSection.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const expanded = navSection.getAttribute('aria-expanded') === 'true';
+
         if (isDesktop.matches) {
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          toggleAllNavSections(navSections);
+          // Desktop behavior: only one open
+          toggleAllSubNavSections(navSections, false);
+          toggleAllNavSections(navSections, false);
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        } else {
+          // Mobile behavior: toggle only this item
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
       });
@@ -175,12 +182,24 @@ export default async function decorate(block) {
 
     // sub-nav
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul')) navSection.classList.add('sub-nav-drop');
+      if (navSection.querySelector('ul')) {
+      navSection.classList.add('sub-nav-drop');
+      
+      //Ensure aria-expanded exists
+      if (!navSection.hasAttribute('aria-expanded')) {
+        navSection.setAttribute('aria-expanded', 'false');
+      }
+    }
       navSection.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const expanded = navSection.getAttribute('aria-expanded') === 'true';
+
         if (isDesktop.matches) {
-          e.stopPropagation();
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          toggleAllSubNavSections(navSections);
+          toggleAllSubNavSections(navSections, false);
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        } else {
+          // Mobile independent toggle
+          toggleAllNavSections(navSections, false);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
       });
@@ -197,8 +216,15 @@ export default async function decorate(block) {
   nav.prepend(hamburger);
 
   nav.setAttribute('aria-expanded', 'false');
-  toggleMenu(nav, navSections, isDesktop.matches);
-  isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
+
+  // Desktop loads open, Mobile loads closed
+  if (isDesktop.matches) {
+    toggleMenu(nav, navSections, true);
+  }
+
+  isDesktop.addEventListener('change', () => {
+    toggleMenu(nav, navSections, isDesktop.matches);
+  });
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
