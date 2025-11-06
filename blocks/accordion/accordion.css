@@ -1,0 +1,135 @@
+.accordion-wrapper {
+  max-width: 65% !important;
+  margin: 0 auto;
+  padding: 8px 8px 8px 8px;
+  font-family: Gotham, sans-serif;
+}
+
+.accordion details {
+  border: 1px solid black;
+}
+
+.accordion details + details {
+  margin-top: 20px;
+}
+
+.accordion details p {
+  margin-bottom: 0.8em;
+}
+
+.accordion details summary {
+  position: relative;
+  padding: 24px 60px 24px 20px; /* increased right padding */
+  cursor: pointer;
+  list-style: none;
+  overflow: hidden;
+  transition: background-color 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordion details summary p {
+  margin: 0 !important;
+  flex: 1; /* allow text to use available space */
+  word-break: break-word; /* prevents overflow */
+}
+
+.accordion details[open] summary {
+  background-color: #0f3133;
+  color: white;
+}
+
+.accordion details summary:hover {
+  background-color: #0f3133 !important;
+  color: white !important;
+}
+
+.accordion details:not([open]) summary:hover,
+.accordion details:not([open]) summary:focus {
+  background-color: white;
+  color: #000;
+}
+
+.accordion details summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion details summary::after {
+  content: '+';
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  font-size: 28px;
+  font-weight: 100;
+  transition: transform 0.2s, content 0.2s;
+}
+
+.accordion details[open] summary::after {
+  content: '–';
+}
+
+.accordion details .accordion-item-body {
+  padding: 0 16px;
+}
+
+.accordion .accordion-item-label {
+  font-weight: bold;
+}
+
+.accordion details[open] .accordion-item-body {
+  border-top: 1px solid black;
+  background-color: var(--background-color);
+}
+
+.accordion-item-body a {
+  color: #f95e4a;
+  text-decoration: underline;
+}
+
+
+/* ----------- TABLETS ----------- */
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+  .accordion-wrapper {
+    max-width: 100% !important; /* Optional — slightly wider for tablets */
+    margin: 0 auto !important; /* keeps it centered */
+    padding: 60px 20px !important;
+  }
+}
+
+/* ----------- MOBILE PHONES ----------- */
+@media screen and (max-width: 768px) {
+  .accordion-wrapper {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 40px 16px !important;
+  }
+
+  .accordion details summary {
+    padding: 24px 30px 24px 20px !important;
+    font-size: 1rem !important;
+    line-height: 1.4;
+  }
+
+  .accordion details summary::after {
+    right: 7.5px;
+    font-size: 24px;
+    align-items: center;
+  }
+
+  .accordion details .accordion-item-body {
+    padding: 12px 16px !important;
+    font-size: 0.95rem;
+  }
+
+  .accordion details {
+    border-radius: 0;
+  }
+
+  .accordion details + details {
+    margin-top: 16px !important;
+  }
+}
+
+

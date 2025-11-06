@@ -18,16 +18,61 @@ import {
  * @param {Element} main The container element
  */
 function buildHeroBlock(main) {
-  const h1 = main.querySelector('h1');
-  const picture = main.querySelector('picture');
-  // eslint-disable-next-line no-bitwise
-  if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
-    const section = document.createElement('div');
-    section.append(buildBlock('hero', { elems: [picture, h1] }));
-    main.prepend(section);
+  try {
+    if (main.querySelector('[data-block-name="hero"], .hero')) return;
+    const h1 = main.querySelector('h1');
+    const picture = main.querySelector('picture');
+    if (h1 && picture && (h1.compareDocumentPosition(picture)
+      && Node.DOCUMENT_POSITION_PRECEDING)) {
+      const getTopSection = (el) => {
+        let cur = el;
+        while (cur && cur.parentElement !== main) cur = cur.parentElement;
+        return (cur && cur.parentElement === main) ? cur : null;
+      };
+      const picTop = getTopSection(picture);
+      const h1Top = getTopSection(h1);
+      const sections = Array.from(main.children);
+
+      let anchor = null;
+      if (picTop && h1Top) {
+        anchor = (sections.indexOf(picTop) <= sections.indexOf(h1Top)) ? picTop : h1Top;
+      } else {
+        anchor = picTop || h1Top || null;
+      }
+      const heroSection = document.createElement('div');
+      heroSection.append(buildBlock('hero', { elems: [picture, h1] }));
+
+      if (anchor) {
+        main.insertBefore(heroSection, anchor);
+      } else {
+        main.prepend(heroSection);
+      }
+    }
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('Auto Hero build failed', e);
   }
 }
-
+export function createTag(tag, attributes, html) {
+  const el = document.createElement(tag);
+  if (html) {
+    if (html instanceof HTMLElement
+      || html instanceof SVGElement
+      || html instanceof DocumentFragment) {
+      el.append(html);
+    } else if (Array.isArray(html)) {
+      el.append(...html);
+    } else {
+      el.insertAdjacentHTML('beforeend', html);
+    }
+  }
+  if (attributes) {
+    Object.entries(attributes).forEach(([key, val]) => {
+      el.setAttribute(key, val);
+    });
+  }
+  return el;
+}
 /**
  * load fonts.css and set a session storage flag
  */
@@ -59,7 +104,6 @@ function buildAutoBlocks(main) {
  */
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
-  // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
   buildAutoBlocks(main);
@@ -82,7 +126,6 @@ async function loadEager(doc) {
   }
 
   try {
-    /* if desktop (proxy for fast connection) or fonts already loaded, load fonts.css */
     if (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded')) {
       loadFonts();
     }
@@ -117,7 +160,6 @@ async function loadLazy(doc) {
 function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
   window.setTimeout(() => import('./delayed.js'), 3000);
-  // load anything that can be postponed to the latest here
 }
 
 async function loadPage() {
