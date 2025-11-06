@@ -1,8 +1,7 @@
 .accordion-wrapper {
   max-width: 65% !important;
-  margin-left: 348.906px !important;
-  margin-right: 348.906px !important;
-  padding: 100px 8px !important;
+  margin: 0 auto;
+  padding: 8px 8px 8px 8px;
   font-family: Gotham, sans-serif;
 }
 
@@ -89,7 +88,17 @@
   text-decoration: underline;
 }
 
-/* ----------- MOBILE OPTIMIZATION (for all phones & small tablets) ----------- */
+
+/* ----------- TABLETS ----------- */
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+  .accordion-wrapper {
+    max-width: 100% !important; /* Optional — slightly wider for tablets */
+    margin: 0 auto !important; /* keeps it centered */
+    padding: 60px 20px !important;
+  }
+}
+
+/* ----------- MOBILE PHONES ----------- */
 @media screen and (max-width: 768px) {
   .accordion-wrapper {
     max-width: 100% !important;
@@ -98,14 +107,15 @@
   }
 
   .accordion details summary {
-    padding: 20px 50px 20px 16px !important; /* keep space for + icon */
+    padding: 24px 30px 24px 20px !important;
     font-size: 1rem !important;
     line-height: 1.4;
   }
 
   .accordion details summary::after {
-    right: 16px;
+    right: 7.5px;
     font-size: 24px;
+    align-items: center;
   }
 
   .accordion details .accordion-item-body {
@@ -113,12 +123,13 @@
     font-size: 0.95rem;
   }
 
-  /* Removed rounded corners on mobile */
   .accordion details {
-    border-radius: 0; /* square edges */
+    border-radius: 0;
   }
 
   .accordion details + details {
     margin-top: 16px !important;
   }
 }
+
+
