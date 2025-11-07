@@ -1,84 +1,114 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
-  const getCardsPerSlide = () => {
-    const width = window.innerWidth;
-    if (width < 768) return 1;
-    if (width < 1024) return 2;
-    return 3;
-  };
-
-  const cardsPerSlide = getCardsPerSlide();
-
-  const cards = Array.from(block.children).map((row) => {
-    const cols = row.querySelectorAll('div');
-    const card = document.createElement('div');
-    card.className = 'carousel-card';
-
-    const img = cols[0].querySelector('img');
-    if (img) {
-      const picture = createOptimizedPicture(img.src, img.alt || '', false, [{ width: 750 }]);
-      card.appendChild(picture);
-    }
-
-    const content = document.createElement('div');
-    content.className = 'carousel-content';
-    content.append(...cols[1].children);
-    card.appendChild(content);
-
-    return card;
-  });
-
-  const carousel = document.createElement('div');
-  carousel.className = 'carousel-container';
-
-  const slidesWrapper = document.createElement('div');
-  slidesWrapper.className = 'carousel-slides';
-
-  // Group cards into slides
-  for (let i = 0; i < cards.length; i += cardsPerSlide) {
-    const slide = document.createElement('div');
-    slide.className = 'carousel-slide';
-
-    // Show last N cards if remaining cards are less than the group size
-    if (i + cardsPerSlide > cards.length && cards.length > cardsPerSlide) {
-      const lastGroup = cards.slice(-cardsPerSlide);
-      lastGroup.forEach((card) => slide.appendChild(card.cloneNode(true)));
-    } else {
-      const group = cards.slice(i, i + cardsPerSlide);
-      group.forEach((card) => slide.appendChild(card));
-    }
-
-    slidesWrapper.appendChild(slide);
+  
+  if (!block._originalChildren) {
+    block._originalChildren = Array.from(block.children).map((row) => {
+      const cols = row.querySelectorAll('div');
+      const img = cols[0]?.querySelector('img');
+      return {
+        img: img ? { src: img.src, alt: img.alt } : null,
+        content: cols[1]?.cloneNode(true) || null 
+      };
+    });
   }
 
-  carousel.appendChild(slidesWrapper);
+  let activeSlideIndex = 0; 
 
-  // Add navigation
-  const nav = document.createElement('div');
-  nav.className = 'carousel-nav';
+  const buildCarousel = () => {
+    const getCardsPerSlide = () => {
+      const width = window.innerWidth;
+      if (width < 768) return 1;
+      if (width < 1024) return 2;
+      return 3;
+    };
 
-  const bullets = [];
-  const slides = slidesWrapper.children;
+    const cardsPerSlide = getCardsPerSlide();
 
-  for (let i = 0; i < slides.length; i += 1) {
-    const bullet = document.createElement('button');
-    bullet.className = 'carousel-bullet';
-    if (i === 0) bullet.classList.add('active');
+    // Create card elements
+    const cards = block._originalChildren.map((cardData) => {
+      const card = document.createElement('div');
+      card.className = 'carousel-card';
 
-    bullet.addEventListener('click', () => {
-      Array.from(slides).forEach((slide) => {
-        slide.style.transform = `translateX(-${i * 100}%)`;
-      });
-      bullets.forEach((b) => b.classList.remove('active'));
-      bullet.classList.add('active');
+      if (cardData.img) {
+        const picture = createOptimizedPicture(cardData.img.src, cardData.img.alt || '', false, [{ width: 750 }]);
+        card.appendChild(picture);
+      }
+
+      if (cardData.content) {
+        const content = document.createElement('div');
+        content.className = 'carousel-content';
+        content.append(...Array.from(cardData.content.children).map(c => c.cloneNode(true)));
+        card.appendChild(content);
+      }
+
+      return card;
     });
 
-    nav.appendChild(bullet);
-    bullets.push(bullet);
-  }
+    const carousel = document.createElement('div');
+    carousel.className = 'carousel-container';
 
-  carousel.appendChild(nav);
-  block.innerHTML = '';
-  block.appendChild(carousel);
+    const slidesWrapper = document.createElement('div');
+    slidesWrapper.className = 'carousel-slides';
+
+    // Group cards into slides
+    for (let i = 0; i < cards.length; i += cardsPerSlide) {
+      const slide = document.createElement('div');
+      slide.className = 'carousel-slide';
+
+      if (i + cardsPerSlide > cards.length && cards.length > cardsPerSlide) {
+        const lastGroup = cards.slice(-cardsPerSlide);
+        lastGroup.forEach((card) => slide.appendChild(card.cloneNode(true)));
+      } else {
+        const group = cards.slice(i, i + cardsPerSlide);
+        group.forEach((card) => slide.appendChild(card));
+      }
+
+      slidesWrapper.appendChild(slide);
+    }
+
+    carousel.appendChild(slidesWrapper);
+
+    // Navigation bullets
+    const nav = document.createElement('div');
+    nav.className = 'carousel-nav';
+    const slides = slidesWrapper.children;
+    const bullets = [];
+
+    for (let i = 0; i < slides.length; i++) {
+      const bullet = document.createElement('button');
+      bullet.className = 'carousel-bullet';
+      if (i === activeSlideIndex) bullet.classList.add('active');
+
+      bullet.addEventListener('click', () => {
+        Array.from(slides).forEach((slide) => {
+          slide.style.transform = `translateX(-${i * 100}%)`;
+        });
+        bullets.forEach((b) => b.classList.remove('active'));
+        bullet.classList.add('active');
+        activeSlideIndex = i;
+      });
+
+      nav.appendChild(bullet);
+      bullets.push(bullet);
+    }
+
+    carousel.appendChild(nav);
+    block.innerHTML = '';
+    block.appendChild(carousel);
+
+    Array.from(slides).forEach((slide) => {
+      slide.style.transform = `translateX(-${activeSlideIndex * 100}%)`;
+    });
+    bullets.forEach((b) => b.classList.remove('active'));
+    if (bullets[activeSlideIndex]) bullets[activeSlideIndex].classList.add('active');
+  };
+
+  buildCarousel();
+
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(buildCarousel, 200);
+  });
 }

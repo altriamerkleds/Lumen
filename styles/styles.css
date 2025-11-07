@@ -367,7 +367,6 @@ main .section.widget-university {
 
 main .section.widget-intern-highlights {
     max-width: 1440px;
-    width: 100%;
     margin: 0 auto;
     padding-top: 10px;
     padding-bottom: 50px;
@@ -457,6 +456,32 @@ main .section.section-button-tertiary {
 
 main .section.section-button-tertiary a:hover {
     color: #337ab7;
+}
+
+.section.university-cards-title {
+    max-width: 1440px;
+    width: 1244px;
+    margin: 0 auto;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+.section.university-cards-title h2 {
+    font-size: 25px;
+    line-height: 45px;
+    font-weight: 400;
+}
+
+.section.widget-university.widget-university-talent {
+    padding-top: 16px;
+    h2 {
+        margin: 0;
+        padding: 8px;
+    }
+
+    p {
+        text-align-last: center;
+        padding-bottom: 20px;
+    }
 }
 /* Tablet */
 @media (max-width: 1024px) {

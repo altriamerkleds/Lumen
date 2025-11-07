@@ -31,6 +31,8 @@
     align-items: center;
     display: flex;
     justify-content: center;
+    flex: 1;
+    order: unset;
     a {
         font-style: normal;
         font-size: 18px;
@@ -42,6 +44,11 @@
     }
 }
 
+.columns-container:has(.actionbanner) .columns > div {
+    align-items: center;
+    flex-direction: unset;
+    gap: 24px;
+}
 .columns-container:has(.actionbanner) .columns > div > div:last-child {
     border-right: none;
 }
@@ -99,6 +106,10 @@
 
 .columns-container:has(.lumen) {
     background-color: #0f3133;
+    .columns > div {
+        flex-direction: row;
+        align-items: center;
+    }
     h3 {
         font-family: "Gotham", sans-serif;
         line-height: 45px;
@@ -120,13 +131,17 @@
         font-family: "GothamMedium", sans-serif;
         display: inline-block;
         text-decoration: none;
-        color: #000;
+        color: #0f3133;
         font-weight: 400;
         font-size: 14px;
         line-height: 28px;
         cursor: pointer;
         text-transform: uppercase;
         word-break: break-word;
+    }
+    .button-container a.button.secondary:hover {
+        background-color: red;
+        color: white;
     }
 }
 
@@ -258,7 +273,7 @@
     font-family: "GothamMedium", sans-serif;
     display: inline-block;
     text-decoration: none;
-    color: #000;
+    color: #0f3133;
     font-weight: 400;
     font-size: 14px;
     line-height: 28px;
@@ -295,18 +310,136 @@
     height: 100%;
 }
 
-/* Tablet */
-
-@media (min-width: 768px) {
+/* Universal Page */
+.columns-container:has(.university-column) {
+    background-color: #fafafa;
     .columns > div {
+        display: flex;
         align-items: center;
         flex-direction: unset;
-        gap: 24px;
+        gap: 0;
+        flex-wrap: no-wrap;
+        margin: 0 -8px;
+        width: 100%;
+    }
+    .columns.block > div > div {
+        max-width: 100%;
+        position: relative;
+        padding: 8px;
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+        p {
+            margin: 0;
+        }
+    }
+    .columns.block > div > div p:nth-of-type(2):last-of-type {
+        padding: 16px 20px;
+        margin: 0;
+        font-family: gothamlight, sans-serif;
+        font-size: 16px;
+        line-height: 28px;
+    }
+}
+
+.columns-container:has(.universal) {
+    .columns-wrapper {
+        max-width: 1440px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 5px 5px 30px 5px;
     }
 
-    .columns > div > div {
-        flex: 1;
-        order: unset;
+    /* Default Desktop: 4 columns */
+    .columns > div {
+        display: flex;
+        flex-wrap: wrap; /* allow multiple rows */
+        gap: 0;
+    }
+
+    .columns.block > div > div {
+        flex: 0 0 25%; /* 4 columns */
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        margin: 0;
+        box-sizing: border-box;
+        background-color: transparent;
+    }
+
+    .columns.block > div > div picture,
+    .columns.block > div > div img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        display: block;
+        margin: 0;
+    }
+
+    .columns.block > div > div h2,
+    .columns.block > div > div p:not(:has(picture)) {
+        padding: 32px 56px 32px 40px;
+        background-color: #f2f0f1;
+        margin: 0;
+    }
+
+    .columns.block > div > div h2 {
+        font-family: Gotham, sans-serif;
+        padding-bottom: 0;
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 40px;
+        color: red;
+    }
+
+    .columns.block > div > div p {
+        font-family: GothamLight, sans-serif;
+        font-size: 16px;
+        line-height: 28px;
+        color: #3f4145;
+        margin: 0;
+    }
+
+    .columns.block > div > div > p:not(:has(picture)) {
+        padding-top: 0;
+    }
+}
+
+.columns-container .columns.universal.block.columns-4-cols > div {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0; /* Adjust if you want spacing */
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .columns-container:has(.university-column) .columns > div {
+        display: flex; /* side by side row */
+        flex-wrap: nowrap;
+        gap: 16px; /* space between image and text */
+    }
+
+    .columns-container:has(.university-column) .columns > div > div {
+        flex: 1 1 50%; /* each div takes half width */
+        max-width: 50%;
+        display: flex;
+        flex-direction: column; /* image on top, text below inside div */
+        justify-content: center;
+        box-sizing: border-box;
+        padding: 8px; /* optional padding */
+    }
+
+    .columns-container:has(.university-column) .columns > div > div picture,
+    .columns-container:has(.university-column) .columns > div > div img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        display: block;
+    }
+
+    .columns-container .columns.universal.block.columns-4-cols > div {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -317,10 +450,31 @@
         flex-direction: column;
         display: flex;
     }
+    .columns-container:has(.lumen) {
+        .columns > div {
+            flex-direction: column;
+        }
+        h3 {
+            font-size: 22px;
+            line-height: 40px;
+        }
+    }
+
+    .columns-container:has(.universal) {
+        .columns-wrapper {
+            width: 100%;
+        }
+        .columns.block > div > div {
+            flex: 0 0 50%; /* 2 columns */
+        }
+    }
 
     .columns > div > div {
         flex: 1;
         order: unset;
+    }
+    .columns-container:has(.actionbanner) .columns > div {
+        display: block;
     }
     .columns-container:has(.actionbanner) .columns > div > div {
         border-right: 0;
@@ -367,5 +521,29 @@
 
     .columns-container:has(.footersocial) .columns .columns-img-col a {
         width: auto;
+    }
+    .columns-container:has(.university-column) {
+        .columns.block > div > div p:nth-of-type(2):last-of-type {
+            padding: 16px 20px;
+            margin: 0;
+        }
+        .columns > div {
+            flex-direction: column;
+        }
+        .columns.block > div > div {
+            width: 100%;
+        }
+    }
+}
+
+@media (min-width: 580px) and (max-width: 768px) {
+    .columns-container .columns.universal.block.columns-4-cols > div {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 580px) {
+    .columns-container .columns.universal.block.columns-4-cols > div {
+        grid-template-columns: 1fr;
     }
 }
