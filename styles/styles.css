@@ -483,6 +483,26 @@ main .section.section-button-tertiary a:hover {
         padding-bottom: 20px;
     }
 }
+
+
+.widget-hero .button-container a.button.primary {
+    text-align: center;
+    border: 1px solid #0f3133;
+    background-color: #b2fff6;
+    border-radius: 5px;
+    padding: 11px 38px;
+    font-family: "Gotham", sans-serif;
+    text-decoration: none;
+    color: #000;
+    font-weight: 400;
+    display: block;
+    width: 100%;
+}
+
+.widget-hero .button-container a.button.primary:hover {
+    background-color: red;
+    color: white;
+}
 /* Tablet */
 @media (max-width: 1024px) {
     .section.people-intro h2 {
