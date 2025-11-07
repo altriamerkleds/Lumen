@@ -439,7 +439,11 @@ header nav .nav-sections > .default-content-wrapper > ul > li > a:hover,
     }
 
     header nav .nav-sections .nav-drop[aria-expanded="true"] > ul {
-        max-width: 200px;
+        width: 200px;
+    }
+
+    header nav .nav-sections ul > li > ul > li {
+        padding-right: 30px;
     }
 
     header nav .nav-sections .sub-nav-drop::after {
