@@ -175,16 +175,22 @@ export default async function decorate(block) {
       }
 
       navSection.addEventListener('click', (e) => {
+        if (
+          (navSection.classList.contains('nav-drop') || navSection.classList.contains('sub-nav-drop')) &&
+          e.target.closest('a')
+        ) {
+          e.preventDefault();
+        }
+
         e.stopPropagation();
+
         const expanded = navSection.getAttribute('aria-expanded') === 'true';
 
         if (isDesktop.matches) {
-          // Desktop behavior: only one open
           toggleAllSubNavSections(navSections, false);
           toggleAllNavSections(navSections, false);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         } else {
-          // Mobile: only one open (close siblings, then toggle this)
           closeSiblingSections(navSection);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
@@ -199,19 +205,28 @@ export default async function decorate(block) {
           navSection.setAttribute('aria-expanded', 'false');
         }
       }
+
       navSection.addEventListener('click', (e) => {
+        if (
+          (navSection.classList.contains('nav-drop') || navSection.classList.contains('sub-nav-drop')) &&
+          e.target.closest('a')
+        ) {
+          e.preventDefault();
+        }
+
         e.stopPropagation();
+
         const expanded = navSection.getAttribute('aria-expanded') === 'true';
 
         if (isDesktop.matches) {
           toggleAllSubNavSections(navSections, false);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         } else {
-          // Mobile: only one open at this level
           closeSiblingSections(navSection);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
       });
+
     });
   }
 
