@@ -1,64 +1,107 @@
-import { loadVideoEmbed } from '../video/video.js';
+import { loadVideoEmbed } from "../video/video.js";
 
 export default function decorate(block) {
-  const ul = document.createElement('ul');
-  ul.className = 'card-video-list';
+  const ul = document.createElement("ul");
+  ul.className = "card-video-list";
+
   [...block.children].forEach((row) => {
-    const li = document.createElement('li');
-    li.className = 'card-video-item';
+    const li = document.createElement("li");
+    li.className = "card-video-item";
 
-    const videoCol = row.children[0];
-    const bodyCol = row.children[1];
-
+    const [videoCol, bodyCol] = row.children;
     if (videoCol) {
-      videoCol.className = 'card-video-video';
+      videoCol.className = "card-video-video";
 
-      const link = videoCol.querySelector('a')?.href;
-      const placeholder = videoCol.querySelector('picture');
+      const link = videoCol.querySelector("a")?.href;
+      const placeholder = videoCol.querySelector("picture");
 
       if (link) {
-        videoCol.textContent = '';
+        videoCol.textContent = "";
         videoCol.dataset.embedLoaded = false;
 
-        // Create wrapper
-        const wrapper = document.createElement('div');
-        wrapper.className = 'video-placeholder';
+        const wrapper = document.createElement("div");
+        wrapper.className = "video-placeholder";
 
-        if (placeholder) {
-          wrapper.append(placeholder);
-        }
+        if (placeholder) wrapper.append(placeholder);
 
-        // Overlay play button
-        const playWrapper = document.createElement('div');
-        playWrapper.className = 'video-placeholder-play';
-        const playBtn = document.createElement('button');
+        const playWrapper = document.createElement("div");
+        playWrapper.className = "video-placeholder-play";
+
+        const playBtn = document.createElement("button");
         playWrapper.append(playBtn);
         wrapper.append(playWrapper);
 
-        playBtn.addEventListener('click', (e) => {
+        playBtn.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          wrapper.remove();
-          loadVideoEmbed(videoCol, link, true, false);
+          openVideoModal(link);
         });
-        wrapper.addEventListener('click', (e) => {
-          if (e.target.closest('button')) return;
-          window.open(link, '_blank', 'noopener,noreferrer');
+
+        wrapper.addEventListener("click", (e) => {
+          if (!e.target.closest("button")) {
+            window.open(link, "_blank", "noopener,noreferrer");
+          }
         });
 
         videoCol.append(wrapper);
       }
     }
 
-    if (bodyCol) {
-      bodyCol.className = 'card-video-body';
-      li.append(videoCol, bodyCol);
-    } else if (videoCol) {
-      li.append(videoCol);
-    }
+    if (bodyCol) bodyCol.className = "card-video-body";
 
+    li.append(videoCol, ...(bodyCol ? [bodyCol] : []));
     ul.append(li);
   });
-  block.textContent = '';
+
+  block.textContent = "";
   block.append(ul);
 }
+
+/* Modal Popup Handler  */
+
+function openVideoModal(videoUrl) {
+  const overlay = document.createElement("div");
+  overlay.className = "video-modal-overlay";
+
+  const modal = document.createElement("div");
+  modal.className = "video-modal";
+
+  const closeBtn = document.createElement("button");
+  closeBtn.className = "video-modal-close";
+  closeBtn.innerHTML = "&times;";
+
+  const videoContainer = document.createElement("div");
+  videoContainer.className = "video-modal-content";
+
+  modal.append(closeBtn, videoContainer);
+  overlay.append(modal);
+  document.body.append(overlay);
+
+  loadVideoEmbed(videoContainer, preventAutoPlay(videoUrl), false, false);
+
+  closeBtn.addEventListener("click", () => overlay.remove());
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) overlay.remove();
+  });
+
+  playBtn.addEventListener("click", () => {
+    const iframe = videoContainer.querySelector("iframe");
+    const video = videoContainer.querySelector("video");
+
+    if (iframe) {
+      iframe.src = enableAutoPlay(iframe.src);
+    } else if (video) {
+      video.play();
+    }
+
+    playBtn.style.display = "none";
+  });
+}
+
+const preventAutoPlay = (url) =>
+  url.replace(/(\?|&)autoplay=1/, "").replace(/(\?|&)mute=1/, "");
+
+const enableAutoPlay = (url) =>
+  url.includes("autoplay=1")
+    ? url
+    : `${url}${url.includes("?") ? "&" : "?"}autoplay=1`;
