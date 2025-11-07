@@ -183,4 +183,76 @@
   border-top: 1px ;
   border-color: black !important;
 }
+/* ======================================== */
+/* OVERRIDES: Mobile tabs horizontal layout */
+/* ======================================== */
+
+.tabs div[role=tablist] {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding: 0 8px;
+}
+
+.tabs div[role=tablist]::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs div[role=tablist] .tab-list-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  box-sizing: content-box;
+}
+
+/* Hide dropdown select entirely */
+.tab-list-container .select {
+  display: none !important;
+}
+
+/* Always show tab buttons */
+.tab-list-container button {
+  display: flex !important;
+}
+
+/* Tab appearance (like "Browsing Based" image) */
+.tabs div[role=tablist] .tab-list-container .heading-xs {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #1c2a2e;
+  font-family: "GothamMedium", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  text-transform: uppercase;
+  padding: 6px 0;
+  margin: 0 16px 12px 0;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.tabs div[role=tablist] .tab-list-container .heading-xs[aria-selected="true"] {
+  border-bottom: 2px solid #1c2a2e;
+  color: #1c2a2e;
+}
+
+.tabs div[role=tablist] .tab-list-container .heading-xs:hover {
+  border-bottom: 2px solid #1c2a2e;
+  color: #1c2a2e;
+}
+
+@media (max-width: 767px) {
+  .tabs div[role=tablist] {
+    justify-content: flex-start;
+  }
+
+  .tabs div[role=tablist] .tab-list-container .heading-xs {
+    font-size: 16px;
+    margin-right: 12px;
+  }
+}
 
