@@ -7,7 +7,7 @@ export default async function decorate(block) {
       const img = cols[0]?.querySelector('img');
       return {
         img: img ? { src: img.src, alt: img.alt } : null,
-        content: cols[1]?.cloneNode(true) || null
+        content: cols[1]?.cloneNode(true) || null,
       };
     });
   }
@@ -33,7 +33,7 @@ export default async function decorate(block) {
           cardData.img.src,
           cardData.img.alt || '',
           false,
-          [{ width: 750 }]
+          [{ width: 750 }],
         );
         card.appendChild(picture);
       }
@@ -42,7 +42,7 @@ export default async function decorate(block) {
         const content = document.createElement('div');
         content.className = 'carousel-content';
         content.append(
-          ...Array.from(cardData.content.children).map((c) => c.cloneNode(true))
+          ...Array.from(cardData.content.children).map((c) => c.cloneNode(true)),
         );
         card.appendChild(content);
       }

@@ -1,10 +1,14 @@
 import { loadVideoEmbed } from '../video/video.js';
 
-const preventAutoPlay = (url) =>
-  url.replace(/(\?|&)autoplay=1/, '').replace(/(\?|&)mute=1/, '');
+const preventAutoPlay = (url) => url
+  .replace(/(\?|&)autoplay=1/, '')
+  .replace(/(\?|&)mute=1/, '');
 
-const enableAutoPlay = (url) =>
-  url.includes('autoplay=1') ? url : `${url}${url.includes('?') ? '&' : '?'}autoplay=1`;
+const enableAutoPlay = (url) => (
+  url.includes('autoplay=1')
+    ? url
+    : `${url}${url.includes('?') ? '&' : '?'}autoplay=1`
+);
 
 export default function decorate(block) {
   const ul = document.createElement('ul');
@@ -88,7 +92,7 @@ function openVideoModal(videoUrl) {
     if (e.target === overlay) overlay.remove();
   });
 
-  // Move play button logic inside modal creation
+  // Play button inside modal
   const modalPlayBtn = document.createElement('button');
   modalPlayBtn.className = 'video-modal-play';
   modal.append(modalPlayBtn);
