@@ -20,16 +20,26 @@ function closeOnEscape(e) {
 }
 
 function closeOnFocusLost(e) {
-  const nav = e.currentTarget;
-  if (!nav.contains(e.relatedTarget)) {
-    const navSections = nav.querySelector('.nav-sections');
-    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
-    if (navSectionExpanded && isDesktop.matches) {
-      toggleAllNavSections(navSections, false);
-    } else if (!isDesktop.matches) {
-      toggleMenu(nav, navSections, false);
+  if (isDesktop.matches) {
+    const nav = e.currentTarget;
+    if (!nav.contains(e.relatedTarget)) {
+      const navSections = nav.querySelector('.nav-sections');
+      const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
+      if (navSectionExpanded && isDesktop.matches) {
+        toggleAllNavSections(navSections, false);
+      } else if (!isDesktop.matches) {
+        toggleMenu(nav, navSections, false);
+      }
     }
   }
+}
+
+function closeSiblingSections(li) {
+  const parent = li && li.parentElement;
+  if (!parent) return;
+  parent.querySelectorAll(':scope > li[aria-expanded="true"]').forEach((sib) => {
+    if (sib !== li) sib.setAttribute('aria-expanded', 'false');
+  });
 }
 
 function openOnKeydown(e) {
@@ -68,7 +78,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
+  toggleAllNavSections(navSections, 'false');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
 
   const navDrops = navSections.querySelectorAll('.nav-drop');
@@ -95,7 +105,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
       }
     });
   } else {
-    navDrops.forEach((drop) => {
+    subNavDrops.forEach((drop) => {
       drop.removeAttribute('tabindex');
       drop.removeEventListener('focus', focusNavSection);
     });
@@ -174,7 +184,8 @@ export default async function decorate(block) {
           toggleAllNavSections(navSections, false);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         } else {
-          // Mobile behavior: toggle only this item
+          // Mobile: only one open (close siblings, then toggle this)
+          closeSiblingSections(navSection);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
       });
@@ -184,8 +195,6 @@ export default async function decorate(block) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) {
         navSection.classList.add('sub-nav-drop');
-
-        // Ensure aria-expanded exists
         if (!navSection.hasAttribute('aria-expanded')) {
           navSection.setAttribute('aria-expanded', 'false');
         }
@@ -198,8 +207,8 @@ export default async function decorate(block) {
           toggleAllSubNavSections(navSections, false);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         } else {
-          // Mobile independent toggle
-          toggleAllNavSections(navSections, false);
+          // Mobile: only one open at this level
+          closeSiblingSections(navSection);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
       });
