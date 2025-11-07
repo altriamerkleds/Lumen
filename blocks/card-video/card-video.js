@@ -1,45 +1,50 @@
-import { loadVideoEmbed } from "../video/video.js";
+import { loadVideoEmbed } from '../video/video.js';
+
+const preventAutoPlay = (url) =>
+  url.replace(/(\?|&)autoplay=1/, '').replace(/(\?|&)mute=1/, '');
+
+const enableAutoPlay = (url) =>
+  url.includes('autoplay=1') ? url : `${url}${url.includes('?') ? '&' : '?'}autoplay=1`;
 
 export default function decorate(block) {
-  const ul = document.createElement("ul");
-  ul.className = "card-video-list";
+  const ul = document.createElement('ul');
+  ul.className = 'card-video-list';
 
   [...block.children].forEach((row) => {
-    const li = document.createElement("li");
-    li.className = "card-video-item";
+    const li = document.createElement('li');
+    li.className = 'card-video-item';
 
     const [videoCol, bodyCol] = row.children;
     if (videoCol) {
-      videoCol.className = "card-video-video";
+      videoCol.className = 'card-video-video';
 
-      const link = videoCol.querySelector("a")?.href;
-      const placeholder = videoCol.querySelector("picture");
+      const link = videoCol.querySelector('a')?.href;
+      const placeholder = videoCol.querySelector('picture');
 
       if (link) {
-        videoCol.textContent = "";
+        videoCol.textContent = '';
         videoCol.dataset.embedLoaded = false;
 
-        const wrapper = document.createElement("div");
-        wrapper.className = "video-placeholder";
-
+        const wrapper = document.createElement('div');
+        wrapper.className = 'video-placeholder';
         if (placeholder) wrapper.append(placeholder);
 
-        const playWrapper = document.createElement("div");
-        playWrapper.className = "video-placeholder-play";
+        const playWrapper = document.createElement('div');
+        playWrapper.className = 'video-placeholder-play';
 
-        const playBtn = document.createElement("button");
+        const playBtn = document.createElement('button');
         playWrapper.append(playBtn);
         wrapper.append(playWrapper);
 
-        playBtn.addEventListener("click", (e) => {
+        playBtn.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
           openVideoModal(link);
         });
 
-        wrapper.addEventListener("click", (e) => {
-          if (!e.target.closest("button")) {
-            window.open(link, "_blank", "noopener,noreferrer");
+        wrapper.addEventListener('click', (e) => {
+          if (!e.target.closest('button')) {
+            window.open(link, '_blank', 'noopener,noreferrer');
           }
         });
 
@@ -47,31 +52,30 @@ export default function decorate(block) {
       }
     }
 
-    if (bodyCol) bodyCol.className = "card-video-body";
+    if (bodyCol) bodyCol.className = 'card-video-body';
 
     li.append(videoCol, ...(bodyCol ? [bodyCol] : []));
     ul.append(li);
   });
 
-  block.textContent = "";
+  block.textContent = '';
   block.append(ul);
 }
 
-/* Modal Popup Handler  */
-
+/* Modal Popup Handler */
 function openVideoModal(videoUrl) {
-  const overlay = document.createElement("div");
-  overlay.className = "video-modal-overlay";
+  const overlay = document.createElement('div');
+  overlay.className = 'video-modal-overlay';
 
-  const modal = document.createElement("div");
-  modal.className = "video-modal";
+  const modal = document.createElement('div');
+  modal.className = 'video-modal';
 
-  const closeBtn = document.createElement("button");
-  closeBtn.className = "video-modal-close";
-  closeBtn.innerHTML = "&times;";
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'video-modal-close';
+  closeBtn.innerHTML = '&times;';
 
-  const videoContainer = document.createElement("div");
-  videoContainer.className = "video-modal-content";
+  const videoContainer = document.createElement('div');
+  videoContainer.className = 'video-modal-content';
 
   modal.append(closeBtn, videoContainer);
   overlay.append(modal);
@@ -79,14 +83,19 @@ function openVideoModal(videoUrl) {
 
   loadVideoEmbed(videoContainer, preventAutoPlay(videoUrl), false, false);
 
-  closeBtn.addEventListener("click", () => overlay.remove());
-  overlay.addEventListener("click", (e) => {
+  closeBtn.addEventListener('click', () => overlay.remove());
+  overlay.addEventListener('click', (e) => {
     if (e.target === overlay) overlay.remove();
   });
 
-  playBtn.addEventListener("click", () => {
-    const iframe = videoContainer.querySelector("iframe");
-    const video = videoContainer.querySelector("video");
+  // Move play button logic inside modal creation
+  const modalPlayBtn = document.createElement('button');
+  modalPlayBtn.className = 'video-modal-play';
+  modal.append(modalPlayBtn);
+
+  modalPlayBtn.addEventListener('click', () => {
+    const iframe = videoContainer.querySelector('iframe');
+    const video = videoContainer.querySelector('video');
 
     if (iframe) {
       iframe.src = enableAutoPlay(iframe.src);
@@ -94,14 +103,6 @@ function openVideoModal(videoUrl) {
       video.play();
     }
 
-    playBtn.style.display = "none";
+    modalPlayBtn.style.display = 'none';
   });
 }
-
-const preventAutoPlay = (url) =>
-  url.replace(/(\?|&)autoplay=1/, "").replace(/(\?|&)mute=1/, "");
-
-const enableAutoPlay = (url) =>
-  url.includes("autoplay=1")
-    ? url
-    : `${url}${url.includes("?") ? "&" : "?"}autoplay=1`;

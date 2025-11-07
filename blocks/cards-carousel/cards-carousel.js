@@ -1,19 +1,18 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
-  
-  if (!block._originalChildren) {
-    block._originalChildren = Array.from(block.children).map((row) => {
+  if (!block.originalChildren) {
+    block.originalChildren = Array.from(block.children).map((row) => {
       const cols = row.querySelectorAll('div');
       const img = cols[0]?.querySelector('img');
       return {
         img: img ? { src: img.src, alt: img.alt } : null,
-        content: cols[1]?.cloneNode(true) || null 
+        content: cols[1]?.cloneNode(true) || null
       };
     });
   }
 
-  let activeSlideIndex = 0; 
+  let activeSlideIndex = 0;
 
   const buildCarousel = () => {
     const getCardsPerSlide = () => {
@@ -25,20 +24,26 @@ export default async function decorate(block) {
 
     const cardsPerSlide = getCardsPerSlide();
 
-    // Create card elements
-    const cards = block._originalChildren.map((cardData) => {
+    const cards = block.originalChildren.map((cardData) => {
       const card = document.createElement('div');
       card.className = 'carousel-card';
 
       if (cardData.img) {
-        const picture = createOptimizedPicture(cardData.img.src, cardData.img.alt || '', false, [{ width: 750 }]);
+        const picture = createOptimizedPicture(
+          cardData.img.src,
+          cardData.img.alt || '',
+          false,
+          [{ width: 750 }]
+        );
         card.appendChild(picture);
       }
 
       if (cardData.content) {
         const content = document.createElement('div');
         content.className = 'carousel-content';
-        content.append(...Array.from(cardData.content.children).map(c => c.cloneNode(true)));
+        content.append(
+          ...Array.from(cardData.content.children).map((c) => c.cloneNode(true))
+        );
         card.appendChild(content);
       }
 
@@ -51,7 +56,6 @@ export default async function decorate(block) {
     const slidesWrapper = document.createElement('div');
     slidesWrapper.className = 'carousel-slides';
 
-    // Group cards into slides
     for (let i = 0; i < cards.length; i += cardsPerSlide) {
       const slide = document.createElement('div');
       slide.className = 'carousel-slide';
@@ -69,20 +73,19 @@ export default async function decorate(block) {
 
     carousel.appendChild(slidesWrapper);
 
-    // Navigation bullets
     const nav = document.createElement('div');
     nav.className = 'carousel-nav';
     const slides = slidesWrapper.children;
     const bullets = [];
 
-    for (let i = 0; i < slides.length; i++) {
+    Array.from(slides).forEach((slide, i) => {
       const bullet = document.createElement('button');
       bullet.className = 'carousel-bullet';
       if (i === activeSlideIndex) bullet.classList.add('active');
 
       bullet.addEventListener('click', () => {
-        Array.from(slides).forEach((slide) => {
-          slide.style.transform = `translateX(-${i * 100}%)`;
+        Array.from(slides).forEach((s) => {
+          s.style.transform = `translateX(-${i * 100}%)`;
         });
         bullets.forEach((b) => b.classList.remove('active'));
         bullet.classList.add('active');
@@ -91,7 +94,7 @@ export default async function decorate(block) {
 
       nav.appendChild(bullet);
       bullets.push(bullet);
-    }
+    });
 
     carousel.appendChild(nav);
     block.innerHTML = '';
