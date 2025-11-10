@@ -1,110 +1,92 @@
 .cards > ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 24px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
 }
 
 .cards > ul > li {
-  background-color: #f7fafa;
+    background-color: #f7fafa;
 }
 
 .cards .cards-card-body {
-  margin: 10;
+    margin: 10px;
 }
 
 .cards .cards-card-image {
-  line-height: 0;
+    line-height: 0;
 }
 
 .cards > ul > li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-}
-
-.section.people-intro {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.section.people-intro h2 {
-  font-family: 'GothamBlack', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  text-align: center;
-  margin-bottom: 52px;
-  line-height: 32px;
-  color: #000; /* default black */
-}
-
-.section.people-intro h2 span.highlight {
-  color: #d62828;
-  font-family: 'GothamBlack', sans-serif;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
 }
 
 /* Card text body styling */
 .cards.people.block .cards-card-body {
-  display: flex;
-  flex-direction: column;
-  background-color: #f7fafa;
-  padding: 16px;
-  text-align: left;
-  flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    background-color: #f7fafa;
+    padding: 16px;
+    text-align: left;
+    flex-grow: 1;
 }
 
 .cards.people.block .cards-card-body p strong {
-  display: block;
-  font-size:18px;
-  padding:24px 0 0;
-  margin-bottom: 6px;   
-  font-family: 'Gotham', sans-serif;   
-  line-height: 14px;  
+    display: block;
+    font-size: 18px;
+    padding: 24px 0 0;
+    margin-bottom: 6px;
+    font-family: Gotham, sans-serif;
+    line-height: 14px;
 }
 
 /* Paragraph styling */
-.cards.people.block .cards-card-body p {      
-    font-family: 'Gotham-Book', sans-serif;
+.cards.people.block .cards-card-body p {
+    font-family: Gotham-Book, sans-serif;
     font-weight: 400;
     margin: 0;
-   font-size:14px;
+    font-size: 14px;
     color: #0f3133;
-    box-sizing: border-box;   
-    flex-grow: 1; 
-  display: flex;
-  flex-direction: column; 
+    box-sizing: border-box;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Button styling */
 .cards.people.block .cards-card-body .button-container a.button.secondary {
-  text-align: center;
-  border: 1px solid #0f3133;
-  background-color: #b2fff6;
-  border-radius: 5px;
-  padding: 11px 38px;     
-  font-family: 'Gotham', sans-serif; 
-  display: inline-block;
-  text-decoration: none;
-  color: #000;     
-  font-weight: 400; 
+    text-align: center;
+    border: 1px solid #0f3133;
+    background-color: #b2fff6;
+    border-radius: 5px;
+    padding: 11px 38px;
+    font-family: Gotham, sans-serif;
+    display: inline-block;
+    text-decoration: none;
+    color: #0f3133;
+    font-weight: 400;
 }
 
-.cards.people.block .cards-card-body .button-container a.button.secondary:hover{
-  background-color: red;
-  color: white;
-
+.cards.people.block
+    .cards-card-body
+    .button-container
+    a.button.secondary:hover {
+    background-color: #f95e4a;
+    color: white;
 }
 
 /* Center the button within container */
 .cards.people.block .cards-card-body .button-container {
-  text-align: left;
-  margin-top: 28px;
+    text-align: left;
+    margin-top: 28px;
 }
 
 .cards.people.block ul li {
-  display: flex;
-  flex-direction: column;
-  height: 100%; 
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
