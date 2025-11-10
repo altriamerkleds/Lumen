@@ -421,20 +421,21 @@ main .section.widget-intern-highlights {
 
 .section.section-button-secondary .button-container {
     text-align: center;
-    font-size: 14px;
-    line-height: 28px;
-    font-family: "GothamMedium", sans-serif;
+    padding-bottom: 45px;
+    font-family: GothamMedium, sans-serif;
     a.button.secondary {
         text-align: center;
         border: 1px solid #0f3133;
         background-color: #b2fff6;
         border-radius: 5px;
-        padding: 11px 38px;
-        font-family: Gotham, sans-serif;
+        padding: 5px 38px;
+        font-family: GothamMedium, sans-serif;
         display: inline-block;
         text-decoration: none;
         color: #0f3133;
         font-weight: 400;
+        font-size: 14px;
+        line-height: 28px;
     }
 }
 
@@ -449,8 +450,10 @@ main .section.section-button-tertiary {
     a {
         font-size: 15px;
         color: #f95e4a;
-        font-family: MontserratSemiBold, sans-serif;
+        font-family: Montserrat, sans-serif;
         font-weight: normal;
+        line-height: 21px;
+        font-style: normal;
     }
 }
 
