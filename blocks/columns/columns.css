@@ -110,6 +110,9 @@
         flex-direction: row;
         align-items: center;
     }
+    .columns.block > div > div {
+        width: fit-content;
+    }
     h3 {
         font-family: "Gotham", sans-serif;
         line-height: 45px;
@@ -148,10 +151,10 @@
 /* Recognition section */
 .columns.recognition {
     max-width: 1440px;
-    width: 1244px;
+    width: 100%;
     margin: 0 auto;
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 .columns-container:has(.recognition) {
@@ -167,6 +170,7 @@
     display: flex;
     flex-wrap: nowrap;
     align-items: stretch;
+    flex-direction: row;
 }
 
 .columns.recognition.block.columns-2-cols > div > div:first-child {
@@ -213,6 +217,7 @@
 .columns.amazing-careers.block.columns-2-cols > div {
     display: flex;
     flex-wrap: nowrap;
+    flex-direction: row;
     align-items: stretch;
     max-width: 1440px;
     background-color: #f2f0f1 !important;
@@ -282,6 +287,10 @@
     word-break: break-word;
 }
 
+.columns.amazing-careers .button-container a.button.secondary:hover {
+    background-color: red;
+    color: #fff;
+}
 /* footer Social Section */
 
 .columns.footersocial .columns-img-col p {
