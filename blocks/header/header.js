@@ -2,8 +2,7 @@ import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match for desktop/tablet
-const isDesktop = window.matchMedia('(min-width: 1024px)');
-
+const isDesktop = window.matchMedia('(min-width: 1025px)');
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
