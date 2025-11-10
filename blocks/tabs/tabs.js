@@ -38,7 +38,6 @@ function changeTabs(e) {
 
   const blockElements = targetPanel.querySelectorAll('[data-block-name]');
   blockElements.forEach((blockEl) => {
-    console.log('Loading block:', blockEl.dataset.blockName);
     loadBlock(blockEl);
   });
 }
@@ -144,6 +143,39 @@ export default function decorate(block) {
   tabList.setAttribute('role', 'tablist');
   const tabListContainer = tabList.querySelector(':scope > div');
   tabListContainer.classList.add('tab-list-container');
+  const leftArrow = createTag('button', {
+    class: 'tab-scroll-arrow left',
+    'aria-label': 'Scroll left',
+  }, '‹');
+  const rightArrow = createTag('button', {
+    class: 'tab-scroll-arrow right',
+    'aria-label': 'Scroll right',
+  }, '›');
+
+  tabList.insertBefore(leftArrow, tabListContainer);
+  tabList.insertBefore(rightArrow, tabListContainer.nextSibling);
+
+  const scrollAmount = 120;
+  leftArrow.addEventListener('click', (e) => {
+    e.stopPropagation();
+    tabListContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  });
+  rightArrow.addEventListener('click', (e) => {
+    e.stopPropagation();
+    tabListContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  });
+
+  const updateArrowVisibility = () => {
+    const { scrollLeft } = tabListContainer;
+    const { scrollWidth } = tabListContainer;
+    const { clientWidth } = tabListContainer;
+    leftArrow.style.display = scrollLeft > 0 ? 'block' : 'none';
+    rightArrow.style.display = scrollLeft + clientWidth < scrollWidth ? 'block' : 'none';
+  };
+  tabListContainer.addEventListener('scroll', updateArrowVisibility);
+  window.addEventListener('resize', updateArrowVisibility);
+  updateArrowVisibility();
+
   const tabListItems = rows[0].querySelectorAll(':scope li');
 
   if (tabListItems) {
@@ -208,6 +240,7 @@ export default function decorate(block) {
       document.querySelectorAll(`#${selected}`)
         .forEach((t) => t.removeAttribute('hidden'));
     });
+
     selectContainer.append(select);
     tabListContainer.append(selectContainer);
     tabListItems[0].parentElement.remove();

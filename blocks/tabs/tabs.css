@@ -37,8 +37,15 @@
 
 .tabs div[role=tablist] .tab-list-container {
   box-sizing: content-box;
-  display: flex;
   padding: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  position: relative;
+  z-index: 1; /* keep below arrows */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 .tabs div[role=tablist] .tab-list-container .heading-xs {
@@ -139,53 +146,6 @@
   width: 100%;
 }
 
-/* Tab button styles */
-.tabs div[role=tablist] button {
-  background: #f0f0f0; /* default background */
-  border-color: #ccc;  /* default border */
-  border-radius: 4px;
-  border-width: 1px;
-  color: #000;          /* default text color */
-}
-
-.tabs div[role=tablist] button:hover {
-  background: #e0e0e0;
-  border-color: #999;
-  color: #111;
-}
-
-.tabs div[role=tablist] button:focus {
-  background: #f0f0f0;
-  border-color: #ccc;
-  color: #000;
-}
-
-.tabs div[role=tablist] button:focus-visible {
-  background: #d0ebff; /* key focus */
-  border-color: #3399ff;
-  color: #000;
-  outline: 2px solid #3399ff;
-}
-
-.tabs div[role=tablist] button:active {
-  background: #c0c0c0;
-  border-color: #666;
-  color: #111;
-}
-
-.tabs div[role=tablist] button.disabled {
-  background: #f9f9f9;
-  border-color: #ddd;
-  color: #aaa;
-}
-
-.tabs div[role=tablist] button[aria-selected=true] {
-  border-top: 1px ;
-  border-color: black !important;
-}
-/* ======================================== */
-/* OVERRIDES: Mobile tabs horizontal layout */
-/* ======================================== */
 
 .tabs div[role=tablist] {
   display: flex;
@@ -200,7 +160,6 @@
 .tabs div[role=tablist]::-webkit-scrollbar {
   display: none;
 }
-
 .tabs div[role=tablist] .tab-list-container {
   display: flex;
   align-items: center;
@@ -228,9 +187,9 @@
   font-weight: 700;
   font-size: 18px;
   text-transform: uppercase;
+  cursor: pointer;
   padding: 6px 0;
   margin: 0 16px 12px 0;
-  cursor: pointer;
   white-space: nowrap;
   transition: border-color 0.3s ease, color 0.3s ease;
 }
@@ -255,4 +214,104 @@
     margin-right: 12px;
   }
 }
+
+
+/* === FIX: make tab scroll arrows clickable === */
+
+/* Ensure outer container holds positioning context */
+.tabList[role="tablist"] {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: visible !important; /* ⬅️ critical: prevents arrows from being clipped */
+  z-index: 5;
+}
+
+/* Make scroll area separate stacking layer but below arrows */
+.tab-list-container {
+  flex: 1;
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  z-index: 1;
+  padding: 0 40px; /* space for arrows on both sides */
+  
+}
+.tab-list-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Arrow base style */
+.tab-scroll-arrow {
+  top: 50%;
+  z-index: 10; /* ⬅️ keeps above .tab-list-container */
+  background: #fff;
+  color: #000;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border:none;
+  padding: 0;
+  font-size: 30px;
+  border-radius: 0;
+  pointer-events: auto !important; /* ⬅️ force clickable */
+}
+
+.tab-scroll-arrow:hover {
+  background: #f0f0f0;
+}
+
+.tab-scroll-arrow.left {
+  left: 4px;
+}
+
+.tab-scroll-arrow.right {
+  right: 4px;
+}
+
+/* Show arrows on mobile */
+@media (max-width: 768px) {
+  .tabs-wrapper
+  {
+    padding: 0 !important;
+  }
+  .tab-scroll-arrow {
+    display: flex !important;
+    width: 20px;
+    height: 40px;
+    font-size: 32px;
+  }
+  .tab-list-container {
+    overflow-x: hidden !important;
+  }
+
+}
+
+
+.tab-list-container .heading-xs {
+  flex: 0 0 auto; /* Prevent buttons from shrinking */
+  white-space: nowrap; /* Keep the full label in one line */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  min-width: fit-content;
+  margin: 0 16px 12px 0; /* Ensure text takes full width needed */
+}
+
+.tabs div[role=tablist] {
+  position: relative;
+  overflow: visible !important;
+  align-items: center;}
+
+/* Keep arrows always visible on top */
+.tab-scroll-arrow,
+.tab-scroll-arrow * {
+  z-index: 9999 !important;
+  pointer-events: auto;
+}
+
+
 
