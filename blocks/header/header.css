@@ -34,7 +34,7 @@ header nav[aria-expanded="true"] {
     min-height: 100dvh;
 }
 
-@media (width >= 1024px) {
+@media (min-width: 1025px) {
     header nav {
         display: flex;
         justify-content: space-between;
@@ -127,7 +127,7 @@ header nav[aria-expanded="true"] .nav-hamburger-icon::after {
     transform: rotate(-45deg);
 }
 
-@media (width >= 1024px) {
+@media (min-width: 1025px) {
     header nav .nav-hamburger {
         display: none;
         visibility: hidden;
@@ -279,7 +279,7 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
     transform: rotate(315deg);
 }
 
-@media (width >= 1024px) {
+@media (min-width: 1025px) {
     header nav .nav-sections {
         display: block;
         visibility: visible;
@@ -454,7 +454,7 @@ header nav .nav-sections > .default-content-wrapper > ul > li > a:hover,
 }
 
 /********** Tablet */
-@media (width <= 1024px) and (width >= 768px) {
+@media (max-width: 1024px) and (min-width: 768px) {
     .nav-wrapper nav {
         display: flex;
         align-items: center;
@@ -513,7 +513,7 @@ header nav .nav-sections > .default-content-wrapper > ul > li > a:hover,
     display: none;
 }
 
-@media (width <= 1023.98px) {
+@media (max-width: 1024px) {
     .nav-hamburger {
         display: flex;
     }
