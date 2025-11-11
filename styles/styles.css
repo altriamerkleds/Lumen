@@ -494,7 +494,7 @@ main .section.section-button-tertiary a:hover {
     background-color: #b2fff6;
     border-radius: 5px;
     padding: 11px 38px;
-    font-family: "Gotham", sans-serif;
+    font-family: gotham-bold, sans-serif;
     text-decoration: none;
     color: #000;
     font-weight: 400;
