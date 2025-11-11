@@ -593,3 +593,57 @@ header nav .nav-sections > .default-content-wrapper > ul > li > a:hover,
         color: #f95e4a;
     }
 }
+
+/*Header Language Selector*/
+header .nav-tools {
+    position: relative;
+}
+
+header .nav-tools p {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+header .nav-tools .icon {
+    height: 16px;
+    width: 16px;
+}
+
+header .nav-tools ul {
+    padding: 0;
+    position: absolute;
+    right: -8px;
+    box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.12);
+    border: 1px solid #f8f8f8;
+    top: 30px;
+    left: auto;
+    width: 334px;
+    display: none;
+    background-color: #fff;
+}
+
+header .nav-tools ul li {
+    font-family: "Gotham-Book", sans-serif;
+    list-style-type: none;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f8f8f8;
+    color: #000000;
+    font-size: .875rem;
+    line-height: 24px;
+}
+
+@media only screen and (max-width: 1024px) {
+    header .nav-tools {
+        position: initial;
+    }
+
+    header .nav-tools ul {
+        right: 0;
+        left: 0;
+        top: 52px;
+        width: 100%;
+    }
+}
