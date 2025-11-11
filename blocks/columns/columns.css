@@ -114,7 +114,7 @@
         width: fit-content;
     }
     h3 {
-        font-family: "Gotham", sans-serif;
+        font-family: gotham-bold, sans-serif;
         line-height: 45px;
         color: white;
         font-weight: 400;
@@ -175,7 +175,9 @@
 
 .columns.recognition.block.columns-2-cols > div > div:first-child {
     flex: 1 1 50%;
+    display: flex;
     overflow: hidden;
+    justify-content: center;
 }
 
 .columns.recognition.block.columns-2-cols > div > div:first-child picture,
@@ -194,16 +196,21 @@
     align-items: flex-start;
 }
 
-.columns.recognition.block.columns-2-cols h3 {
+.columns.recognition.block.columns-2-cols h2 {
     margin-top: 0;
-    font-size: 1.8rem;
-    font-family: "GothamBlack", sans-serif;
+    font-size: 28px;
+    line-height: 45px;
+     color: #0f3133;
+    font-family: GothamBlack, sans-serif;
+     strong {
+         color:#f95e4a;
+    }
 }
 
 .columns.recognition.block.columns-2-cols p {
     font-size: 18px;
-    line-height: 1.6;
-    font-family: "gotham-book", sans-serif;
+    line-height: 27px;
+    font-family: gotham-book, sans-serif;
     color: #3f4145;
 }
 
@@ -228,7 +235,6 @@
 
 .columns.amazing-careers.block.columns-2-cols > div > div:first-child {
     flex: 0 0 50%;
-    max-width: 50%;
     display: flex;
     padding: 0;
 }
@@ -257,31 +263,34 @@
 
 .columns.amazing-careers.block.columns-2-cols h3 {
     margin-top: 0;
-    font-size: 1.8rem;
-    line-height: 1.3;
-    font-family: "gotham", sans-serif;
+    font-size: 30px;
+    line-height: 36px;
+    font-family: gotham-bold, sans-serif;
+    color:#f95e4a;
+    font-weight: 700;
 }
 
 .columns.amazing-careers.block.columns-2-cols p {
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 16px;
+    line-height: 28px;
     margin-bottom: 1rem;
-    font-family: "gotham-book", sans-serif;
+    font-family: gotham-book, sans-serif;
+   
 }
 
 .columns.amazing-careers .button-container a.button.secondary {
     text-align: center;
     border: 1px solid #0f3133;
     background-color: #b2fff6;
-    border-radius: 5px;
-    padding: 11px 38px;
+    border-radius: 3px;
+    padding: 10px 50px;
     font-family: "GothamMedium", sans-serif;
     display: inline-block;
     text-decoration: none;
     color: #0f3133;
     font-weight: 400;
     font-size: 14px;
-    line-height: 28px;
+    line-height: 24px;
     cursor: pointer;
     text-transform: uppercase;
     word-break: break-word;
@@ -394,7 +403,7 @@
     }
 
     .columns.block > div > div h2 {
-        font-family: Gotham, sans-serif;
+        font-family: gotham-bold, sans-serif;
         padding-bottom: 0;
         font-size: 22px;
         font-weight: 600;
@@ -423,6 +432,8 @@
 
 /* Tablet */
 @media (min-width: 768px) and (max-width: 1024px) {
+
+   
     .columns-container:has(.university-column) .columns > div {
         display: flex; /* side by side row */
         flex-wrap: nowrap;
@@ -455,6 +466,14 @@
 /* Mobile */
 
 @media (max-width: 768px) {
+    .columns.recognition.block.columns-2-cols h2{
+        font-size: 22px;
+        line-height: 40px;
+    }
+     .columns.amazing-careers.block.columns-2-cols h3 {
+        font-size: 16px;
+        line-height: 20px;
+    }
     .columns-container:has(.footersocial) .columns > div {
         flex-direction: column;
         display: flex;
@@ -510,8 +529,6 @@
     }
     .columns.amazing-careers.block.columns-2-cols > div > div:last-child {
         padding: 20px;
-        align-items: center;
-        text-align: center;
     }
     .columns-container:has(.footersocial) .columns > div > div {
         a {

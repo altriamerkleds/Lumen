@@ -37,9 +37,8 @@
 
 /* Gotham Fonts */
 @font-face {
-  font-family: Gotham;
-  src: url('../fonts/gotham-bold.woff2') format('woff2');
-  font-weight: 700;
+  font-family: gotham-bold;
+  src: url('../fonts/gotham-bold,.woff2') format('woff2');
   font-style: normal;
 }
 
