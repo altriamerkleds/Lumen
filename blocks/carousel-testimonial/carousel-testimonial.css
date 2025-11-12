@@ -40,6 +40,7 @@
 .carousel-testimonial-container .carousel-slide picture {
   flex: 0 0 40%;
   max-width: 350px;
+  margin-bottom: 0;
 }
 
 .carousel-testimonial .carousel-slide img {
@@ -159,14 +160,18 @@
   .carousel-testimonial-container .carousel-slide {
     flex-direction: column;
     text-align: center;
-    padding: 24px;
+    padding: 16px 0;
   }
 
-  .carousel-testimonial-container .carousel-slide picture {
-    max-width: 200px;
+  .carousel-testimonial-container .carousel-slide picture {          
+    margin-bottom: 24px;
+  }
+
+  .carousel-slide [data-align="center"] {
+    padding: 24px 0;
   }
 
   .carousel-testimonial-container .carousel-content {
-    text-align: center;
+    text-align: left;
   }
 }
