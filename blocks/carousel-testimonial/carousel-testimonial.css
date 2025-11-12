@@ -1,0 +1,172 @@
+/* ===========================
+   BASE STRUCTURE
+   =========================== */
+.carousel-testimonial-container,
+.carousel-testimonial {
+  position: relative;
+  overflow: hidden;
+  font-family: Gotham, sans-serif;
+  font-weight: normal;
+}
+
+.carousel-testimonial-container .carousel-container,
+.carousel-testimonial .carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 64px;
+}
+
+.carousel-testimonial-container .carousel-slides {
+  display: flex;
+  transition: transform 0.5s ease;
+  will-change: transform;
+  position: relative;
+}
+
+/* ===========================
+   TESTIMONIAL TWO-COLUMN LAYOUT
+   =========================== */
+.carousel-testimonial-container .carousel-slide {
+  flex: 0 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7fafa;
+  box-sizing: border-box;
+  padding: 16px 0 32px;
+}
+
+.carousel-testimonial-container .carousel-slide picture {
+  flex: 0 0 40%;
+  max-width: 350px;
+}
+
+.carousel-testimonial .carousel-slide img {
+  width: 40%;
+  max-width: 350px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.carousel-testimonial-container .carousel-slide picture img {
+  width: 100%;
+  min-width: 202px;
+  height: auto;
+  min-height: 202px;
+  border-radius: 0;
+  object-fit: cover;
+}
+
+.carousel-testimonial-container .carousel-content {
+  flex: 1;
+  text-align: left;
+  color: #00343f;
+  background: none;
+  padding: 0;
+  max-width: none;
+}
+
+.carousel-testimonial .carousel-slide h2,
+.carousel-testimonial .carousel-slide p {
+  color: #0f3133;
+  font-size: 16px;
+  line-height: 28px;
+  font-family: gotham-book, sans-serif;
+  margin: 0;
+}
+
+.carousel-testimonial-container .carousel-content p:first-child {
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.carousel-testimonial-container .carousel-content strong {
+  color: #f95e4a;
+  font-weight: 700;
+}
+
+/* ===========================
+   IMAGE LAYOUT (Right text)
+   =========================== */
+.carousel-testimonial .carousel-slide > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.carousel-testimonial .carousel-slide p strong {
+  color: #f95e4a;
+  font-size: 16px;
+  line-height: 28px;
+  font-family: Gotham, sans-serif;
+  margin: 0;
+}  
+
+.carousel-testimonial .carousel-slide p:first-of-type em {
+  display: block;
+  color: #3F4145;
+  font-size: 16px;
+  line-height: 28px;
+  font-family: gotham-book, sans-serif;
+  margin-bottom: 32px;
+}  
+
+.carousel-slide [data-align="center"] {
+  padding: 16px 92px;
+  text-align: left;
+}
+
+/* ===========================
+   DOT / BULLET NAVIGATION
+   =========================== */
+.carousel-testimonial-container .carousel-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  padding: 0;
+}
+
+.carousel-testimonial-container .carousel-bullet {
+  all: unset !important;
+  width: 16px !important;
+  height: 16px !important;
+  border-radius: 50% !important;
+  border: 1px solid #0f3133 !important;
+  background: transparent !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: inline-block !important;
+}
+
+.carousel-testimonial-container .carousel-bullet.active {
+  background: #0f3133 !important;
+  border-color: #0f3133 !important;
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+@media (width <= 768px) {
+  .carousel-testimonial-container .carousel-slide {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px;
+  }
+
+  .carousel-testimonial-container .carousel-slide picture {
+    max-width: 200px;
+  }
+
+  .carousel-testimonial-container .carousel-content {
+    text-align: center;
+  }
+}
