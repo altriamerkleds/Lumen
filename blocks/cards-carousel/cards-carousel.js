@@ -3,8 +3,8 @@ import { createOptimizedPicture } from "../../scripts/aem.js";
 export default async function decorate(block) {
   if (!block.originalChildren) {
     block.originalChildren = Array.from(block.children).map((row) => {
-      const cols = row.querySelectorAll("div");
-      const img = cols[0]?.querySelector("img");
+      const cols = row.querySelectorAll('div');
+      const img = cols[0]?.querySelector('img');
       return {
         img: img ? { src: img.src, alt: img.alt } : null,
         content: cols[1]?.cloneNode(true) || null,
@@ -26,8 +26,8 @@ export default async function decorate(block) {
 
     // Build cards
     const cards = block.originalChildren.map((cardData) => {
-      const card = document.createElement("div");
-      card.className = "carousel-card";
+      const card = document.createElement('div');
+      card.className = 'carousel-card';
 
       if (cardData.img) {
         const picture = createOptimizedPicture(
@@ -40,7 +40,7 @@ export default async function decorate(block) {
       }
 
       if (cardData.content) {
-        const content = document.createElement("div");
+        const content = document.createElement('div');
         content.className = "carousel-content";
         content.append(
           ...Array.from(cardData.content.children).map((c) => c.cloneNode(true))
@@ -51,14 +51,14 @@ export default async function decorate(block) {
       return card;
     });
 
-    const carousel = document.createElement("div");
-    carousel.className = "carousel-container";
+    const carousel = document.createElement('div');
+    carousel.className = 'carousel-container';
 
-    const slidesWrapper = document.createElement("div");
-    slidesWrapper.className = "carousel-slides";
+    const slidesWrapper = document.createElement('div');
+    slidesWrapper.className = 'carousel-slides';
 
     for (let i = 0; i < cards.length; i += cardsPerSlide) {
-      const slide = document.createElement("div");
+      const slide = document.createElement('div');
       slide.className = "carousel-slide";
 
       let group = cards.slice(i, i + cardsPerSlide);
@@ -79,24 +79,24 @@ export default async function decorate(block) {
     carousel.appendChild(slidesWrapper);
 
     // Navigation
-    const nav = document.createElement("div");
-    nav.className = "carousel-nav";
+    const nav = document.createElement('div');
+    nav.className = 'carousel-nav';
     const slides = slidesWrapper.children;
     const bullets = [];
 
     Array.from(slides).forEach((slide, i) => {
-      const bullet = document.createElement("button");
-      bullet.className = "carousel-bullet";
-      if (i === activeSlideIndex) bullet.classList.add("active");
+      const bullet = document.createElement('button');
+      bullet.className = 'carousel-bullet';
+      if (i === activeSlideIndex) bullet.classList.add('active');
 
-      bullet.addEventListener("click", () => {
+      bullet.addEventListener('click', () => {
         // Show only active slide
         Array.from(slides).forEach((s, idx) => {
           s.style.display = idx === i ? "flex" : "none";
         });
 
-        bullets.forEach((b) => b.classList.remove("active"));
-        bullet.classList.add("active");
+        bullets.forEach((b) => b.classList.remove('active'));
+        bullet.classList.add('active');
         activeSlideIndex = i;
 
         normalizeSlideHeights();
@@ -112,17 +112,17 @@ export default async function decorate(block) {
     block.appendChild(carousel);
 
     Array.from(slides).forEach((slide, i) => {
-      slide.style.display = i === activeSlideIndex ? "flex" : "none";
+      slide.style.display = i === activeSlideIndex ? 'flex' : 'none';
     });
 
     normalizeSlideHeights();
   };
 
   const normalizeSlideHeights = () => {
-    const slides = block.querySelectorAll(".carousel-slide");
+    const slides = block.querySelectorAll('.carousel-slide');
     slides.forEach((slide) => {
       let maxHeight = 0;
-      const contents = slide.querySelectorAll(".carousel-content");
+      const contents = slide.querySelectorAll('.carousel-content');
       contents.forEach((c) => {
         c.style.height = "auto"; // reset first
         if (c.offsetHeight > maxHeight) maxHeight = c.offsetHeight;
