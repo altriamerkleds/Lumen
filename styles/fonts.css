@@ -72,7 +72,7 @@
 
 /* Montserrat Semi Bold */
 @font-face {
-  font-family: Montserrat;
+  font-family: MontserratSemiBold;
   src: url('../fonts/MontserratSemiBold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
