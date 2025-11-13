@@ -57,7 +57,7 @@
 }
 
 .widget-hero .button-container a.button.primary:hover {
-    background-color: red;
+    background-color: #f95e4a;
     color: white;
 }
 
@@ -126,7 +126,7 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .hero {
         padding: 0;
         min-height: auto;

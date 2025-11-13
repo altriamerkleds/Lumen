@@ -81,6 +81,7 @@
     a:first-child {
         margin: 0 16px 0 0;
     }
+
     picture img {
         width: 20px;
         height: auto;
@@ -94,6 +95,24 @@
 
 .columns-container:has(.lumenicon) .columns {
     width: 192px;
+}
+
+.columns-container:has(.footersocial) .columns > div > div p {
+    display: block;
+    flex: 1 1 100%;
+    margin: 0;
+    line-height: 21px;
+}
+
+.columns-container:has(.footersocial) .columns > div:last-child > div p a {
+    display: inline;
+    margin: 0;
+    text-decoration: underline;
+    vertical-align: baseline;
+    color: #0f3133;
+    font-size: 12px;
+    line-height: 21px;
+    font-family: "gotham-book", sans-serif;
 }
 
 .columns.block > div > div {
@@ -143,7 +162,7 @@
         word-break: break-word;
     }
     .button-container a.button.secondary:hover {
-        background-color: red;
+        background-color: #f95e4a;
         color: white;
     }
 }
@@ -200,10 +219,10 @@
     margin-top: 0;
     font-size: 28px;
     line-height: 45px;
-     color: #0f3133;
+    color: #0f3133;
     font-family: GothamBlack, sans-serif;
-     strong {
-         color:#f95e4a;
+    strong {
+        color: #f95e4a;
     }
 }
 
@@ -266,7 +285,7 @@
     font-size: 30px;
     line-height: 36px;
     font-family: gotham-bold, sans-serif;
-    color:#f95e4a;
+    color: #f95e4a;
     font-weight: 700;
 }
 
@@ -275,7 +294,6 @@
     line-height: 28px;
     margin-bottom: 1rem;
     font-family: gotham-book, sans-serif;
-   
 }
 
 .columns.amazing-careers .button-container a.button.secondary {
@@ -297,7 +315,7 @@
 }
 
 .columns.amazing-careers .button-container a.button.secondary:hover {
-    background-color: red;
+    background-color: #f95e4a;
     color: #fff;
 }
 /* footer Social Section */
@@ -427,27 +445,25 @@
 .columns-container .columns.universal.block.columns-4-cols > div {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 0; /* Adjust if you want spacing */
+    gap: 0; 
 }
 
 /* Tablet */
 @media (min-width: 768px) and (max-width: 1024px) {
-
-   
     .columns-container:has(.university-column) .columns > div {
-        display: flex; /* side by side row */
+        display: flex; 
         flex-wrap: nowrap;
-        gap: 16px; /* space between image and text */
+        gap: 16px;
     }
 
     .columns-container:has(.university-column) .columns > div > div {
-        flex: 1 1 50%; /* each div takes half width */
+        flex: 1 1 50%; 
         max-width: 50%;
         display: flex;
-        flex-direction: column; /* image on top, text below inside div */
+        flex-direction: column; 
         justify-content: center;
         box-sizing: border-box;
-        padding: 8px; /* optional padding */
+        padding: 8px;
     }
 
     .columns-container:has(.university-column) .columns > div > div picture,
@@ -466,11 +482,11 @@
 /* Mobile */
 
 @media (max-width: 768px) {
-    .columns.recognition.block.columns-2-cols h2{
+    .columns.recognition.block.columns-2-cols h2 {
         font-size: 22px;
         line-height: 40px;
     }
-     .columns.amazing-careers.block.columns-2-cols h3 {
+    .columns.amazing-careers.block.columns-2-cols h3 {
         font-size: 16px;
         line-height: 20px;
     }

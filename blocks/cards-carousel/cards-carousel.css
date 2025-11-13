@@ -170,6 +170,7 @@
   display: flex;
   margin: 0;
   flex-direction: column;
+  flex-grow: 1;
 }
 
 .section.people-career.cards-carousel-container
@@ -204,6 +205,7 @@
   .carousel-content
   .button-container {
   margin-top: 10px;
+  justify-content: end;
 }
 
 .section.people-career.cards-carousel-container
@@ -228,7 +230,7 @@
   .carousel-content
   .button-container
   a.button.secondary:hover {
-  background-color: red;
+  background-color: #f95e4a;
   color: white;
 }
 

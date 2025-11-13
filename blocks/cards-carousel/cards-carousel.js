@@ -178,4 +178,15 @@ export default async function decorate(block) {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(handleResize, 200);
   });
+  
+   /* CTA To Open in New tab */
+   
+  block.querySelectorAll('a').forEach((link) => {
+  const href = link.getAttribute('href');
+  if (href && href.startsWith('http')) {
+    link.setAttribute('target', '_blank');
+    link.setAttribute('rel', 'noopener noreferrer');
+  }
+});
+
 }
