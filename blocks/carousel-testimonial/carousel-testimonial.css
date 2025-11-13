@@ -107,16 +107,17 @@
   margin: 0;
 }  
 
-.carousel-testimonial .carousel-slide p:first-of-type em {
+.carousel-testimonial .carousel-slide p:first-of-type {
   display: block;
   color: #3F4145;
   font-size: 16px;
   line-height: 28px;
   font-family: gotham-book, sans-serif;
   margin-bottom: 32px;
+  font-style: italic;
 }  
 
-.carousel-slide [data-align="center"] {
+.carousel-slide > div:nth-of-type(2) {
   padding: 16px 92px;
   text-align: left;
 }
@@ -167,7 +168,7 @@
     margin-bottom: 24px;
   }
 
-  .carousel-slide [data-align="center"] {
+  .carousel-slide > div:nth-of-type(2) {
     padding: 24px 0;
   }
 
