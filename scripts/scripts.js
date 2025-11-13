@@ -159,6 +159,13 @@ async function loadLazy(doc) {
  */
 function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
+  requestIdleCallback(() => {
+    const s = document.createElement('script');
+    s.src = 'https://assets.adobedtm.com/c58e7dfcc1ae/65c3c535dbf4/launch-22e49494a283.min.js';
+    s.async = true;
+    s.crossOrigin = 'anonymous';
+    document.head.appendChild(s);
+  });
   window.setTimeout(() => import('./delayed.js'), 3000);
 }
 
