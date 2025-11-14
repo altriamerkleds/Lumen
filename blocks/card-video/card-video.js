@@ -19,6 +19,7 @@ export default function decorate(block) {
     li.className = 'card-video-item';
 
     const [videoCol, bodyCol] = row.children;
+
     if (videoCol) {
       videoCol.className = 'card-video-video';
 
@@ -29,30 +30,50 @@ export default function decorate(block) {
         videoCol.textContent = '';
         videoCol.dataset.embedLoaded = false;
 
-        const wrapper = document.createElement('div');
-        wrapper.className = 'video-placeholder';
-        if (placeholder) wrapper.append(placeholder);
+        /** ----------------------------------------------------------------
+         *  CASE 1: YOUTUBE / VIMEO WITHOUT POSTER → DIRECT INLINE EMBED
+         * ---------------------------------------------------------------- */
+        if (!placeholder) {
+          const embedWrapper = document.createElement('div');
+          embedWrapper.className = 'card-video-embed';
 
-        const playWrapper = document.createElement('div');
-        playWrapper.className = 'video-placeholder-play';
+          // Direct inline embed using OOTB loadVideoEmbed
+          loadVideoEmbed(embedWrapper, link, false, false);
 
-        const playBtn = document.createElement('button');
-        playWrapper.append(playBtn);
-        wrapper.append(playWrapper);
+          videoCol.append(embedWrapper);
+        }
 
-        playBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          openVideoModal(link);
-        });
+        /** ----------------------------------------------------------------
+         *  CASE 2: POSTER EXISTS → USE EXISTING PLACEHOLDER + PLAY BUTTON
+         * ---------------------------------------------------------------- */
+        else {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'video-placeholder';
+          wrapper.append(placeholder);
 
-        wrapper.addEventListener('click', (e) => {
-          if (!e.target.closest('button')) {
-            window.open(link, '_blank', 'noopener,noreferrer');
-          }
-        });
+          const playWrapper = document.createElement('div');
+          playWrapper.className = 'video-placeholder-play';
 
-        videoCol.append(wrapper);
+          const playBtn = document.createElement('button');
+          playWrapper.append(playBtn);
+          wrapper.append(playWrapper);
+
+          // Modal play click
+          playBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            openVideoModal(link);
+          });
+
+          // If clicking outside play button → open in new tab
+          wrapper.addEventListener('click', (e) => {
+            if (!e.target.closest('button')) {
+              window.open(link, '_blank', 'noopener,noreferrer');
+            }
+          });
+
+          videoCol.append(wrapper);
+        }
       }
     }
 
@@ -92,7 +113,6 @@ function openVideoModal(videoUrl) {
     if (e.target === overlay) overlay.remove();
   });
 
-  // Play button inside modal
   const modalPlayBtn = document.createElement('button');
   modalPlayBtn.className = 'video-modal-play';
   modal.append(modalPlayBtn);
