@@ -395,12 +395,12 @@ main .section.widget-intern-highlights {
 }
 
 .section.people-intro h2 span.highlight {
-    color: #d62828;
+    color: #f95e4a;
     font-family: GothamBlack, sans-serif;
 }
 
 .section.people-career h2 span.highlight {
-    color: #d62828;
+    color: #f95e4a;
     font-family: GothamBlack, sans-serif;
 }
 
@@ -503,7 +503,7 @@ main .section.section-button-tertiary a:hover {
 }
 
 .widget-hero .button-container a.button.primary:hover {
-    background-color: red;
+    background-color: #f95e4a;
     color: white;
 }
 /* Tablet */
