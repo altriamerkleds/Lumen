@@ -662,4 +662,12 @@ header .nav-tools p[aria-expanded="true"] {
         position: initial;
         margin-left: auto;
     }
+     .menu-section.nav-tools p {
+    font-size: 0; /* hide text but keep layout */
+  }
+
+  .menu-section.nav-tools p span {
+    font-size: 16px; /* restore icon sizes */
+  }
+    
 }
