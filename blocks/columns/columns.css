@@ -35,7 +35,8 @@
     order: unset;
     a {
         font-style: normal;
-        font-size: 18px;
+        font-size: 16px;
+        line-height: 22px;
         color: #ffffff;
         font-family: "MontserratSemiBold", sans-serif;
     }
@@ -294,6 +295,7 @@
     line-height: 28px;
     margin-bottom: 1rem;
     font-family: gotham-book, sans-serif;
+    color:#3F4145;
 }
 
 .columns.amazing-careers .button-container a.button.secondary {
