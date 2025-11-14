@@ -635,10 +635,18 @@ header .nav-tools ul li {
     line-height: 24px;
 }
 
+header .nav-tools ul li a:focus {
+    outline: 2px dotted #000000;
+}
+
+header .nav-tools p:focus,
+header .nav-tools p[aria-expanded="true"] {
+    outline: 2px dotted #000000;
+}
+
 @media only screen and (max-width: 1024px) {
     header .nav-tools {
         position: initial;
-        margin-left: auto;
     }
 
     header .nav-tools ul {
@@ -646,5 +654,12 @@ header .nav-tools ul li {
         left: 0;
         top: 52px;
         width: 100%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    header .nav-tools {
+        position: initial;
+        margin-left: auto;
     }
 }
