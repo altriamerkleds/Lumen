@@ -1,8 +1,8 @@
 .accordion-wrapper {
   max-width: 800px !important;
   margin: 0 auto;
-  padding: 8px 8px 8px 8px;
-  font-family: Gotham, sans-serif;
+  padding: 8px 8px 8px 8px !important;
+  font-family: gotham-bold, sans-serif;
 }
 
 .accordion details {
@@ -76,6 +76,19 @@
   font-size: 16px;
   line-height: 28px;
 }
+ .accordion-item-body .button-container > a{
+  all:unset;
+  color: #f95e4a;
+  font-family: "Gotham-Book", sans-serif;
+  font-size: 16px;
+  font-weight: 700; /* the reddish-orange tone */
+  text-decoration: underline;
+  cursor: pointer;
+}
+ .accordion-item-body .button-container
+ {
+  margin: 0px;
+ }
 
 .accordion .accordion-item-label {
   font-weight: bold;

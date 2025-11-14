@@ -15,4 +15,9 @@ export default function decorate(block) {
       }
     });
   });
+   /* CTA To Open in New tab */
+    block.querySelectorAll('a[href^="http"]').forEach((link) => {
+    link.setAttribute('target', '_blank');
+    link.setAttribute('rel', 'noopener noreferrer');
+  });
 }

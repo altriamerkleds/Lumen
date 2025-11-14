@@ -37,14 +37,16 @@
 
 /* Gotham Fonts */
 @font-face {
-  font-family: Gotham;
-  src: url('../fonts/gotham-bold.woff2') format('woff2');
-  font-weight: 700;
+  font-family: gotham-bold;
+  font-display: swap;
+  src: url('../fonts/gotham-bold,.woff2') format('woff2');
   font-style: normal;
+  font-weight: 700;
 }
 
 @font-face {
   font-family: GothamMedium;
+  font-display: swap;
   src: url('../fonts/gotham-medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
@@ -52,6 +54,7 @@
 
 @font-face {
   font-family: Gotham-Book;
+  font-display: swap;
   src: url('../fonts/gotham-book.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
@@ -59,6 +62,7 @@
 
 @font-face {
   font-family: GothamLight;
+  font-display: swap;
   src: url('../fonts/gotham-light.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
@@ -66,6 +70,7 @@
 
 @font-face {
   font-family: GothamBlack;
+  font-display: swap;
   src: url('../fonts/GothamBlack.woff2') format('woff2');
   font-weight: 900;
   font-style: normal;
@@ -73,7 +78,8 @@
 
 /* Montserrat Semi Bold */
 @font-face {
-  font-family: Montserrat;
+  font-family: MontserratSemiBold;
+  font-display: swap;
   src: url('../fonts/MontserratSemiBold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;

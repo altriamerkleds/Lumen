@@ -80,6 +80,15 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   toggleAllNavSections(navSections, 'false');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
 
+   // Close language dropdown if open
+  const toolsWrapper = nav.querySelector('.nav-tools .default-content-wrapper');
+  const langTrigger = toolsWrapper?.querySelector('p');
+  const langMenu = toolsWrapper?.querySelector('ul');
+  if (langTrigger && langMenu) {
+    langTrigger.setAttribute('aria-expanded', 'false');
+    langMenu.style.display = 'none';
+  }
+
   const navDrops = navSections.querySelectorAll('.nav-drop');
   if (isDesktop.matches) {
     navDrops.forEach((drop) => {
@@ -119,6 +128,72 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   }
 }
 
+// ===== LANGUAGE SELECTOR HELPERS (fixed) =====
+function setLangMenuState(trigger, menu, open) {
+  trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  menu.style.display = open ? 'block' : 'none';
+}
+
+function initLanguageSelector(rootNav) {
+  const tools = rootNav.querySelector('.nav-tools .default-content-wrapper');
+  if (!tools) return;
+
+  const trigger = tools.querySelector('p');
+  const menu = tools.querySelector('ul');
+  if (!trigger || !menu) return;
+
+  // A11y
+  trigger.setAttribute('tabindex', '0');
+  trigger.setAttribute('role', 'button');
+  trigger.setAttribute('aria-haspopup', 'listbox');
+  trigger.setAttribute('aria-expanded', 'false');
+
+  setLangMenuState(trigger, menu, false);
+
+  // Toggle on click only (no auto-open on focus)
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = trigger.getAttribute('aria-expanded') === 'true';
+    setLangMenuState(trigger, menu, !open);
+  });
+
+  // Keyboard support: Enter/Space toggles; Esc closes
+  trigger.addEventListener('keydown', (e) => {
+    if (e.code === 'Enter' || e.code === 'Space') {
+      e.preventDefault();
+      const open = trigger.getAttribute('aria-expanded') === 'true';
+      setLangMenuState(trigger, menu, !open);
+    } else if (e.code === 'Escape') {
+      setLangMenuState(trigger, menu, false);
+      trigger.blur();
+    }
+  });
+
+  // Keep open when interacting inside the menu
+  menu.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  // Close on outside click (pointerdown is snappier and avoids race with focus)
+  document.addEventListener('pointerdown', (e) => {
+    if (!tools.contains(e.target)) {
+      setLangMenuState(trigger, menu, false);
+    }
+  });
+
+  // Close when focus truly leaves the .nav-tools cluster (keyboard users)
+  document.addEventListener('focusin', (e) => {
+    if (!tools.contains(e.target)) {
+      setLangMenuState(trigger, menu, false);
+    }
+  });
+
+  // Close if main nav transitions (hamburger etc.)
+  rootNav.addEventListener('transitionend', () => {
+    setLangMenuState(trigger, menu, false);
+  });
+}
+
 export default async function decorate(block) {
   // load nav fragment
   const navMeta = getMetadata('nav');
@@ -135,6 +210,8 @@ export default async function decorate(block) {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
   });
+
+  initLanguageSelector(nav);
 
   // --- replace brand <p> with <a><img> ---
   const navBrand = nav.querySelector('.nav-brand');

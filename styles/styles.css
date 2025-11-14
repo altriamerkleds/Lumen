@@ -395,12 +395,12 @@ main .section.widget-intern-highlights {
 }
 
 .section.people-intro h2 span.highlight {
-    color: #d62828;
+    color: #f95e4a;
     font-family: GothamBlack, sans-serif;
 }
 
 .section.people-career h2 span.highlight {
-    color: #d62828;
+    color: #f95e4a;
     font-family: GothamBlack, sans-serif;
 }
 
@@ -416,7 +416,7 @@ main .section.widget-intern-highlights {
     text-align: center;
     margin-bottom: 40px;
     line-height: 32px;
-    color: #000;
+    color: #0f3133 ;
 }
 
 .section.section-button-secondary .button-container {
@@ -450,7 +450,7 @@ main .section.section-button-tertiary {
     a {
         font-size: 15px;
         color: #f95e4a;
-        font-family: Montserrat, sans-serif;
+        font-family: MontserratSemiBold, sans-serif;
         font-weight: normal;
         line-height: 21px;
         font-style: normal;
@@ -494,7 +494,7 @@ main .section.section-button-tertiary a:hover {
     background-color: #b2fff6;
     border-radius: 5px;
     padding: 11px 38px;
-    font-family: "Gotham", sans-serif;
+    font-family: gotham-bold, sans-serif;
     text-decoration: none;
     color: #000;
     font-weight: 400;
@@ -503,7 +503,7 @@ main .section.section-button-tertiary a:hover {
 }
 
 .widget-hero .button-container a.button.primary:hover {
-    background-color: red;
+    background-color: #f95e4a;
     color: white;
 }
 /* Tablet */
@@ -561,7 +561,7 @@ main .section.section-button-tertiary a:hover {
     }
 
     .section.people-career h2 {
-        font-size: 28px;
+        font-size: 32px;
         line-height: 32px;
     }
     main .section.widget-university {

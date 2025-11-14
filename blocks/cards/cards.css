@@ -40,16 +40,16 @@
     font-size: 18px;
     padding: 24px 0 0;
     margin-bottom: 6px;
-    font-family: Gotham, sans-serif;
+    font-family: gotham-bold, sans-serif;
     line-height: 14px;
 }
 
 /* Paragraph styling */
 .cards.people.block .cards-card-body p {
-    font-family: Gotham-Book, sans-serif;
+    font-family: gotham-book,sans-serif;
     font-weight: 400;
     margin: 0;
-    font-size: 14px;
+    font-size: 15px;
     color: #0f3133;
     box-sizing: border-box;
     flex-grow: 1;
@@ -57,14 +57,27 @@
     flex-direction: column;
 }
 
+.cards.people.block .cards-card-body h3 {
+    font-family: GothamLight, sans-serif;
+    font-weight: 700;
+    margin: 0;
+    font-size: 16px;
+    color: #0f3133;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+                flex: 0 0 auto;
+}
 /* Button styling */
 .cards.people.block .cards-card-body .button-container a.button.secondary {
     text-align: center;
     border: 1px solid #0f3133;
     background-color: #b2fff6;
+    font-size: 15px;
+    line-height: 24px;
     border-radius: 5px;
     padding: 11px 38px;
-    font-family: Gotham, sans-serif;
+    font-family: 'MontserratSemiBold', sans-serif;
     display: inline-block;
     text-decoration: none;
     color: #0f3133;
@@ -83,10 +96,64 @@
 .cards.people.block .cards-card-body .button-container {
     text-align: left;
     margin-top: 28px;
+    justify-content: end;
 }
 
 .cards.people.block ul li {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .cards-card-body {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    flex-grow: 1;
+
+    /* Ensure only button pushes to bottom */
+    .button-container {
+      margin-top: auto;
+    }
+
+    p {
+      display: block; 
+      flex: 0 0 auto; 
+      margin-bottom: 8px;
+    }
+
+    ul {
+      display: grid;
+    }
+
+    ul li {
+      display: list-item;
+      list-style-type: disc;
+      font-family: GothamLight, sans-serif;
+      color: #3f4145;
+      font-size: 16px;
+      line-height: 28px;
+      font-weight: 400;
+    }
+  }
+
+  a {
+    color: #0f3133;
+    font-size: 15px;
+    line-height: 21px;
+    text-decoration: underline;
+    font-family: "gotham-book", sans-serif;
+  }
 }
+
+.cards.people.block.text-only ul li {
+    & .cards-card-body {
+        p{
+            font-size: 16px;
+        }
+        p strong {
+            line-height: 18px;
+        }
+        ul li {
+            font-family: "gotham-book", sans-serif;
+        }
+    }
+}   

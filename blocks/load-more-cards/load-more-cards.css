@@ -11,7 +11,7 @@
     background-color: #b2fff6;
     border-radius: 5px;
     padding: 11px 38px;
-    font-family: montserrat, sans-serif;
+    font-family: MontserratSemiBold, sans-serif;
     display: inline-block;
     text-decoration: none;
     color: #000;
@@ -31,7 +31,7 @@
 .load-more-cards-container {
   background-color: transparent;
   padding: 0 20px 40px;
-  font-family: Montserrat, sans-serif;
+  font-family: MontserratSemiBold, sans-serif;
   color: #1b1b1b;
 
   .default-content-wrapper {
@@ -114,7 +114,7 @@
         border-radius: 4px;
         padding: 5px 38px;
         font-size: 14px;
-        font-family: Montserrat, sans-serif;
+        font-family: MontserratSemiBold, sans-serif;
         font-weight: normal;
         text-transform: uppercase;
         text-decoration: none;
@@ -146,7 +146,7 @@
       border: 1px solid #0f3133;
       border-radius: 5px;
       padding: 11px 38px;
-      font-family: Montserrat, sans-serif;
+      font-family: MontserratSemiBold, sans-serif;
       font-size: 14px;
       font-weight: 400;
       text-transform: uppercase;

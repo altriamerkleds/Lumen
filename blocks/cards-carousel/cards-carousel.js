@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
+import { createOptimizedPicture } from "../../scripts/aem.js";
 
 export default async function decorate(block) {
   if (!block.originalChildren) {
@@ -24,6 +24,7 @@ export default async function decorate(block) {
 
     const cardsPerSlide = getCardsPerSlide();
 
+    // Build cards
     const cards = block.originalChildren.map((cardData) => {
       const card = document.createElement('div');
       card.className = 'carousel-card';
@@ -31,18 +32,18 @@ export default async function decorate(block) {
       if (cardData.img) {
         const picture = createOptimizedPicture(
           cardData.img.src,
-          cardData.img.alt || '',
+          cardData.img.alt || "",
           false,
-          [{ width: 750 }],
+          [{ width: 750 }]
         );
         card.appendChild(picture);
       }
 
       if (cardData.content) {
         const content = document.createElement('div');
-        content.className = 'carousel-content';
+        content.className = "carousel-content";
         content.append(
-          ...Array.from(cardData.content.children).map((c) => c.cloneNode(true)),
+          ...Array.from(cardData.content.children).map((c) => c.cloneNode(true))
         );
         card.appendChild(content);
       }
@@ -58,21 +59,26 @@ export default async function decorate(block) {
 
     for (let i = 0; i < cards.length; i += cardsPerSlide) {
       const slide = document.createElement('div');
-      slide.className = 'carousel-slide';
+      slide.className = "carousel-slide";
 
-      if (i + cardsPerSlide > cards.length && cards.length > cardsPerSlide) {
-        const lastGroup = cards.slice(-cardsPerSlide);
-        lastGroup.forEach((card) => slide.appendChild(card.cloneNode(true)));
-      } else {
-        const group = cards.slice(i, i + cardsPerSlide);
-        group.forEach((card) => slide.appendChild(card));
+      let group = cards.slice(i, i + cardsPerSlide);
+
+      // If last slide has fewer cards, use cards from the end of previous slides
+      if (group.length < cardsPerSlide) {
+        const deficit = cardsPerSlide - group.length;
+        const startIndex = cards.length - cardsPerSlide; // pick last full set
+        group = cards.slice(startIndex, startIndex + cardsPerSlide);
       }
+
+      // Append cloned cards to slide
+      group.forEach((card) => slide.appendChild(card.cloneNode(true)));
 
       slidesWrapper.appendChild(slide);
     }
 
     carousel.appendChild(slidesWrapper);
 
+    // Navigation
     const nav = document.createElement('div');
     nav.className = 'carousel-nav';
     const slides = slidesWrapper.children;
@@ -84,12 +90,16 @@ export default async function decorate(block) {
       if (i === activeSlideIndex) bullet.classList.add('active');
 
       bullet.addEventListener('click', () => {
-        Array.from(slides).forEach((s) => {
-          s.style.transform = `translateX(-${i * 100}%)`;
+        // Show only active slide
+        Array.from(slides).forEach((s, idx) => {
+          s.style.display = idx === i ? "flex" : "none";
         });
+
         bullets.forEach((b) => b.classList.remove('active'));
         bullet.classList.add('active');
         activeSlideIndex = i;
+
+        normalizeSlideHeights();
       });
 
       nav.appendChild(bullet);
@@ -97,21 +107,86 @@ export default async function decorate(block) {
     });
 
     carousel.appendChild(nav);
-    block.innerHTML = '';
+
+    block.innerHTML = "";
     block.appendChild(carousel);
 
-    Array.from(slides).forEach((slide) => {
-      slide.style.transform = `translateX(-${activeSlideIndex * 100}%)`;
+    Array.from(slides).forEach((slide, i) => {
+      slide.style.display = i === activeSlideIndex ? 'flex' : 'none';
     });
-    bullets.forEach((b) => b.classList.remove('active'));
-    if (bullets[activeSlideIndex]) bullets[activeSlideIndex].classList.add('active');
+
+    normalizeSlideHeights();
+  };
+
+  const normalizeSlideHeights = () => {
+    const slides = block.querySelectorAll('.carousel-slide');
+    slides.forEach((slide) => {
+      let maxHeight = 0;
+      const contents = slide.querySelectorAll('.carousel-content');
+      contents.forEach((c) => {
+        c.style.height = "auto"; // reset first
+        if (c.offsetHeight > maxHeight) maxHeight = c.offsetHeight;
+      });
+      contents.forEach((c) => (c.style.height = `${maxHeight}px`));
+    });
+  };
+
+  const getBreakpoint = () => {
+    const width = window.innerWidth;
+    if (width < 768) return "mobile";
+    if (width < 1024) return "tablet";
+    return "desktop";
+  };
+
+  let currentBreakpoint = getBreakpoint();
+
+  const handleResize = () => {
+    const newBreakpoint = getBreakpoint();
+    if (newBreakpoint !== currentBreakpoint) {
+      const oldCardsPerSlide =
+        currentBreakpoint === "desktop"
+          ? 3
+          : currentBreakpoint === "tablet"
+          ? 2
+          : 1;
+      const firstCardIndex = activeSlideIndex * oldCardsPerSlide;
+
+      currentBreakpoint = newBreakpoint;
+      buildCarousel();
+      const newCardsPerSlide =
+        newBreakpoint === "desktop" ? 3 : newBreakpoint === "tablet" ? 2 : 1;
+      activeSlideIndex = Math.floor(firstCardIndex / newCardsPerSlide);
+
+      const slides = block.querySelectorAll(".carousel-slide");
+      Array.from(slides).forEach((slide, idx) => {
+        slide.style.display = idx === activeSlideIndex ? "flex" : "none";
+      });
+
+      const bullets = block.querySelectorAll(".carousel-bullet");
+      bullets.forEach((b, idx) => {
+        b.classList.toggle("active", idx === activeSlideIndex);
+      });
+
+      normalizeSlideHeights();
+    }
   };
 
   buildCarousel();
 
   let resizeTimeout;
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(buildCarousel, 200);
+    resizeTimeout = setTimeout(handleResize, 200);
   });
+  
+   /* CTA To Open in New tab */
+   
+  block.querySelectorAll('a').forEach((link) => {
+  const href = link.getAttribute('href');
+  if (href && href.startsWith('http')) {
+    link.setAttribute('target', '_blank');
+    link.setAttribute('rel', 'noopener noreferrer');
+  }
+});
+
 }

@@ -48,7 +48,7 @@
     background-color: #b2fff6;
     border-radius: 5px;
     padding: 11px 38px;
-    font-family: "Gotham", sans-serif;
+    font-family: gotham-bold, sans-serif;
     text-decoration: none;
     color: #000;
     font-weight: 400;
@@ -57,7 +57,7 @@
 }
 
 .widget-hero .button-container a.button.primary:hover {
-    background-color: red;
+    background-color: #f95e4a;
     color: white;
 }
 
@@ -92,7 +92,7 @@
     display: inline-block;
     padding: 11px 38px;
     width: auto;
-    font-family: "Gotham", sans-serif;
+    font-family: gotham-bold, sans-serif;
     font-weight: 500;
     font-size: 14px;
     color: #0f3133;
@@ -126,7 +126,7 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .hero {
         padding: 0;
         min-height: auto;

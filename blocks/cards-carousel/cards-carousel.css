@@ -110,7 +110,7 @@
 .section.people-career.cards-carousel-container .carousel-card picture,
 .section.people-career.cards-carousel-container .carousel-card img {
   max-width: 100%;
-  width: auto;
+  width: 100%;
   aspect-ratio: 4 / 3;
   height: auto;
   object-fit: cover;
@@ -142,7 +142,7 @@
   text-decoration: none;
   color: #000;
   font-weight: 600;
-  font-family: Gotham, sans-serif;
+  font-family: gotham-bold, sans-serif;
   margin-top: auto;
 }
 
@@ -156,7 +156,7 @@
   display: block;
   font-size: 18px;
   margin-bottom: 6px;
-  font-family: Gotham, sans-serif;
+  font-family: gotham-bold, sans-serif;
   line-height: 25px;
 }
 
@@ -164,11 +164,13 @@
   font-family: GothamLight, sans-serif;
   font-weight: 400;
   font-size: 14px;
-  color: #0f3133;
+  line-height: 24px;
+  color: #3F4145;
   box-sizing: border-box;
   display: flex;
   margin: 0;
   flex-direction: column;
+  flex-grow: 1;
 }
 
 .section.people-career.cards-carousel-container
@@ -179,7 +181,7 @@
   text-align: left;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   box-sizing: border-box;
 }
 
@@ -188,6 +190,7 @@
   .carousel-content
   p:first-of-type {
   margin-top: 0;
+  margin-bottom: 0;
 }
 
 .section.people-career.cards-carousel-container
@@ -202,6 +205,7 @@
   .carousel-content
   .button-container {
   margin-top: 10px;
+  justify-content: end;
 }
 
 .section.people-career.cards-carousel-container
@@ -214,10 +218,11 @@
   border: 1px solid #0f3133;
   background-color: #b2fff6;
   border-radius: 5px;
-  padding: 8px 16px;
+  padding: 16px;
+  line-height: 14px;
   text-decoration: none;
   color: #000;
-  font-family: Gotham, sans-serif;
+  font-family: gotham-bold, sans-serif;
 }
 
 .section.people-career.cards-carousel-container
@@ -225,7 +230,7 @@
   .carousel-content
   .button-container
   a.button.secondary:hover {
-  background-color: red;
+  background-color: #f95e4a;
   color: white;
 }
 
