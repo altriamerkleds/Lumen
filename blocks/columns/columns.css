@@ -353,7 +353,6 @@
     background-color: #fafafa;
     .columns > div {
         display: flex;
-        align-items: center;
         flex-direction: unset;
         gap: 0;
         flex-wrap: no-wrap;
