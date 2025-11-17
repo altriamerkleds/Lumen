@@ -372,12 +372,25 @@
         }
     }
     .columns.block > div > div p:nth-of-type(2):last-of-type {
-        padding: 16px 20px;
+        padding: 32px 56px 0px 40px;
         margin: 0;
         font-family: gothamlight, sans-serif;
         font-size: 16px;
         line-height: 28px;
     }
+    .columns.block > div > div > ul  {
+        font-family: gothamlight, sans-serif;
+        font-size: 16px;
+        line-height: 28px;
+        color : #3F4145;
+        padding : 0px 56px 0px 80px;
+        li > a {
+            font-weight: 700;
+            text-decoration: underline;
+            color: inherit;
+        }
+    } 
+
 }
 
 .columns-container:has(.universal) {
@@ -568,7 +581,7 @@
     }
     .columns-container:has(.university-column) {
         .columns.block > div > div p:nth-of-type(2):last-of-type {
-            padding: 16px 20px;
+            padding: 16px 20px 0px 20px;
             margin: 0;
         }
         .columns > div {
@@ -576,6 +589,9 @@
         }
         .columns.block > div > div {
             width: 100%;
+        }
+        .columns.block > div > div > ul  {
+            padding : 0px 20px 0px 60px;
         }
     }
 }
