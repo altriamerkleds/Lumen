@@ -65,13 +65,6 @@ export default function decorate(block) {
             openVideoModal(link);
           });
 
-          // If clicking outside play button → open in new tab
-          wrapper.addEventListener('click', (e) => {
-            if (!e.target.closest('button')) {
-              window.open(link, '_blank', 'noopener,noreferrer');
-            }
-          });
-
           videoCol.append(wrapper);
         }
       }
