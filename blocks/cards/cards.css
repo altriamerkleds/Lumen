@@ -46,7 +46,7 @@
 
 /* Paragraph styling */
 .cards.people.block .cards-card-body p {
-    font-family: gotham-book,sans-serif;
+    font-family: gotham-book, sans-serif;
     font-weight: 400;
     margin: 0;
     font-size: 15px;
@@ -66,7 +66,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-                flex: 0 0 auto;
+    flex: 0 0 auto;
 }
 /* Button styling */
 .cards.people.block .cards-card-body .button-container a.button.secondary {
@@ -77,7 +77,7 @@
     line-height: 24px;
     border-radius: 5px;
     padding: 11px 38px;
-    font-family: 'MontserratSemiBold', sans-serif;
+    font-family: "MontserratSemiBold", sans-serif;
     display: inline-block;
     text-decoration: none;
     color: #0f3133;
@@ -100,53 +100,53 @@
 }
 
 .cards.people.block ul li {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-
-  .cards-card-body {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    height: 100%;
 
-    /* Ensure only button pushes to bottom */
-    .button-container {
-      margin-top: auto;
+    .cards-card-body {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+        /* Ensure only button pushes to bottom */
+        .button-container {
+            margin-top: auto;
+        }
+
+        p {
+            display: block;
+            flex: 0 0 auto;
+            margin-bottom: 8px;
+        }
+
+        ul {
+            display: grid;
+        }
+
+        ul li {
+            display: list-item;
+            list-style-type: disc;
+            font-family: GothamLight, sans-serif;
+            color: #3f4145;
+            font-size: 16px;
+            line-height: 28px;
+            font-weight: 400;
+        }
     }
 
-    p {
-      display: block; 
-      flex: 0 0 auto; 
-      margin-bottom: 8px;
+    a {
+        color: #0f3133;
+        font-size: 15px;
+        line-height: 21px;
+        text-decoration: underline;
+        font-family: "gotham-book", sans-serif;
     }
-
-    ul {
-      display: grid;
-    }
-
-    ul li {
-      display: list-item;
-      list-style-type: disc;
-      font-family: GothamLight, sans-serif;
-      color: #3f4145;
-      font-size: 16px;
-      line-height: 28px;
-      font-weight: 400;
-    }
-  }
-
-  a {
-    color: #0f3133;
-    font-size: 15px;
-    line-height: 21px;
-    text-decoration: underline;
-    font-family: "gotham-book", sans-serif;
-  }
 }
 
 .cards.people.block.text-only ul li {
     & .cards-card-body {
-        p{
+        p {
             font-size: 16px;
         }
         p strong {
@@ -156,7 +156,7 @@
             font-family: "gotham-book", sans-serif;
         }
     }
-}   
+}
 
 /* Variation 4 Cards */
 .column-4.cards > ul > li img {
@@ -179,9 +179,90 @@
     font-weight: 600;
 }
 
+.cards.people.card-column-4.block {
+    margin-bottom: 20px;
+
+    .cards-card-body {
+        padding: 32px 56px 32px 40px;
+        margin: 0;
+        p {
+            font-family: GothamLight, sans-serif;
+            color: #3f4145;
+            font-size: 16px;
+
+            line-height: 28px;
+            font-weight: 400;
+        }
+
+        ul li {
+            display: list-item;
+            list-style-type: disc;
+            font-family: GothamLight, sans-serif;
+            color: #3f4145;
+            font-size: 16px;
+            line-height: 28px;
+            font-weight: 400;
+        }
+    }
+    ul {
+        grid-template-columns: repeat(auto-fill, minmax(241px, 1fr));
+        gap: 16px;
+    }
+}
+
+.cards.people.card-column-4.people-cta {
+    .cards-card-body {
+        p strong {
+            padding-top: 0;
+            color: #0f3133;
+            font-size: 16px;
+            line-height: 24px;
+        }
+        .button-container a.button.secondary {
+            white-space: normal;
+            font-size: 14px;
+            line-height: 14px;
+        }
+    }
+}
+
+.cards.people.block.column-4.people-icon {
+    .cards-card-body {
+        padding: 32px 56px 32px 40px;
+        margin: 0;
+        p strong {
+            font-size: 18px;
+            line-height: 21px;
+        }
+        p {
+            line-height: 19px;
+            a{
+                color: #f95e4a;
+            }
+        }
+        ul {
+            margin: 0;
+        }
+        ul li {
+            color: #0f3133;
+            font-family: gotham-book, sans-serif;
+            line-height: 19px;
+        }
+    }
+}
+
 @media only screen and (min-width: 1025px) {
     .cards.column-4 > ul {
         grid-template-columns: repeat(4, 1fr);
+    }
+
+    .cards.people.card-column-4.people-cta {
+        .cards-card-body {
+            p strong {
+                font-size: 21px;
+                line-height: 32px;
+            }
+        }
     }
 
     .cards.people.block.column-4 .cards-card-body p strong {
@@ -192,37 +273,4 @@
     .cards.people.block.column-4 .cards-card-body p {
         font-size: 16px;
     }
-}
-
-.cards.people.card-column-4.block {
-    margin-bottom: 20px;
-    
-    .cards-card-body {
-        padding: 32px 56px 32px 40px;
-        margin: 0;
-        p{
-        font-family: GothamLight, sans-serif;
-      color: #3f4145;
-      font-size: 16px;
-
-      line-height: 28px;
-      font-weight: 400;
-        }
-        
-
-         ul li {
-      display: list-item;
-      list-style-type: disc;
-      font-family: GothamLight, sans-serif;
-      color: #3f4145;
-      font-size: 16px;
-      line-height: 28px;
-      font-weight: 400;
-    }
-    }
-     ul {
-        grid-template-columns: repeat(auto-fill, minmax(241px, 1fr)); 
-        gap:16px;
-    }
-   
 }
