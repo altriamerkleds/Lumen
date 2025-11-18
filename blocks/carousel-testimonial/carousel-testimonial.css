@@ -138,7 +138,7 @@
 }
 
 .carousel-testimonial-container .carousel-bullet {
-  all: unset !important;
+ 
   width: 16px !important;
   height: 16px !important;
   border-radius: 50% !important;
@@ -147,6 +147,8 @@
   cursor: pointer !important;
   transition: all 0.3s ease !important;
   display: inline-block !important;
+  font-size: 16px;
+  padding: 0;
 }
 
 .carousel-testimonial-container .carousel-bullet.active {
@@ -157,15 +159,25 @@
 /* ===========================
    RESPONSIVE
    =========================== */
-@media (width <= 768px) {
+@media (width <= 767px) {
   .carousel-testimonial-container .carousel-slide {
     flex-direction: column;
     text-align: center;
     padding: 16px 0;
   }
 
+  .carousel-testimonial-container .carousel-slide picture img {
+    min-width: auto;
+    min-height: auto;
+  }
+
+  .carousel-testimonial .carousel-slide img {
+    max-width: fit-content;
+  }
+
   .carousel-testimonial-container .carousel-slide picture {          
     margin-bottom: 24px;
+    max-width: 100%;
   }
 
   .carousel-slide > div:nth-of-type(2) {
