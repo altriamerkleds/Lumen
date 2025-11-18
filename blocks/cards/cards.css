@@ -236,6 +236,9 @@
         }
         p {
             line-height: 19px;
+            a{
+                color: #f95e4a;
+            }
         }
         ul {
             margin: 0;
