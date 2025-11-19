@@ -3,16 +3,16 @@
 }
 
 .carousel-photo-container h2 {
-    font-family: GothamBlack, sans-serif;
-    font-weight: 400;
-    font-size: 1.375rem;
-    line-height: 40px;
-    color: #0f3133;
-    letter-spacing: normal;
-    text-transform: none;
-    text-decoration: none;
-    text-align: center;
-    margin-bottom: 24px;
+  font-family: GothamBlack, sans-serif;
+  font-weight: 400;
+  font-size: 1.375rem;
+  line-height: 40px;
+  color: #0f3133;
+  letter-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+  text-align: center;
+  margin-bottom: 24px;
 }
 
 .carousel-photo-container .carousel-container {
@@ -28,7 +28,7 @@
 }
 
 /* Center content inside each slide */
-.carousel-photo-container .carousel-slide > div {
+.carousel-photo-container .carousel-slide>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,5 +73,12 @@
   .carousel-photo-container .carousel-bullet {
     width: 12px;
     height: 12px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .carousel-photo-container picture,
+  .carousel-photo-container img {
+    width: 384px;
   }
 }
