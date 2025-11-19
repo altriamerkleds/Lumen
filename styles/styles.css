@@ -513,6 +513,7 @@ main .section.section-button-tertiary a:hover {
 /* Tablet */
 @media (max-width: 1024px) {
     .section.people-intro h2 {
+        padding-top: 40px;
         font-size: 19px;
     }
 
@@ -562,11 +563,15 @@ main .section.section-button-tertiary a:hover {
     .section.people-intro h2 {
         font-size: 32px;
         line-height: 32px;
+        margin-top: 50px;
+        margin-bottom: 50px;
     }
 
     .section.people-career h2 {
         font-size: 32px;
         line-height: 32px;
+        margin-top: 50px;
+        margin-bottom: 50px;
     }
     main .section.widget-university {
         padding: 44px;
