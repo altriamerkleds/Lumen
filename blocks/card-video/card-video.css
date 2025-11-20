@@ -1,3 +1,4 @@
+/* card-video list/grid */
 .card-video > ul {
     list-style: none;
     margin: 0;
@@ -6,8 +7,6 @@
     grid-template-columns: repeat(4, 1fr);
 }
 
-
-/* card */
 .card-video > ul > li {
     background-color: var(--background-color);
     display: flex;
@@ -62,7 +61,7 @@
     justify-content: center;
     position: absolute;
     inset: 0;
-     img {
+    img {
         width: 100%;
     }
 }
@@ -78,31 +77,28 @@ section.card-video-container h2 {
     color: #000;
 }
 
-
 .card-video .video-placeholder-play {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
 }
 
 /* Remove default circle */
 .card-video .video-placeholder-play button {
-  width: 60px;
-  height: 60px;
-  border: none;
-  outline: none;
-  background: url('https://cdn.phenompeople.com/CareerConnectResources/common/assets/images/image-placeholders/v-1686931928171-video_play.png')
-    no-repeat center center;
-  background-size: contain;
-  cursor: pointer;
-  padding: 0;
+    width: 60px;
+    height: 60px;
+    border: none;
+    outline: none;
+    background: url("https://cdn.phenompeople.com/CareerConnectResources/common/assets/images/image-placeholders/v-1686931928171-video_play.png")
+        no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    padding: 0;
 }
 
-
-
-/* modal overlay */
+/* ---------- Modal overlay & box ---------- */
 .video-modal-overlay {
     position: fixed;
     inset: 0;
@@ -120,10 +116,12 @@ section.card-video-container h2 {
     max-width: 900px;
     aspect-ratio: 16 / 9;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-    overflow: hidden;
+    overflow: visible;
     width: 95% !important;
+    border-radius: 6px;
 }
 
+/* responsive internal wrapper */
 .video-modal-content {
     padding-bottom: 56.25%;
     position: relative;
@@ -131,6 +129,7 @@ section.card-video-container h2 {
     height: 0;
     overflow: hidden;
     width: 100% !important;
+    z-index: 1;
 }
 
 .video-modal-content iframe,
@@ -138,37 +137,70 @@ section.card-video-container h2 {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 
-/* close button */
+/* - YOUTUBE STYLE CLOSE BUTTON --- */
 .video-modal-close {
     position: absolute;
-    top: -12px;
-    right: -12px;
-    font-size: 28px;
+    top: -45px;
+    right: 0;
+    width: 27px;
+    height: 27px;
     background: none;
     border: none;
     cursor: pointer;
-    z-index: 9999;
-    font-weight: 300;
-    line-height: 1;
+    padding: 0;
+    z-index: 10010;
+}
+
+/* Remove existing text */
+.video-modal-close::before,
+.video-modal-close::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 2px;
+    height: 32px;
+    background-color: white;
+    transform-origin: center;
+}
+
+.video-modal-close::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.video-modal-close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 .video-modal-close:hover {
-    background: none;
-    opacity: 1;
-    transform: scale(1.15);
+    background-color: transparent;
+}
+
+/* wrapper */
+.video-modal-wrapper {
+    position: relative;
+    width: 100%;
+    display: inline-block;
+}
+
+.video-close-btn {
+    display: none !important;
 }
 
 /* 1 column */
 .card-video-1-col > ul {
     grid-template-columns: repeat(1, 1fr);
-     margin-bottom: 50px;
+    margin-bottom: 50px;
     .card-video-video {
-            aspect-ratio: 3 / 1;
+        aspect-ratio: 3 / 1;
     }
 }
-
 /* 2 columns */
 .card-video-2-col > ul {
     grid-template-columns: repeat(2, 1fr);
@@ -183,35 +215,35 @@ section.card-video-container h2 {
 .card-video-4-col > ul {
     grid-template-columns: repeat(4, 1fr);
 }
-
-/* Below 580px */
+/* responsive tweaks */
 @media (max-width: 767px) {
-     .card-video-2-col > ul,
+    .card-video-2-col > ul,
     .card-video-3-col > ul,
     .card-video-4-col > ul {
         grid-template-columns: repeat(1, 1fr);
     }
 
+    .video-modal {
+        max-width: 95%;
+        border-radius: 4px;
+    }
+
+    .video-modal-close {
+        top: -45px;
+    }
 }
 
-/* Tablet 768px */
-@media (max-width: 1024px) and (min-width: 768px) {
-    
+/* tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
     .card-video-2-col > ul {
         grid-template-columns: repeat(2, 1fr);
     }
     .card-video-4-col > ul {
         grid-template-columns: repeat(3, 1fr);
     }
-
-    .video-modal-close {
-        top: -16px;
-        right: -16px;
-        font-size: 32px;
-    }
 }
 
-/* Desktop 1024px */
+/* desktop */
 @media (min-width: 1024px) {
     .card-video-2-col > ul {
         grid-template-columns: repeat(2, 1fr);
@@ -219,8 +251,7 @@ section.card-video-container h2 {
     .card-video-3-col > ul {
         grid-template-columns: repeat(3, 1fr);
     }
-    .card-video-4-col> ul {
+    .card-video-4-col > ul {
         grid-template-columns: repeat(4, 1fr);
     }
-
 }

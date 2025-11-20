@@ -1,65 +1,58 @@
-import { loadVideoEmbed } from '../video/video.js';
+import { loadVideoEmbed } from "../video/video.js";
 
-const preventAutoPlay = (url) => url
-  .replace(/(\?|&)autoplay=1/, '')
-  .replace(/(\?|&)mute=1/, '');
+const preventAutoPlay = (url) =>
+  url.replace(/(\?|&)autoplay=1/, "").replace(/(\?|&)mute=1/, "");
 
-const enableAutoPlay = (url) => (
-  url.includes('autoplay=1')
+const enableAutoPlay = (url) =>
+  url.includes("autoplay=1")
     ? url
-    : `${url}${url.includes('?') ? '&' : '?'}autoplay=1`
-);
+    : `${url}${url.includes("?") ? "&" : "?"}autoplay=1`;
 
 export default function decorate(block) {
-  const ul = document.createElement('ul');
-  ul.className = 'card-video-list';
+  const ul = document.createElement("ul");
+  ul.className = "card-video-list";
 
   [...block.children].forEach((row) => {
-    const li = document.createElement('li');
-    li.className = 'card-video-item';
+    const li = document.createElement("li");
+    li.className = "card-video-item";
 
     const [videoCol, bodyCol] = row.children;
 
     if (videoCol) {
-      videoCol.className = 'card-video-video';
+      videoCol.className = "card-video-video";
 
-      const link = videoCol.querySelector('a')?.href;
-      const placeholder = videoCol.querySelector('picture');
+      const link = videoCol.querySelector("a")?.href;
+      const placeholder = videoCol.querySelector("picture");
 
       if (link) {
-        videoCol.textContent = '';
+        videoCol.textContent = "";
         videoCol.dataset.embedLoaded = false;
 
-        /** ----------------------------------------------------------------
-         *  CASE 1: YOUTUBE / VIMEO WITHOUT POSTER → DIRECT INLINE EMBED
-         * ---------------------------------------------------------------- */
-        if (!placeholder) {
-          const embedWrapper = document.createElement('div');
-          embedWrapper.className = 'card-video-embed';
+        /** YOUTUBE / VIMEO WITHOUT POSTER */
 
-          // Direct inline embed using OOTB loadVideoEmbed
+        if (!placeholder) {
+          const embedWrapper = document.createElement("div");
+          embedWrapper.className = "card-video-embed";
+
           loadVideoEmbed(embedWrapper, link, false, false);
 
           videoCol.append(embedWrapper);
-        }
+        } else {
 
-        /** ----------------------------------------------------------------
-         *  CASE 2: POSTER EXISTS → USE EXISTING PLACEHOLDER + PLAY BUTTON
-         * ---------------------------------------------------------------- */
-        else {
-          const wrapper = document.createElement('div');
-          wrapper.className = 'video-placeholder';
+        /** POSTER EXISTS    */
+          const wrapper = document.createElement("div");
+          wrapper.className = "video-placeholder";
           wrapper.append(placeholder);
 
-          const playWrapper = document.createElement('div');
-          playWrapper.className = 'video-placeholder-play';
+          const playWrapper = document.createElement("div");
+          playWrapper.className = "video-placeholder-play";
 
-          const playBtn = document.createElement('button');
+          const playBtn = document.createElement("button");
           playWrapper.append(playBtn);
           wrapper.append(playWrapper);
 
           // Modal play click
-          playBtn.addEventListener('click', (e) => {
+          playBtn.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
             openVideoModal(link);
@@ -70,30 +63,29 @@ export default function decorate(block) {
       }
     }
 
-    if (bodyCol) bodyCol.className = 'card-video-body';
+    if (bodyCol) bodyCol.className = "card-video-body";
 
     li.append(videoCol, ...(bodyCol ? [bodyCol] : []));
     ul.append(li);
   });
 
-  block.textContent = '';
+  block.textContent = "";
   block.append(ul);
 }
 
 /* Modal Popup Handler */
 function openVideoModal(videoUrl) {
-  const overlay = document.createElement('div');
-  overlay.className = 'video-modal-overlay';
+  const overlay = document.createElement("div");
+  overlay.className = "video-modal-overlay";
 
-  const modal = document.createElement('div');
-  modal.className = 'video-modal';
+  const modal = document.createElement("div");
+  modal.className = "video-modal";
 
-  const closeBtn = document.createElement('button');
-  closeBtn.className = 'video-modal-close';
-  closeBtn.innerHTML = '&times;';
+  const closeBtn = document.createElement("button");
+  closeBtn.className = "video-modal-close";
 
-  const videoContainer = document.createElement('div');
-  videoContainer.className = 'video-modal-content';
+  const videoContainer = document.createElement("div");
+  videoContainer.className = "video-modal-content";
 
   modal.append(closeBtn, videoContainer);
   overlay.append(modal);
@@ -101,25 +93,31 @@ function openVideoModal(videoUrl) {
 
   loadVideoEmbed(videoContainer, preventAutoPlay(videoUrl), false, false);
 
-  closeBtn.addEventListener('click', () => overlay.remove());
-  overlay.addEventListener('click', (e) => {
+  closeBtn.addEventListener("click", () => {
+    overlay.remove();
+  });
+
+  overlay.addEventListener("click", (e) => {
     if (e.target === overlay) overlay.remove();
   });
 
-  const modalPlayBtn = document.createElement('button');
-  modalPlayBtn.className = 'video-modal-play';
-  modal.append(modalPlayBtn);
-
-  modalPlayBtn.addEventListener('click', () => {
-    const iframe = videoContainer.querySelector('iframe');
-    const video = videoContainer.querySelector('video');
-
-    if (iframe) {
-      iframe.src = enableAutoPlay(iframe.src);
-    } else if (video) {
-      video.play();
-    }
-
-    modalPlayBtn.style.display = 'none';
+  modal.addEventListener("click", (e) => {
+    e.stopPropagation();
   });
+
+  overlay.addEventListener("remove", () => {
+    const iframe = videoContainer.querySelector("iframe");
+    if (iframe) {
+      iframe.src = "";
+    }
+  });
+
+  const observer = new MutationObserver(() => {
+    if (!document.body.contains(overlay)) {
+      const iframe = videoContainer.querySelector("iframe");
+      if (iframe) iframe.src = "";
+      observer.disconnect();
+    }
+  });
+  observer.observe(document.body, { childList: true });
 }
