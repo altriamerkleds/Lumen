@@ -129,6 +129,16 @@
   flex-direction: column;
 }
 
+.carousel-slide ul  {
+  margin-top: 0;
+  li {
+  font-family:  gotham-book, sans-serif;
+  font-size: 16px;
+  line-height: 28px;
+  color: #3F4145;
+  }
+}
+
 .carousel-teaser-container .carousel-slide div:nth-child(1) {
   padding: 0 12px;
 }
