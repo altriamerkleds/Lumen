@@ -274,3 +274,121 @@
         font-size: 16px;
     }
 }
+
+/* Variation 3 Cards */
+.column-3.cards > ul > li img {
+    width: 128px;
+    height: 128px;
+}
+
+.cards.column-3 .cards-card-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cards.people.block.column-3 .cards-card-body p {
+    font-size: 1.125rem;
+}
+
+.cards.people.block.column-3 .cards-card-body p strong {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.cards.people.card-column-3.block {
+    margin-bottom: 20px;
+
+    .cards-card-body {
+        padding: 32px 56px 32px 40px;
+        margin: 0;
+        p {
+            font-family: GothamLight, sans-serif;
+            color: #3f4145;
+            font-size: 16px;
+
+            line-height: 28px;
+            font-weight: 400;
+        }
+
+        ul li {
+            display: list-item;
+            list-style-type: disc;
+            font-family: GothamLight, sans-serif;
+            color: #3f4145;
+            font-size: 16px;
+            line-height: 28px;
+            font-weight: 400;
+        }
+    }
+    ul {
+        grid-template-columns: repeat(auto-fill, minmax(241px, 1fr));
+        gap: 16px;
+    }
+}
+
+.cards.people.card-column-3.people-cta {
+    .cards-card-body {
+        p strong {
+            padding-top: 0;
+            color: #0f3133;
+            font-size: 16px;
+            line-height: 24px;
+        }
+        .button-container a.button.secondary {
+            white-space: normal;
+            font-size: 14px;
+            line-height: 14px;
+        }
+    }
+}
+
+.cards.people.block.column-3.people-icon {
+    .cards-card-body {
+        padding: 32px 56px 32px 40px;
+        margin: 0;
+        p strong {
+            font-size: 18px;
+            line-height: 21px;
+        }
+        p {
+            line-height: 19px;
+            a{
+                color: #f95e4a;
+            }
+        }
+        ul {
+            margin: 0;
+        }
+        ul li {
+            color: #0f3133;
+            font-family: gotham-book, sans-serif;
+            line-height: 19px;
+        }
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .cards.column-3 > ul {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .cards.people.card-column-3.people-cta {
+        .cards-card-body {
+            p strong {
+                font-size: 21px;
+                line-height: 32px;
+            }
+        }
+    }
+
+    .cards.people.block.column-3 .cards-card-body p strong {
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    .cards.people.block.column-3 .cards-card-body p {
+        font-size: 16px;
+    }
+}

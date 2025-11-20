@@ -614,3 +614,34 @@ main .section.section-button-tertiary a:hover {
         width: auto;
     }
 }
+
+.text-block {
+    padding: 32px 56px 32px 40px;
+    background-color: #f7fafa;
+}
+
+.text-block h2 {
+    font-family: gotham-bold, sans-serif;
+    margin-bottom: 0;
+    font-size: 1.375rem;
+    color: #0f3133;
+    line-height: 40px;
+    font-weight: 600;
+    margin-top: 16px;
+}
+
+.text-block ol li,
+.text-block ul li {
+    color: #3F4145;
+    margin-bottom: 0;
+    font-size: 1rem;
+    line-height: 28px;
+    font-family: gothamlight, sans-serif;
+    font-weight: 400;
+}
+
+@media only screen and (max-width: 1024px) {
+    .text-block {
+        padding: 16px 20px;
+    }
+}
