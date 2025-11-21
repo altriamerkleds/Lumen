@@ -17,13 +17,13 @@
     --background-color: white;
     --light-color: #f8f8f8;
     --dark-color: #505050;
-    --text-color: #131313;
-    --link-color: #3b63fb;
-    --link-hover-color: #1d3ecf;
+    --text-color: #0f3133;
+    --link-color: #f95e4a;
+    --link-hover-color: #f95e4a;
 
     /* fonts */
-    --body-font-family: roboto, roboto-fallback, sans-serif;
-    --heading-font-family: roboto-condensed, roboto-condensed-fallback,
+    --body-font-family: gotham-book, sans-serif;
+    --heading-font-family: GothamBlack,
         sans-serif;
 
     /* body sizes */
@@ -41,19 +41,6 @@
 
     /* nav height */
     --nav-height: 64px;
-}
-
-/* fallback fonts */
-@font-face {
-    font-family: roboto-condensed-fallback;
-    size-adjust: 88.82%;
-    src: local("Arial");
-}
-
-@font-face {
-    font-family: roboto-fallback;
-    size-adjust: 99.529%;
-    src: local("Arial");
 }
 
 @media (width >= 900px) {
@@ -116,8 +103,7 @@ h3,
 h4,
 h5,
 h6 {
-    margin-top: 0.8em;
-    margin-bottom: 0.25em;
+    margin: 0;
     font-family: var(--heading-font-family);
     font-weight: 600;
     line-height: 1.25;
@@ -149,6 +135,7 @@ ol,
 ul,
 pre,
 blockquote {
+    font-family: gotham-book,sans-serif;
     margin-top: 0.8em;
     margin-bottom: 0.25em;
 }
@@ -179,13 +166,15 @@ button {
 
 /* links */
 a:any-link {
-    color: var(--link-color);
+    color: #f95e4a;
     text-decoration: none;
     overflow-wrap: break-word;
+    font-size: 14px;
+    line-height: 24px;
 }
 
 a:hover {
-    color: var(--link-hover-color);
+    color: #f95e4a;
     text-decoration: underline;
 }
 
@@ -196,21 +185,22 @@ button {
     display: inline-block;
     max-width: 100%;
     margin: 12px 0;
-    border: 2px solid transparent;
-    border-radius: 2.4em;
+    border: 1px solid #0f3133;
     padding: 0.5em 1.2em;
     font-family: var(--body-font-family);
     font-style: normal;
     font-weight: 500;
-    line-height: 1.25;
+    font-size: 15px;
+    line-height: 24px;
     text-align: center;
     text-decoration: none;
-    background-color: var(--link-color);
-    color: var(--background-color);
+    background-color: #b2fff6;
+    color: var(--text-color);
     cursor: pointer;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    border-radius: 5px;
 }
 
 a.button:hover,
@@ -229,9 +219,16 @@ button:disabled:hover {
 
 a.button.secondary,
 button.secondary {
-    background-color: unset;
-    border: 2px solid currentcolor;
     color: var(--text-color);
+    display: inline-block;
+    text-align: center;
+    border: 1px solid currentcolor;
+    background-color: #b2fff6;
+    border-radius: 5px;
+}
+
+a.button.secondary:hover {
+    background-color: var(--link-hover-color);
 }
 
 main img {

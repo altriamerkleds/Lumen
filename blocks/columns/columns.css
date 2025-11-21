@@ -393,6 +393,7 @@
 }
 
 .columns-container:has(.universal) {
+      padding: 0 80px;
     .columns-wrapper {
         max-width: 1440px;
         width: 100%;
@@ -403,19 +404,19 @@
     /* Default Desktop: 4 columns */
     .columns > div {
         display: flex;
-        flex-wrap: wrap; /* allow multiple rows */
-        gap: 0;
+    flex-direction: column;
+
     }
 
     .columns.block > div > div {
-        flex: 0 0 25%; /* 4 columns */
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: flex-start;
-        margin: 0;
-        box-sizing: border-box;
-        background-color: transparent;
+      
+       display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    background-color: transparent;
+    min-height: 100%;
     }
 
     .columns.block > div > div picture,
@@ -440,7 +441,7 @@
         font-size: 22px;
         font-weight: 600;
         line-height: 40px;
-        color: red;
+        color: #f95e4a;
     }
 
     .columns.block > div > div p {
@@ -458,8 +459,10 @@
 
 .columns-container .columns.universal.block.columns-4-cols > div {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0; 
+    grid-template-columns: repeat(auto-fit, minmax(295px, 1fr));
+    gap: 4px;  /* adjust as needed */
+    justify-content: center; /* center inside container */
+    align-items: stretch; 
 }
 
 /* Tablet */
