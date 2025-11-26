@@ -23,8 +23,7 @@
 
     /* fonts */
     --body-font-family: gotham-book, sans-serif;
-    --heading-font-family: GothamBlack,
-        sans-serif;
+    --heading-font-family: GothamBlack, sans-serif;
 
     /* body sizes */
     --body-font-size-m: 22px;
@@ -135,7 +134,7 @@ ol,
 ul,
 pre,
 blockquote {
-    font-family: gotham-book,sans-serif;
+    font-family: gotham-book, sans-serif;
     margin-top: 0.8em;
     margin-bottom: 0.25em;
 }
@@ -362,7 +361,7 @@ main .section.widget-university {
     }
     a {
         text-decoration: underline;
-        color : #f95e4a;
+        color: #f95e4a;
     }
 }
 
@@ -417,7 +416,7 @@ main .section.widget-intern-highlights {
     text-align: center;
     margin-bottom: 40px;
     line-height: 32px;
-    color: #0f3133 ;
+    color: #0f3133;
 }
 
 .section.section-button-secondary .button-container {
@@ -488,7 +487,6 @@ main .section.section-button-tertiary a:hover {
     }
 }
 
-
 .widget-hero .button-container a.button.primary {
     text-align: center;
     border: 1px solid #0f3133;
@@ -507,6 +505,29 @@ main .section.section-button-tertiary a:hover {
     background-color: #f95e4a;
     color: white;
 }
+
+/* Create white Space block */
+
+.section.people-structure {
+    display: block;
+    width: 100%;
+    height: var(--space-height, 40px); /* default space */
+    padding: 0;
+    margin: 0;
+}
+
+.section.people-structure.small {
+    --space-height: 20px;
+}
+
+.section.people-structure.medium {
+    --space-height: 40px;
+}
+
+.section.people-structure.large {
+    --space-height: 80px;
+}
+
 /* Tablet */
 @media (max-width: 1024px) {
     .section.people-intro h2 {
@@ -629,7 +650,7 @@ main .section.section-button-tertiary a:hover {
 
 .text-block ol li,
 .text-block ul li {
-    color: #3F4145;
+    color: #3f4145;
     margin-bottom: 0;
     font-size: 1rem;
     line-height: 28px;
