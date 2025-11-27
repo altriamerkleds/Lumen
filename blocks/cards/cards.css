@@ -621,4 +621,13 @@ body.cards-modal-open {
             height: 200px;
         }
     }
+    .cards.column-3.people > ul {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .cards.people > ul {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .cards.people.column-4.people-icon > ul {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
 }
