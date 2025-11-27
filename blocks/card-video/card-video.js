@@ -120,4 +120,11 @@ function openVideoModal(videoUrl) {
     }
   });
   observer.observe(document.body, { childList: true });
+
+    // Close Modal on esc key
+  document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    overlay.remove();
+  }
+});
 }

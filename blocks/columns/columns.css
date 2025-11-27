@@ -506,7 +506,7 @@
     .columns-container:has(.universal)
         .columns.universal.block.columns-4-cols
         > div {
-        grid-template-columns: repeat(3, 1fr) !important;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     }
 }
 
