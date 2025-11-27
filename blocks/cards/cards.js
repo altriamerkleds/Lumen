@@ -151,4 +151,12 @@ export default function decorate(block) {
   closeBtn.addEventListener("click", closeModal);
   rightArrow.addEventListener("click", nextImg);
   leftArrow.addEventListener("click", prevImg);
+
+  // Close Modal on esc key
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeModal();
+  }
+});
+
 }
