@@ -673,3 +673,7 @@ header .nav-tools p[aria-expanded="true"] {
   }
     
 }
+
+header nav .nav-sections li a {
+    font-size: 12px;
+}
