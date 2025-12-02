@@ -170,6 +170,7 @@ header nav .nav-sections ul {
     list-style: none;
     padding-left: 0;
     font-size: var(--body-font-size-s);
+    font-family: GothamMedium, sans-serif;
 }
 
 header nav .nav-sections ul > li {
@@ -605,6 +606,7 @@ header .nav-tools p {
     gap: 8px;
     font-size: 12px;
     cursor: pointer;
+    font-family: GothamMedium, sans-serif;
 }
 
 header .nav-tools .icon {
@@ -670,4 +672,8 @@ header .nav-tools p[aria-expanded="true"] {
     font-size: 16px; /* restore icon sizes */
   }
     
+}
+
+header nav .nav-sections li a {
+    font-size: 12px;
 }
