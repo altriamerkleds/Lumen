@@ -215,6 +215,11 @@ section.card-video-container h2 {
 .card-video-4-col > ul {
     grid-template-columns: repeat(4, 1fr);
 }
+
+.card-video-container img {
+    margin-top: 120px;
+}
+
 /* responsive tweaks */
 @media (max-width: 767px) {
     .card-video-2-col > ul,
@@ -241,6 +246,9 @@ section.card-video-container h2 {
     .card-video-4-col > ul {
         grid-template-columns: repeat(3, 1fr);
     }
+    .card-video-container img {
+        margin-top: 180px;
+    }
 }
 
 /* desktop */
@@ -253,5 +261,8 @@ section.card-video-container h2 {
     }
     .card-video-4-col > ul {
         grid-template-columns: repeat(4, 1fr);
+    }
+    .card-video-container img {
+        margin-top: 150px;
     }
 }
