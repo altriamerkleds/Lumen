@@ -292,7 +292,7 @@ main .section.highlight {
 main .section.widget-intro {
     background-color: #fafafa;
     padding: 10px;
-    p {
+    p, li {
         font-size: 14px;
         font-family: "Gotham-Book", sans-serif;
         word-wrap: break-word;
@@ -303,6 +303,26 @@ main .section.widget-intro {
         color: #0f3133;
         box-sizing: border-box;
     }
+}
+
+main .section.widget-intro p strong,
+main .section.widget-intro li strong {
+    font-family: gotham-bold, sans-serif;
+}
+
+main .section.widget-intro a,
+main .section.widget-talent a {
+    color: #f95e4a;
+}
+
+.university-column {
+    margin-bottom: 20px;
+}
+
+.university-column p strong {
+    font-family: gotham-bold, sans-serif;
+    margin-top: 10px;
+    display: block;
 }
 
 main .section.widget-talent,
