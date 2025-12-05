@@ -175,6 +175,10 @@
     font-size: 1.125rem;
 }
 
+.cards.people.block.column-4 .cards-card-body p:only-child {
+    text-align: center;
+}
+
 .cards.people.block.column-4 .cards-card-body p strong {
     font-size: 16px;
     font-weight: 600;
