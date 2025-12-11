@@ -175,4 +175,8 @@ async function loadPage() {
   loadDelayed();
 }
 
-loadPage();
+loadPage().then(() => {
+  import('./utms.js').then(({ default: applyStickyUtms }) => applyStickyUtms())
+    .catch((e) => console.error('utms import failed', e));
+});
+
