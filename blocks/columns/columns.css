@@ -285,6 +285,7 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
     white-space: normal;
+    background-color: #f2f0f1;
 }
 
 .columns.amazing-careers.block.columns-2-cols h3 {
