@@ -3,6 +3,7 @@ import { loadFragment } from '../fragment/fragment.js';
 
 // media query match for desktop/tablet
 const isDesktop = window.matchMedia('(min-width: 1025px)');
+
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
@@ -43,13 +44,13 @@ function closeSiblingSections(li) {
 
 function openOnKeydown(e) {
   const focused = document.activeElement;
-  if (focused.className === 'nav-drop' && (e.code === 'Enter' || e.code === 'Space')) {
+  if ((focused.classList && focused.classList.contains('nav-drop')) && (e.code === 'Enter' || e.code === 'Space')) {
     const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
     toggleAllNavSections(focused.closest('.nav-sections'));
     focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
   }
 
-  if (focused.className === 'sub-nav-drop' && (e.code === 'Enter' || e.code === 'Space')) {
+  if ((focused.classList && focused.classList.contains('sub-nav-drop')) && (e.code === 'Enter' || e.code === 'Space')) {
     const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
     toggleAllSubNavSections(focused.closest('.nav-sections'));
     focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
@@ -80,10 +81,10 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   toggleAllNavSections(navSections, 'false');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
 
-   // Close language dropdown if open
   const toolsWrapper = nav.querySelector('.nav-tools .default-content-wrapper');
   const langTrigger = toolsWrapper?.querySelector('p');
   const langMenu = toolsWrapper?.querySelector('ul');
+
   if (langTrigger && langMenu) {
     langTrigger.setAttribute('aria-expanded', 'false');
     langMenu.style.display = 'none';
@@ -128,7 +129,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   }
 }
 
-// ===== LANGUAGE SELECTOR HELPERS (fixed) =====
+// ===== LANGUAGE SELECTOR =====
 function setLangMenuState(trigger, menu, open) {
   trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
   menu.style.display = open ? 'block' : 'none';
@@ -142,7 +143,6 @@ function initLanguageSelector(rootNav) {
   const menu = tools.querySelector('ul');
   if (!trigger || !menu) return;
 
-  // A11y
   trigger.setAttribute('tabindex', '0');
   trigger.setAttribute('role', 'button');
   trigger.setAttribute('aria-haspopup', 'listbox');
@@ -150,14 +150,12 @@ function initLanguageSelector(rootNav) {
 
   setLangMenuState(trigger, menu, false);
 
-  // Toggle on click only (no auto-open on focus)
   trigger.addEventListener('click', (e) => {
     e.stopPropagation();
     const open = trigger.getAttribute('aria-expanded') === 'true';
     setLangMenuState(trigger, menu, !open);
   });
 
-  // Keyboard support: Enter/Space toggles; Esc closes
   trigger.addEventListener('keydown', (e) => {
     if (e.code === 'Enter' || e.code === 'Space') {
       e.preventDefault();
@@ -169,32 +167,32 @@ function initLanguageSelector(rootNav) {
     }
   });
 
-  // Keep open when interacting inside the menu
-  menu.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
+  menu.addEventListener('click', (e) => e.stopPropagation());
 
-  // Close on outside click (pointerdown is snappier and avoids race with focus)
   document.addEventListener('pointerdown', (e) => {
-    if (!tools.contains(e.target)) {
-      setLangMenuState(trigger, menu, false);
-    }
+    if (!tools.contains(e.target)) setLangMenuState(trigger, menu, false);
   });
 
-  // Close when focus truly leaves the .nav-tools cluster (keyboard users)
   document.addEventListener('focusin', (e) => {
-    if (!tools.contains(e.target)) {
-      setLangMenuState(trigger, menu, false);
-    }
+    if (!tools.contains(e.target)) setLangMenuState(trigger, menu, false);
   });
 
-  // Close if main nav transitions (hamburger etc.)
   rootNav.addEventListener('transitionend', () => {
     setLangMenuState(trigger, menu, false);
   });
 }
 
+// UPDATED CLICK HANDLERS
+
+// Helper to detect if clicked <a> belongs to the dropdown parent
+
+function isParentLink(navSection, clickedLink) {
+  const parentLink = navSection.querySelector(':scope > a, :scope > .nav-text');
+  return clickedLink && parentLink && parentLink.contains(clickedLink);
+}
+
 export default async function decorate(block) {
+
   // load nav fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
@@ -213,7 +211,7 @@ export default async function decorate(block) {
 
   initLanguageSelector(nav);
 
-  // --- replace brand <p> with <a><img> ---
+  // Replace brand with <a> + logo
   const navBrand = nav.querySelector('.nav-brand');
   const oldLink = navBrand.querySelector('p > a');
   const imgSrc = navBrand.querySelector('img')?.getAttribute('src') || '';
@@ -233,15 +231,18 @@ export default async function decorate(block) {
     navBrand.appendChild(logoLink);
   }
 
-  // --- wrap top-level nav text in <span class="nav-text"> ---
   const navSections = nav.querySelector('.nav-sections');
+
   if (navSections) {
+
+    // TOP LEVEL DROPDOWNS
+
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
 
-      // wrap only the first text node in span
+      // Wrap first text node
       const firstTextNode = Array.from(navSection.childNodes).find(
-        (node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== '',
+        (node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== ''
       );
       if (firstTextNode) {
         const span = document.createElement('span');
@@ -251,10 +252,13 @@ export default async function decorate(block) {
       }
 
       navSection.addEventListener('click', (e) => {
-        if (
-          (navSection.classList.contains('nav-drop') || navSection.classList.contains('sub-nav-drop')) &&
-          e.target.closest('a')
-        ) {
+        const isDrop = navSection.classList.contains('nav-drop') || navSection.classList.contains('sub-nav-drop');
+        const clickedLink = e.target.closest('a');
+
+        // 🔥 Prevent navigation if clicking the parent itself
+        if (isDrop && isParentLink(navSection, clickedLink)) {
+          e.preventDefault();
+        } else if (isDrop && !clickedLink) {
           e.preventDefault();
         }
 
@@ -273,7 +277,8 @@ export default async function decorate(block) {
       });
     });
 
-    // sub-nav
+    // SUB LEVEL DROPDOWNS
+
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) {
         navSection.classList.add('sub-nav-drop');
@@ -283,10 +288,13 @@ export default async function decorate(block) {
       }
 
       navSection.addEventListener('click', (e) => {
-        if (
-          (navSection.classList.contains('nav-drop') || navSection.classList.contains('sub-nav-drop')) &&
-          e.target.closest('a')
-        ) {
+        const isDrop = navSection.classList.contains('nav-drop') || navSection.classList.contains('sub-nav-drop');
+        const clickedLink = e.target.closest('a');
+
+        // 🔥 Prevent navigation on parent link click
+        if (isDrop && isParentLink(navSection, clickedLink)) {
+          e.preventDefault();
+        } else if (isDrop && !clickedLink) {
           e.preventDefault();
         }
 
@@ -302,11 +310,10 @@ export default async function decorate(block) {
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
       });
-
     });
   }
 
-  // --- hamburger for mobile ---
+  // Hamburger menu
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
@@ -317,7 +324,6 @@ export default async function decorate(block) {
 
   nav.setAttribute('aria-expanded', 'false');
 
-  // Desktop loads open, Mobile loads closed
   if (isDesktop.matches) {
     toggleMenu(nav, navSections, true);
   }
