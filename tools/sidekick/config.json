@@ -1,12 +1,21 @@
 {
   "project": "Lumen",
+  "host": "https://main--lumen--altriamerkleds.aem.live",
+  "preview": "https://main--lumen--altriamerkleds.aem.page",
+  "live": "https://main--lumen--altriamerkleds.aem.live",
+  "admin": "https://admin.hlx.page",
   "plugins": [
+    "publish",
+    "unpublish",
+    "delete",
+    "source",
+    "preview",
     {
       "id": "library",
       "title": "Library",
-      "environments": ["edit"],
+      "environments": ["edit", "live", "preview"],
       "url": "/tools/sidekick/library.html",
-      "includePaths": ["**.docx**"]
+      "includePaths": ["**.docx", "**.xlsx"]
     }
   ]
 }
